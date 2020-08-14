@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 
 import { store } from './redux/store';
 import { WrapperApp } from '@/components';
-import { VisitorsScreen, SettingsScreen, StatisticsScreen, NotFoundScreen } from '@/screens';
+import { VisitorsScreen, TariffsScreen, StatisticsScreen, NotFoundScreen } from '@/screens';
 import { theme } from '@/utils/initialTheme';
 import { ThemeProvider } from '@material-ui/styles';
 
@@ -16,7 +16,7 @@ export const App: FunctionComponent<{}> = () => {
                     <WrapperApp>
                         <Switch>
                             <Route path="/" component={VisitorsScreen} exact />
-                            <Route path="/settings" component={SettingsScreen} />
+                            <Route path="/tariffs" component={TariffsScreen} />
                             <Route path="/statistics" component={StatisticsScreen} />
                             <Route path="*">
                                 <NotFoundScreen />

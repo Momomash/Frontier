@@ -6,11 +6,14 @@ import {
     visitorEvent,
     visitorsSelectedDelete,
     visitorsSelectedPay,
+    tariffAdd,
+    tariffDelete,
+    tariffEdit,
 } from '@/redux/actions';
 
 import initialState, { Event } from './initialState';
 
-export const visitorReducer = createReducer(initialState, {
+export const reducer = createReducer(initialState, {
     [visitorAdd.type]: (state, action) => {
         state.visitors.push(action.payload);
     },
@@ -47,4 +50,16 @@ export const visitorReducer = createReducer(initialState, {
             state.visitors[indexVisitor].times.push({ timestamp: Date.now(), status: 'finished' });
         }
     },
+    [tariffAdd.type]: (state, action) => {
+        state.tariffs.push(action.payload);
+    },
+    [tariffEdit.type]: (state, action) => {
+        const indexTariff = state.tariffs.findIndex((tariff) => tariff.id === action.payload.id);
+        state.tariffs[indexTariff] = action.payload;
+    },
+    [tariffDelete.type]: (state, action) => {
+        state.tariffs = state.tariffs.filter((tariff) => tariff.id !== action.payload.id);
+    },
 });
+
+

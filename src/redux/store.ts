@@ -1,5 +1,5 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { visitorReducer } from './reducers';
+import { reducer } from './reducers';
 
 const middleware = getDefaultMiddleware({
     immutableCheck: false,
@@ -8,7 +8,7 @@ const middleware = getDefaultMiddleware({
 });
 
 export const store = configureStore({
-    reducer: visitorReducer,
+    reducer: reducer,
     middleware,
     devTools: process.env.NODE_ENV !== 'production',
 });

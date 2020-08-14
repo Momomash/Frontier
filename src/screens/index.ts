@@ -1,6 +1,6 @@
-import { SettingsScreen } from './SettingsScreen';
+import { TariffsScreen } from './TariffsScreen';
 import { StatisticsScreen } from './StatisticsScreen';
 import { VisitorsScreen } from './VisitorsScreen';
 import { NotFoundScreen } from './NotFoundScreen';
 
-export { SettingsScreen, StatisticsScreen, VisitorsScreen, NotFoundScreen };
+export { TariffsScreen, StatisticsScreen, VisitorsScreen, NotFoundScreen };
