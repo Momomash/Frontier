@@ -17,7 +17,7 @@ interface TableState {
     columns: Array<Column<Row>>;
     data: Row[];
 }
-
+//добавить столбец с редактированием "фиксированная/нефиксированная стоимость"
 export const SettingsScreen: FunctionComponent<State> = () => {
     const [state, setState] = React.useState<TableState>({
         columns: [
