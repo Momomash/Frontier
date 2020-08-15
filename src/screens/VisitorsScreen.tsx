@@ -6,7 +6,7 @@ import PauseIcon from '@material-ui/icons/Pause';
 import StopIcon from '@material-ui/icons/Stop';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import { connect } from 'react-redux';
-import { AlertDialog } from '@/components/Dialog/Dialog';
+import { AlertDialog } from '@/components/AlertDialog/AlertDialog';
 
 import {
     addVisitor,
