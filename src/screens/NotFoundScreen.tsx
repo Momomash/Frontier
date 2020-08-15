@@ -1,8 +1,5 @@
 import React, { FunctionComponent } from 'react';
 
-type Props = {};
-type State = {};
-
-export const NotFoundScreen: FunctionComponent<Props> = () => {
+export const NotFoundScreen: FunctionComponent<{}> = () => {
     return <p>404 !</p>;
 };

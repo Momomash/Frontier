@@ -4,8 +4,6 @@ import MaterialTable, { Column } from 'material-table';
 import { localizationMaterialTable } from '@/utils/localizationMaterialTable';
 import { initialTariffs } from '@/utils/initialData';
 
-type Props = {};
-type State = {};
 interface Row {
     id: number;
     title: string;
@@ -18,7 +16,7 @@ interface TableState {
     data: Row[];
 }
 
-export const SettingsScreen: FunctionComponent<State> = () => {
+export const SettingsScreen: FunctionComponent<{}> = () => {
     const [state, setState] = React.useState<TableState>({
         columns: [
             {

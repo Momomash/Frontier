@@ -1,8 +1,5 @@
 import React, { FunctionComponent } from 'react';
 
-type Props = {};
-type State = {};
-
-export const StatisticsScreen: FunctionComponent<Props> = () => {
+export const StatisticsScreen: FunctionComponent<{}> = () => {
     return <p>statistics screen</p>;
 };
