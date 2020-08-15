@@ -12,7 +12,6 @@ type Props = {
     editTariff(visitor: Tariff): void;
     deleteTariff(visitor: Tariff): void;
 };
-type State = {};
 interface Row {
     id: number;
     title: string;

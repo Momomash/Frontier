@@ -6,7 +6,7 @@ import PauseIcon from '@material-ui/icons/Pause';
 import StopIcon from '@material-ui/icons/Stop';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import { connect } from 'react-redux';
-import { AlertDialog } from '@/components/AlertDialog/AlertDialog';
+import { AlertDialog } from '@/components';
 
 import {
     addVisitor,
@@ -16,10 +16,10 @@ import {
     deleteSelectedVisitors,
     paySelectedVisitors,
 } from '@/redux/actions';
-import { localizationMaterialTable } from '@/utils/localizationMaterialTable';
+import { localizationMaterialTable } from '@/utils';
 import { Tariff, Visitor, EventUser, Store } from '@/redux/initialState';
-import { calculateCost } from '@/utils/calculateCost';
-import { calculateDuration } from '@/utils/calculateDuration';
+import { calculateCost } from '@/utils';
+import { calculateDuration } from '@/utils';
 
 type Props = {
     visitors: Array<Visitor>;
@@ -148,7 +148,7 @@ const VisitorsComponent: FunctionComponent<Props> = (props: Props) => {
             },
             {
                 field: 'status',
-                title: 'Пауза/Старт',
+                title: 'Статус',
                 editable: 'never',
                 initialEditValue: 'active',
                 defaultFilter: 'active',
