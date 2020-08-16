@@ -35,7 +35,7 @@ const Link = styled(NavLink)`
     }
 `;
 
-export const WrapperApp: FunctionComponent<{}> = (props) => {
+export const WrapperApp: FunctionComponent<{}> = (Props) => {
     const classes = useStyles();
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -120,7 +120,7 @@ export const WrapperApp: FunctionComponent<{}> = (props) => {
                 </>
             </Drawer>
             <main className={classes.content}>
-                <div>{props.children}</div>
+                <div>{Props.children}</div>
             </main>
         </div>
     );
