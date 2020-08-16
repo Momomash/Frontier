@@ -1,10 +1,14 @@
-type Status = 'active' | 'pause' | 'finished';
+export type Status = 'active' | 'pause' | 'finished';
 export type Visitor = {
     id?: number;
     name: string;
     tariffId: number;
     status: Status;
     times: Array<Event>;
+};
+export type VisitorsWithTime = {
+    visitors: Visitor[];
+    timestamp: number;
 };
 
 export type Event = {

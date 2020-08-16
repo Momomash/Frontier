@@ -1,14 +1,14 @@
 import { createAction } from '@reduxjs/toolkit';
 import { Dispatch, Action } from 'redux';
 
-import { Visitor, Event, EventUser, Tariff } from '@/redux/initialState';
+import { Visitor, Event, EventUser, Tariff, VisitorsWithTime } from '@/redux/initialState';
 
 export const visitorAdd = createAction<Visitor>('VISITOR_ADD');
 export const visitorEdit = createAction<Visitor>('VISITOR_EDIT');
 export const visitorDelete = createAction<Visitor>('VISITOR_DELETE');
 export const visitorEvent = createAction<Event>('VISITOR_EVENT');
-export const visitorsSelectedDelete = createAction<Visitor[]>('VESITORS_SELECTED_DELETE');
-export const visitorsSelectedPay = createAction<Visitor[]>('VISITORS_SELECTED_PAY');
+export const visitorsSelectedDelete = createAction<Visitor[]>('VISITORS_SELECTED_DELETE');
+export const visitorsSelectedPay = createAction<VisitorsWithTime>('VISITORS_SELECTED_PAY');
 
 export const tariffAdd = createAction<Tariff>('TARIFF_ADD');
 export const tariffEdit = createAction<Tariff>('TARIFF_EDIT');
@@ -44,7 +44,7 @@ export function deleteSelectedVisitors(value: Visitor[]) {
 }
 export function paySelectedVisitors(value: Visitor[]) {
     return (dispatch: Dispatch<Action<string>>) => {
-        dispatch(visitorsSelectedPay(value));
+        dispatch(visitorsSelectedPay({ visitors: value, timestamp: Date.now() }));
     };
 }
 export function addTariff(value: Tariff) {

@@ -42,12 +42,15 @@ export const reducer = createReducer(initialState, {
         }
     },
     [visitorsSelectedPay.type]: (state, action) => {
-        for (let i = 0; i < action.payload.length; i++) {
+        for (let i = 0; i < action.payload.visitors.length; i++) {
             const indexVisitor = state.visitors.findIndex(
-                (visitor) => visitor.id === action.payload[i].id,
+                (visitor) => visitor.id === action.payload.visitors[i].id,
             );
             state.visitors[indexVisitor].status = 'finished';
-            state.visitors[indexVisitor].times.push({ timestamp: Date.now(), status: 'finished' });
+            state.visitors[indexVisitor].times.push({
+                timestamp: action.payload.timestamp,
+                status: 'finished',
+            });
         }
     },
     [tariffAdd.type]: (state, action) => {
@@ -61,5 +64,3 @@ export const reducer = createReducer(initialState, {
         state.tariffs = state.tariffs.filter((tariff) => tariff.id !== action.payload.id);
     },
 });
-
-
