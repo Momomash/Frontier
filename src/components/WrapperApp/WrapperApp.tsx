@@ -22,24 +22,20 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 
-import { useStyles, theme } from '../../utils/initialTheme';
+import { useStyles, theme } from '@/utils/initialTheme';
 
-type Props = {};
-
-const Menu = styled.div`
-    a {
-        color: inherit;
-        text-decoration: none;
-        &.active {
+const Link = styled(NavLink)`
+    color: inherit;
+    text-decoration: none;
+    &.active {
+        color: #f05326;
+        svg {
             color: #f05326;
-            svg {
-                color: #f05326;
-            }
         }
     }
 `;
 
-export const WrapperApp: FunctionComponent<Props> = (Props) => {
+export const WrapperApp: FunctionComponent<{}> = (Props) => {
     const classes = useStyles();
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -94,34 +90,34 @@ export const WrapperApp: FunctionComponent<Props> = (Props) => {
                     </IconButton>
                 </div>
                 <Divider />
-                <Menu>
+                <>
                     <List>
-                        <NavLink exact to="/" activeClassName="active">
+                        <Link exact to="/" activeClassName="active">
                             <ListItem button key="visitors">
                                 <ListItemIcon>
                                     <PeopleAltIcon color="primary" />
                                 </ListItemIcon>
                                 <ListItemText primary="Посетители" />
                             </ListItem>
-                        </NavLink>
-                        <NavLink exact to="/tariffs" activeClassName="active">
+                        </Link>
+                        <Link exact to="/tariffs" activeClassName="active">
                             <ListItem button key="tariffs">
                                 <ListItemIcon>
                                     <SettingsIcon color="primary" />
                                 </ListItemIcon>
                                 <ListItemText primary="Тарифы" />
                             </ListItem>
-                        </NavLink>
-                        <NavLink exact to="/statistics" activeClassName="active">
+                        </Link>
+                        <Link exact to="/statistics" activeClassName="active">
                             <ListItem button key="statistics">
                                 <ListItemIcon>
                                     <AssessmentIcon color="primary" />
                                 </ListItemIcon>
                                 <ListItemText primary="Статистика" />
                             </ListItem>
-                        </NavLink>
+                        </Link>
                     </List>
-                </Menu>
+                </>
             </Drawer>
             <main className={classes.content}>
                 <div>{Props.children}</div>

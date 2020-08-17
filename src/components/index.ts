@@ -1,4 +1,4 @@
-import { WrapperApp } from './WrapperApp/WrapperApp';
+import { WrapperApp } from './WrapperApp';
 import { AlertDialog } from './AlertDialog';
 
 export { WrapperApp, AlertDialog };
