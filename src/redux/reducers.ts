@@ -9,9 +9,13 @@ import {
     tariffAdd,
     tariffDelete,
     tariffEdit,
+    modalPayVisitorsToggle,
+    totalCalculate,
+    payedVisitorsSet,
 } from '@/redux/actions';
 
 import initialState, { Event } from './initialState';
+import { calculateCostHelper } from '@/utils';
 
 export const reducer = createReducer(initialState, {
     [visitorAdd.type]: (state, action) => {
@@ -52,6 +56,8 @@ export const reducer = createReducer(initialState, {
                 status: 'finished',
             });
         }
+        state.total = 0;
+        state.payedVisitors = [];
     },
     [tariffAdd.type]: (state, action) => {
         state.tariffs.push(action.payload);
@@ -62,5 +68,21 @@ export const reducer = createReducer(initialState, {
     },
     [tariffDelete.type]: (state, action) => {
         state.tariffs = state.tariffs.filter((tariff) => tariff.id !== action.payload.id);
+    },
+    [modalPayVisitorsToggle.type]: (state, action) => {
+        state.modals.payVisitors = action.payload;
+    },
+    [totalCalculate.type]: (state, action) => {
+        let total = 0;
+        for (let i = 0; i < action.payload.length; i++) {
+            const indexVisitor = state.visitors.findIndex(
+                (visitor) => visitor.id === action.payload[i].id,
+            );
+            total += calculateCostHelper(state.visitors[indexVisitor], state.tariffs);
+        }
+        state.total = total;
+    },
+    [payedVisitorsSet.type]: (state, action) => {
+        state.payedVisitors = action.payload;
     },
 });

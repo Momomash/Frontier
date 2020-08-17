@@ -8,6 +8,9 @@ import {
     tariffAdd,
     tariffDelete,
     tariffEdit,
+    modalPayVisitorsToggle,
+    totalCalculate,
+    payedVisitorsSet,
 } from '@/redux/actions';
 
 import { Visitor, Event, Tariff } from './initialState';
@@ -95,6 +98,27 @@ describe('actions', () => {
         expect(action).toEqual({
             payload: tariff,
             type: 'TARIFF_DELETE',
+        });
+    });
+    it('should create an action to MODAL_PAY_VISITORS_TOGGLE', () => {
+        const action = modalPayVisitorsToggle(true);
+        expect(action).toEqual({
+            payload: true,
+            type: 'MODAL_PAY_VISITORS_TOGGLE',
+        });
+    });
+    it('should create an action to TOTAL_CALCULATE', () => {
+        const action = totalCalculate([visitor, visitor]);
+        expect(action).toEqual({
+            payload: [visitor, visitor],
+            type: 'TOTAL_CALCULATE',
+        });
+    });
+    it('should create an action to PAYED_VISITORS_SET', () => {
+        const action = payedVisitorsSet([visitor, visitor]);
+        expect(action).toEqual({
+            payload: [visitor, visitor],
+            type: 'PAYED_VISITORS_SET',
         });
     });
 });

@@ -14,6 +14,10 @@ export const tariffAdd = createAction<Tariff>('TARIFF_ADD');
 export const tariffEdit = createAction<Tariff>('TARIFF_EDIT');
 export const tariffDelete = createAction<Tariff>('TARIFF_DELETE');
 
+export const modalPayVisitorsToggle = createAction<boolean>('MODAL_PAY_VISITORS_TOGGLE');
+export const totalCalculate = createAction<Visitor[]>('TOTAL_CALCULATE');
+export const payedVisitorsSet = createAction<Visitor[]>('PAYED_VISITORS_SET');
+
 export function addVisitor(value: Visitor) {
     return (dispatch: Dispatch<Action<string>>) => {
         value.id = Math.random();
@@ -61,5 +65,20 @@ export function editTariff(value: Tariff) {
 export function deleteTariff(value: Tariff) {
     return (dispatch: Dispatch<Action<string>>) => {
         dispatch(tariffDelete(value));
+    };
+}
+export function toggleModalPayVisitors(value: boolean) {
+    return (dispatch: Dispatch<Action<string>>) => {
+        dispatch(modalPayVisitorsToggle(value));
+    };
+}
+export function calculateTotal(value: Visitor[]) {
+    return (dispatch: Dispatch<Action<string>>) => {
+        dispatch(totalCalculate(value));
+    };
+}
+export function setPayedVisitors(value: Visitor[]) {
+    return (dispatch: Dispatch<Action<string>>) => {
+        dispatch(payedVisitorsSet(value));
     };
 }

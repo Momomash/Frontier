@@ -1,13 +1,12 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import MaterialTable, { Column } from 'material-table';
+import MaterialTable from 'material-table';
 import { IconButton } from '@material-ui/core';
 import styled from '@emotion/styled';
 import PauseIcon from '@material-ui/icons/Pause';
-import StopIcon from '@material-ui/icons/Stop';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import { connect } from 'react-redux';
-import { AlertDialog } from '@/components';
 
+import { AlertDialog } from '@/components';
 import {
     addVisitor,
     editVisitor,
@@ -15,25 +14,33 @@ import {
     eventVisitor,
     deleteSelectedVisitors,
     paySelectedVisitors,
+    toggleModalPayVisitors,
+    calculateTotal,
+    setPayedVisitors,
 } from '@/redux/actions';
-import { localizationMaterialTable } from '@/utils';
+import { localizationMaterialTable, calculateCostHelper, calculateDuration } from '@/utils';
 import { Tariff, Visitor, EventUser, Store } from '@/redux/initialState';
-import { calculateCost } from '@/utils';
-import { calculateDuration } from '@/utils';
 
 type Props = {
     visitors: Array<Visitor>;
     tariffs: Array<Tariff>;
+    modals: {
+        payVisitors: boolean;
+    };
+    total: number;
+    payedVisitors: Array<Visitor>;
     addVisitor(visitor: Visitor): void;
     editVisitor(visitor: Visitor): void;
     deleteVisitor(visitor: Visitor): void;
     eventVisitor(event: EventUser): void;
     deleteSelectedVisitors(visitors: Array<Visitor>): void;
     paySelectedVisitors(visitors: Array<Visitor>): void;
+    toggleModalPayVisitors(status: boolean): void;
+    calculateTotal(visitors: Array<Visitor>, tariffs: Array<Tariff>): void;
+    setPayedVisitors(visitors: Array<Visitor>): void;
 };
 
 interface TableState {
-    columns: Array<Column<Visitor>>;
     data: Array<Visitor>;
 }
 
@@ -57,28 +64,33 @@ const getFunctionForRow = (action: (visitor: Visitor) => void) => {
 };
 const VisitorsComponent: FunctionComponent<Props> = (props: Props) => {
     const {
+        payedVisitors,
+        total,
         visitors,
         tariffs,
+        modals,
         addVisitor,
         editVisitor,
         deleteVisitor,
         eventVisitor,
         deleteSelectedVisitors,
         paySelectedVisitors,
+        toggleModalPayVisitors,
+        calculateTotal,
+        setPayedVisitors,
     } = props;
-    const [isDialogOpen, setDialogOpen] = React.useState<boolean>(false);
-    const [total, setTotal] = React.useState<number>(0);
-    const [payedVisitors, setPayedVisitors] = React.useState<Visitor[]>([]);
+    const [timer, setTimer] = React.useState<number>(Date.now());
+    const [tableVisitors, setTableVisitors] = React.useState<TableState>({
+        data: [],
+    });
     const handleTogglePause = (currentUser: Visitor) => {
         const updatedVisitor: Visitor = visitors.find((visitor) => visitor.id === currentUser.id)!;
         if (updatedVisitor.status === 'active') {
-            updatedVisitor.status = 'pause';
             eventVisitor({ timestamp: Date.now(), status: 'pause', id: currentUser.id });
         } else {
-            updatedVisitor.status = 'active';
             eventVisitor({ timestamp: Date.now(), status: 'active', id: currentUser.id });
         }
-        setState((prevState) => {
+        setTableVisitors((prevState) => {
             const data = [...prevState.data];
             data[data.indexOf(currentUser)] = updatedVisitor;
             return { ...prevState, data };
@@ -89,108 +101,90 @@ const VisitorsComponent: FunctionComponent<Props> = (props: Props) => {
         newArr[tariff.id] = tariff.title;
         return newArr;
     }, tariffsColumn);
-    const [timer, setTimer] = React.useState<number>(Date.now());
-    const calculateTariffHelper = (data: Visitor) => {
-        const tariffId = +data.tariffId;
-        const tariffMaxCost = (tariffs.find((tariff) => tariff.id === tariffId) as Tariff).maxCost;
-        const tariffCost = (tariffs.find((tariff) => tariff.id === tariffId) as Tariff).cost;
-        const tariffIsDuration = (tariffs.find((tariff) => tariff.id === tariffId) as Tariff)
-            .isDuration;
-        return calculateCost(
-            tariffCost,
-            tariffMaxCost,
-            calculateDuration(data.times),
-            tariffIsDuration,
-        );
-    };
-    const [state, setState] = React.useState<TableState>({
-        columns: [
-            {
-                title: 'Имя',
-                field: 'name',
-                validate: (rowData) => {
-                    if (
-                        visitors.map((item) => item.name).includes(rowData.name) &&
-                        !visitors.map((item) => item.id).includes(rowData.id)
-                    ) {
-                        return 'Такое имя уже есть!';
-                    } else {
-                        return '';
-                    }
-                },
-            },
-            {
-                title: 'Тариф',
-                field: 'tariffId',
-                lookup: tariffsColumn,
-            },
-            {
-                title: 'Продолжительность посещения',
-                field: 'duration',
-                type: 'numeric',
-                editable: 'onUpdate',
-                initialEditValue: '0',
-                render: (RowData) => {
-                    if (RowData.times == undefined) {
-                        return <>0</>;
-                    } else {
-                        return <>{calculateDuration(RowData.times)}</>;
-                    }
-                },
-            },
-            {
-                title: 'Стоимость',
-                field: 'cost',
-                type: 'numeric',
-                render: (RowData) => {
-                    return <>{calculateTariffHelper(RowData)}</>;
-                },
-            },
-            {
-                field: 'status',
-                title: 'Статус',
-                editable: 'never',
-                initialEditValue: 'active',
-                defaultFilter: 'active',
-                render: (RowData) => {
-                    let icon;
-                    if (RowData.status === 'active') {
-                        icon = <PauseIcon />;
-                    } else if (RowData.status === 'pause') {
-                        icon = <PlayArrowIcon />;
-                    } else {
-                        icon = <StopIcon />;
-                    }
-                    return (
-                        <Controls>
-                            <IconButton
-                                aria-label="Pause"
-                                onClick={() => handleTogglePause(RowData)}
-                            >
-                                {icon}
-                            </IconButton>
-                        </Controls>
-                    );
-                },
-            },
-        ],
-        data: [],
-    });
+
     useEffect(() => {
-        if (visitors !== state.data) {
-            setState({ ...state, data: visitors });
+        if (JSON.stringify(visitors) !== JSON.stringify(tableVisitors.data)) {
+            setTableVisitors({ ...tableVisitors, data: visitors });
         }
         const interval = setInterval(() => {
             setTimer(Date.now());
         }, 60000);
         return () => clearInterval(interval);
     });
+
     return (
         <>
             <MaterialTable
                 title="Фронтир"
-                columns={state.columns}
-                data={JSON.parse(JSON.stringify(state.data))}
+                columns={[
+                    {
+                        title: 'Имя',
+                        field: 'name',
+                        validate: (rowData) => {
+                            if (
+                                visitors.map((item) => item.name).includes(rowData.name) &&
+                                !visitors.map((item) => item.id).includes(rowData.id)
+                            ) {
+                                return 'Такое имя уже есть!';
+                            } else {
+                                return '';
+                            }
+                        },
+                    },
+                    {
+                        title: 'Тариф',
+                        field: 'tariffId',
+                        lookup: tariffsColumn,
+                    },
+                    {
+                        title: 'Продолжительность посещения',
+                        field: 'duration',
+                        type: 'numeric',
+                        editable: 'onUpdate',
+                        initialEditValue: '0',
+                        render: (RowData) => {
+                            if (RowData.times == undefined) {
+                                return <>0</>;
+                            } else {
+                                return <>{calculateDuration(RowData.times)}</>;
+                            }
+                        },
+                    },
+                    {
+                        title: 'Стоимость',
+                        field: 'cost',
+                        type: 'numeric',
+                        render: (RowData) => {
+                            return <>{calculateCostHelper(RowData, tariffs)}</>;
+                        },
+                    },
+                    {
+                        field: 'status',
+                        title: 'Статус',
+                        editable: 'never',
+                        initialEditValue: 'active',
+                        defaultFilter: 'active',
+                        render: (RowData) => {
+                            let icon;
+                            if (RowData.status === 'active') {
+                                icon = <PauseIcon />;
+                            } else {
+                                icon = <PlayArrowIcon />;
+                            }
+                            return (
+                                <Controls>
+                                    <IconButton
+                                        aria-label="Control"
+                                        onClick={() => handleTogglePause(RowData)}
+                                    >
+                                        {icon}
+                                    </IconButton>
+                                </Controls>
+                            );
+                        },
+                    },
+                ]}
+                data={JSON.parse(JSON.stringify(tableVisitors.data))}
                 editable={{
                     onRowAdd: getFunctionForRow(addVisitor),
                     onRowUpdate: getFunctionForRow(editVisitor),
@@ -210,13 +204,9 @@ const VisitorsComponent: FunctionComponent<Props> = (props: Props) => {
                         icon: 'payment',
                         onClick: (evt, data) => {
                             data = Array.isArray(data) ? data : [data];
-                            let total = 0;
-                            for (let i = 0; i < data.length; i++) {
-                                total += calculateTariffHelper(data[i]);
-                            }
-                            setTotal(total);
+                            calculateTotal(data, tariffs);
                             setPayedVisitors(data);
-                            setDialogOpen(true);
+                            toggleModalPayVisitors(true);
                         },
                     },
                 ]}
@@ -232,19 +222,25 @@ const VisitorsComponent: FunctionComponent<Props> = (props: Props) => {
                 disagreeButtonText="Отмена"
                 agreeOnClick={() => {
                     paySelectedVisitors(payedVisitors);
-                    setDialogOpen(false);
+                    toggleModalPayVisitors(false);
                 }}
                 dialogTitle="Рассчитать посетителей"
                 dialogContent={'Итого к расчету: ' + total}
-                isOpen={isDialogOpen}
-                close={() => setDialogOpen(false)}
+                isOpen={modals.payVisitors}
+                close={() => toggleModalPayVisitors(false)}
             />
         </>
     );
 };
 
 const mapStateToProps = (store: Store) => {
-    return { visitors: store.visitors, tariffs: store.tariffs };
+    return {
+        visitors: store.visitors,
+        tariffs: store.tariffs,
+        modals: store.modals,
+        total: store.total,
+        payedVisitors: store.payedVisitors,
+    };
 };
 
 const mapDispatchToProps = {
@@ -254,6 +250,9 @@ const mapDispatchToProps = {
     eventVisitor,
     deleteSelectedVisitors,
     paySelectedVisitors,
+    toggleModalPayVisitors,
+    calculateTotal,
+    setPayedVisitors,
 };
 
 export const VisitorsScreen = connect(mapStateToProps, mapDispatchToProps)(VisitorsComponent);

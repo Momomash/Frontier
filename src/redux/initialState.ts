@@ -30,6 +30,11 @@ export type Tariff = {
 export type Store = {
     visitors: Array<Visitor>;
     tariffs: Array<Tariff>;
+    modals: {
+        payVisitors: boolean;
+    };
+    total: number;
+    payedVisitors: Array<Visitor>;
 };
 const initialState: Store = {
     visitors: [
@@ -71,6 +76,11 @@ const initialState: Store = {
             isDuration: false,
         },
     ],
+    modals: {
+        payVisitors: false,
+    },
+    total: 0,
+    payedVisitors: [],
 };
 
 export default initialState;

@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import MaterialTable, { Column } from 'material-table';
+import MaterialTable from 'material-table';
 import { connect } from 'react-redux';
 
 import { localizationMaterialTable } from '@/utils/localizationMaterialTable';
@@ -12,15 +12,8 @@ type Props = {
     editTariff(visitor: Tariff): void;
     deleteTariff(visitor: Tariff): void;
 };
-interface Row {
-    id: number;
-    title: string;
-    cost: number;
-    maxCost: number;
-    isDuration: boolean;
-}
+
 interface TableState {
-    columns: Array<Column<Tariff>>;
     data: Array<Tariff>;
 }
 const getFunctionForRow = (action: (tariff: Tariff) => void) => {
@@ -34,27 +27,6 @@ const getFunctionForRow = (action: (tariff: Tariff) => void) => {
 export const TariffsComponent: FunctionComponent<Props> = (props: Props) => {
     const { tariffs, addTariff, editTariff, deleteTariff } = props;
     const [state, setState] = React.useState<TableState>({
-        columns: [
-            {
-                title: 'Название тарифа',
-                field: 'title',
-            },
-            {
-                title: 'Стоимость за минуту',
-                field: 'cost',
-                type: 'numeric',
-            },
-            {
-                title: 'Тип',
-                field: 'isDuration',
-                lookup: { true: 'Поминутная', false: 'Фиксированная цена' },
-            },
-            {
-                title: 'Стоп-чек',
-                field: 'maxCost',
-                type: 'numeric',
-            },
-        ],
         data: [],
     });
     useEffect(() => {
@@ -65,7 +37,27 @@ export const TariffsComponent: FunctionComponent<Props> = (props: Props) => {
     return (
         <MaterialTable
             title="Тарифы"
-            columns={state.columns}
+            columns={[
+                {
+                    title: 'Название тарифа',
+                    field: 'title',
+                },
+                {
+                    title: 'Стоимость за минуту',
+                    field: 'cost',
+                    type: 'numeric',
+                },
+                {
+                    title: 'Тип',
+                    field: 'isDuration',
+                    lookup: { true: 'Поминутная', false: 'Фиксированная цена' },
+                },
+                {
+                    title: 'Стоп-чек',
+                    field: 'maxCost',
+                    type: 'numeric',
+                },
+            ]}
             data={JSON.parse(JSON.stringify(state.data))}
             editable={{
                 onRowAdd: getFunctionForRow(addTariff),

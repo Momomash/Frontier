@@ -9,6 +9,9 @@ import {
     tariffAdd,
     tariffDelete,
     tariffEdit,
+    modalPayVisitorsToggle,
+    totalCalculate,
+    payedVisitorsSet,
 } from '@/redux/actions';
 import { Event, Store, Tariff, Visitor } from '@/redux/initialState';
 
@@ -46,6 +49,11 @@ describe('reducer', () => {
     const state: Store = {
         visitors: [initialVisitor],
         tariffs: [initialTariff],
+        modals: {
+            payVisitors: false,
+        },
+        total: 0,
+        payedVisitors: [],
     };
 
     it('should handle VISITOR_ADD', () => {
@@ -140,6 +148,11 @@ describe('reducer', () => {
                         },
                     ],
                     tariffs: [initialTariff],
+                    modals: {
+                        payVisitors: false,
+                    },
+                    total: 0,
+                    payedVisitors: [],
                 },
                 {
                     type: visitorsSelectedDelete,
@@ -190,6 +203,11 @@ describe('reducer', () => {
                         },
                     ],
                     tariffs: [initialTariff],
+                    modals: {
+                        payVisitors: false,
+                    },
+                    total: 0,
+                    payedVisitors: [],
                 },
                 {
                     type: visitorsSelectedPay,
@@ -238,7 +256,11 @@ describe('reducer', () => {
                     ],
                 },
             ],
+            modals: {
+                payVisitors: false,
+            },
             tariffs: [initialTariff],
+            total: 0,
         });
     });
     it('should handle TARIFF_ADD', () => {
@@ -284,6 +306,157 @@ describe('reducer', () => {
                     cost: 4,
                     maxCost: 1000,
                     isDuration: false,
+                },
+            ],
+        });
+    });
+    it('should handle MODAL_PAY_VISITORS_TOGGLE', () => {
+        expect(
+            reducer(state, {
+                type: modalPayVisitorsToggle,
+                payload: true,
+            }),
+        ).toEqual({
+            visitors: [initialVisitor],
+            tariffs: [initialTariff],
+            modals: {
+                payVisitors: true,
+            },
+        });
+    });
+    it('should handle TOTAL_CALCULATE', () => {
+        expect(
+            reducer(
+                {
+                    visitors: [
+                        initialVisitor,
+                        {
+                            id: 2,
+                            name: 'Франц 1',
+                            tariffId: 2,
+                            status: 'active',
+                            times: [{ timestamp: 1597246822295, status: 'active' }],
+                        },
+                        {
+                            id: 3,
+                            name: 'Франц 2',
+                            tariffId: 3,
+                            status: 'active',
+                            times: [{ timestamp: 1597246825795, status: 'active' }],
+                        },
+                    ],
+                    tariffs: [initialTariff],
+                    modals: {
+                        payVisitors: false,
+                    },
+                    total: 0,
+                    payedVisitors: [],
+                },
+                {
+                    type: totalCalculate,
+                    payload: {
+                        visitors: [initialVisitor],
+                    },
+                },
+            ),
+        ).toEqual({
+            visitors: [
+                initialVisitor,
+                {
+                    id: 2,
+                    name: 'Франц 1',
+                    tariffId: 2,
+                    status: 'active',
+                    times: [{ timestamp: 1597246822295, status: 'active' }],
+                },
+                {
+                    id: 3,
+                    name: 'Франц 2',
+                    tariffId: 3,
+                    status: 'active',
+                    times: [{ timestamp: 1597246825795, status: 'active' }],
+                },
+            ],
+            tariffs: [initialTariff],
+            modals: {
+                payVisitors: false,
+            },
+            total: 600,
+        });
+    });
+    it('should handle PAYED_VISITORS_SET', () => {
+        expect(
+            reducer(
+                {
+                    visitors: [
+                        initialVisitor,
+                        {
+                            id: 2,
+                            name: 'Франц 1',
+                            tariffId: 2,
+                            status: 'active',
+                            times: [{ timestamp: 1597246822295, status: 'active' }],
+                        },
+                        {
+                            id: 3,
+                            name: 'Франц 2',
+                            tariffId: 3,
+                            status: 'active',
+                            times: [{ timestamp: 1597246825795, status: 'active' }],
+                        },
+                    ],
+                    tariffs: [initialTariff],
+                    modals: {
+                        payVisitors: false,
+                    },
+                    total: 0,
+                    payedVisitors: [],
+                },
+                {
+                    type: payedVisitorsSet,
+                    payload: [
+                        initialVisitor,
+                        {
+                            id: 3,
+                            name: 'Франц 2',
+                            tariffId: 3,
+                            status: 'active',
+                            times: [{ timestamp: 1597246825795, status: 'active' }],
+                        },
+                    ],
+                },
+            ),
+        ).toEqual({
+            visitors: [
+                initialVisitor,
+                {
+                    id: 2,
+                    name: 'Франц 1',
+                    tariffId: 2,
+                    status: 'active',
+                    times: [{ timestamp: 1597246822295, status: 'active' }],
+                },
+                {
+                    id: 3,
+                    name: 'Франц 2',
+                    tariffId: 3,
+                    status: 'active',
+                    times: [{ timestamp: 1597246825795, status: 'active' }],
+                },
+            ],
+            tariffs: [initialTariff],
+            total: 0,
+            modals: {
+                payVisitors: false,
+            },
+            payedVisitors: [
+                initialVisitor,
+                {
+                    id: 3,
+                    name: 'Франц 2',
+                    tariffId: 3,
+                    status: 'active',
+                    times: [{ timestamp: 1597246825795, status: 'active' }],
                 },
             ],
         });
