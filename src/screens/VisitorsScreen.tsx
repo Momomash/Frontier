@@ -1,9 +1,10 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import MaterialTable from 'material-table';
+import MaterialTable, { MTableToolbar } from 'material-table';
 import { IconButton } from '@material-ui/core';
 import styled from '@emotion/styled';
 import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 
 import { AlertDialog } from '@/components';
@@ -17,6 +18,7 @@ import {
     toggleModalPayVisitors,
     calculateTotal,
     setPayedVisitors,
+    putVisitorsHistory,
 } from '@/redux/actions';
 import { localizationMaterialTable, calculateCostHelper, calculateDuration } from '@/utils';
 import { Tariff, Visitor, EventUser, Store } from '@/redux/initialState';
@@ -38,6 +40,7 @@ type Props = {
     toggleModalPayVisitors(status: boolean): void;
     calculateTotal(visitors: Array<Visitor>, tariffs: Array<Tariff>): void;
     setPayedVisitors(visitors: Array<Visitor>): void;
+    putVisitorsHistory(): void;
 };
 
 interface TableState {
@@ -53,7 +56,18 @@ const Controls = styled.div`
     flex-direction: row;
     align-items: center;
 `;
+const TableHeader = styled.div`
+    display: flex;
+    padding: 10px;
+    justify-content: flex-end;
+`;
 
+const isPayedVisitors = (visitors: Visitor[]) => {
+    const filteredVisitors = visitors.filter((visitor) => {
+        return visitor.status !== 'finished';
+    });
+    return filteredVisitors.length <= 0;
+};
 const getFunctionForRow = (action: (visitor: Visitor) => void) => {
     return (newData: Visitor) => {
         return new Promise((resolve) => {
@@ -78,6 +92,7 @@ const VisitorsComponent: FunctionComponent<Props> = (props: Props) => {
         toggleModalPayVisitors,
         calculateTotal,
         setPayedVisitors,
+        putVisitorsHistory,
     } = props;
     const [timer, setTimer] = React.useState<number>(Date.now());
     const [tableVisitors, setTableVisitors] = React.useState<TableState>({
@@ -216,6 +231,26 @@ const VisitorsComponent: FunctionComponent<Props> = (props: Props) => {
                     actionsColumnIndex: -1,
                     filtering: true,
                 }}
+                components={{
+                    Toolbar: (props) => (
+                        <>
+                            <MTableToolbar {...props} />
+                            <TableHeader>
+                                <Button
+                                    color="secondary"
+                                    variant="contained"
+                                    onClick={() => {
+                                        isPayedVisitors(visitors)
+                                            ? putVisitorsHistory()
+                                            : alert('Рассчитайте всех посетителей!');
+                                    }}
+                                >
+                                    Закрыть день
+                                </Button>
+                            </TableHeader>
+                        </>
+                    ),
+                }}
             />
             <AlertDialog
                 agreeButtonText="Расчитать"
@@ -253,6 +288,7 @@ const mapDispatchToProps = {
     toggleModalPayVisitors,
     calculateTotal,
     setPayedVisitors,
+    putVisitorsHistory,
 };
 
 export const VisitorsScreen = connect(mapStateToProps, mapDispatchToProps)(VisitorsComponent);

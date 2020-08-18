@@ -9,6 +9,8 @@ export const visitorDelete = createAction<Visitor>('VISITOR_DELETE');
 export const visitorEvent = createAction<Event>('VISITOR_EVENT');
 export const visitorsSelectedDelete = createAction<Visitor[]>('VISITORS_SELECTED_DELETE');
 export const visitorsSelectedPay = createAction<VisitorsWithTime>('VISITORS_SELECTED_PAY');
+export const visitorsHistoryPut = createAction('VISITORS_HISTORY_PUT');
+export const visitorsHistoryClean = createAction('VISITORS_HISTORY_CLEAN');
 
 export const tariffAdd = createAction<Tariff>('TARIFF_ADD');
 export const tariffEdit = createAction<Tariff>('TARIFF_EDIT');
@@ -51,6 +53,17 @@ export function paySelectedVisitors(value: Visitor[]) {
         dispatch(visitorsSelectedPay({ visitors: value, timestamp: Date.now() }));
     };
 }
+export function putVisitorsHistory() {
+    return (dispatch: Dispatch<Action<string>>) => {
+        dispatch(visitorsHistoryPut());
+    };
+}
+export function cleanVisitorsHistory() {
+    return (dispatch: Dispatch<Action<string>>) => {
+        dispatch(visitorsHistoryClean());
+    };
+}
+
 export function addTariff(value: Tariff) {
     return (dispatch: Dispatch<Action<string>>) => {
         value.id = Math.random();

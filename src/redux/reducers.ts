@@ -6,6 +6,8 @@ import {
     visitorEvent,
     visitorsSelectedDelete,
     visitorsSelectedPay,
+    visitorsHistoryPut,
+    visitorsHistoryClean,
     tariffAdd,
     tariffDelete,
     tariffEdit,
@@ -58,6 +60,13 @@ export const reducer = createReducer(initialState, {
         }
         state.total = 0;
         state.payedVisitors = [];
+    },
+    [visitorsHistoryPut.type]: (state) => {
+        Array.prototype.push.apply(state.historyVisitors, state.visitors);
+        state.visitors = [];
+    },
+    [visitorsHistoryClean.type]: (state) => {
+        state.historyVisitors = [];
     },
     [tariffAdd.type]: (state, action) => {
         state.tariffs.push(action.payload);

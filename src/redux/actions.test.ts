@@ -5,6 +5,8 @@ import {
     visitorEvent,
     visitorsSelectedDelete,
     visitorsSelectedPay,
+    visitorsHistoryPut,
+    visitorsHistoryClean,
     tariffAdd,
     tariffDelete,
     tariffEdit,
@@ -77,6 +79,18 @@ describe('actions', () => {
                 timestamp: 1111111111111,
             },
             type: 'VISITORS_SELECTED_PAY',
+        });
+    });
+    it('should create an action to VISITORS_HISTORY_PUT', () => {
+        const action = visitorsHistoryPut();
+        expect(action).toEqual({
+            type: 'VISITORS_HISTORY_PUT',
+        });
+    });
+    it('should create an action to VISITORS_HISTORY_CLEAN', () => {
+        const action = visitorsHistoryClean();
+        expect(action).toEqual({
+            type: 'VISITORS_HISTORY_CLEAN',
         });
     });
     it('should create an action to TARIFF_ADD', () => {

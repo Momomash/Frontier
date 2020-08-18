@@ -29,6 +29,7 @@ export type Tariff = {
 };
 export type Store = {
     visitors: Array<Visitor>;
+    historyVisitors: Array<Visitor>;
     tariffs: Array<Tariff>;
     modals: {
         payVisitors: boolean;
@@ -46,6 +47,7 @@ const initialState: Store = {
             times: [{ timestamp: 1597246825795, status: 'active' }],
         },
     ],
+    historyVisitors: [],
     tariffs: [
         {
             id: 1,
