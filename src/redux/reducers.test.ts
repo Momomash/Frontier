@@ -65,6 +65,11 @@ describe('reducer', () => {
         ).toEqual({
             visitors: [initialVisitor, newVisitor],
             tariffs: [initialTariff],
+            modals: {
+                payVisitors: false,
+            },
+            total: 0,
+            payedVisitors: [],
         });
     });
 
@@ -77,6 +82,11 @@ describe('reducer', () => {
         ).toEqual({
             visitors: [],
             tariffs: [initialTariff],
+            modals: {
+                payVisitors: false,
+            },
+            total: 0,
+            payedVisitors: [],
         });
     });
     it('should handle VISITOR_EDIT', () => {
@@ -102,6 +112,11 @@ describe('reducer', () => {
                 },
             ],
             tariffs: [initialTariff],
+            modals: {
+                payVisitors: false,
+            },
+            total: 0,
+            payedVisitors: [],
         });
     });
     it('should handle VISITOR_EVENT', () => {
@@ -124,6 +139,11 @@ describe('reducer', () => {
                 },
             ],
             tariffs: [initialTariff],
+            modals: {
+                payVisitors: false,
+            },
+            total: 0,
+            payedVisitors: [],
         });
     });
     it('should handle VISITOR_SELECTED_DELETE', () => {
@@ -179,6 +199,11 @@ describe('reducer', () => {
                 },
             ],
             tariffs: [initialTariff],
+            modals: {
+                payVisitors: false,
+            },
+            total: 0,
+            payedVisitors: [],
         });
     });
     it('should handle VISITOR_SELECTED_PAY', () => {
@@ -259,6 +284,7 @@ describe('reducer', () => {
             modals: {
                 payVisitors: false,
             },
+            payedVisitors: [],
             tariffs: [initialTariff],
             total: 0,
         });
@@ -272,6 +298,11 @@ describe('reducer', () => {
         ).toEqual({
             visitors: [initialVisitor],
             tariffs: [initialTariff, newTariff],
+            modals: {
+                payVisitors: false,
+            },
+            total: 0,
+            payedVisitors: [],
         });
     });
     it('should handle TARIFF_DELETE', () => {
@@ -283,6 +314,11 @@ describe('reducer', () => {
         ).toEqual({
             visitors: [initialVisitor],
             tariffs: [],
+            modals: {
+                payVisitors: false,
+            },
+            total: 0,
+            payedVisitors: [],
         });
     });
     it('should handle TARIFF_EDIT', () => {
@@ -308,6 +344,11 @@ describe('reducer', () => {
                     isDuration: false,
                 },
             ],
+            modals: {
+                payVisitors: false,
+            },
+            total: 0,
+            payedVisitors: [],
         });
     });
     it('should handle MODAL_PAY_VISITORS_TOGGLE', () => {
@@ -322,6 +363,8 @@ describe('reducer', () => {
             modals: {
                 payVisitors: true,
             },
+            total: 0,
+            payedVisitors: [],
         });
     });
     it('should handle TOTAL_CALCULATE', () => {
@@ -354,9 +397,7 @@ describe('reducer', () => {
                 },
                 {
                     type: totalCalculate,
-                    payload: {
-                        visitors: [initialVisitor],
-                    },
+                    payload: [initialVisitor],
                 },
             ),
         ).toEqual({
@@ -382,6 +423,7 @@ describe('reducer', () => {
                 payVisitors: false,
             },
             total: 600,
+            payedVisitors: [],
         });
     });
     it('should handle PAYED_VISITORS_SET', () => {
