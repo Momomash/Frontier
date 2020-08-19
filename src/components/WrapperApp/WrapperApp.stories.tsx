@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/styles';
 
 import { WrapperApp } from './WrapperApp';
-import { theme } from '@/utils/initialTheme';
+import { theme } from '../../utils/initialTheme';
 
 export default {
     title: 'WrapperApp',

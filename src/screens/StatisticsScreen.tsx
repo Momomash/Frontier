@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
+import { BarChart } from '@/components';
 
 export const StatisticsScreen: FunctionComponent<{}> = () => {
-    return <p>statistics screen</p>;
+    return <BarChart />;
 };

@@ -22,7 +22,7 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 
-import { useStyles, theme } from '@/utils/initialTheme';
+import { useStyles, theme } from '../../utils/initialTheme';
 
 const Link = styled(NavLink)`
     color: inherit;

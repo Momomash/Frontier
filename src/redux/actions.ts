@@ -22,7 +22,7 @@ export const payedVisitorsSet = createAction<Visitor[]>('PAYED_VISITORS_SET');
 
 export function addVisitor(value: Visitor) {
     return (dispatch: Dispatch<Action<string>>) => {
-        value.id = Math.random();
+        value.id = Date.now();
         value.status = 'active';
         value.times = [{ timestamp: Date.now(), status: 'active' }];
         dispatch(visitorAdd(value));
@@ -66,7 +66,7 @@ export function cleanVisitorsHistory() {
 
 export function addTariff(value: Tariff) {
     return (dispatch: Dispatch<Action<string>>) => {
-        value.id = Math.random();
+        value.id = Date.now();
         dispatch(tariffAdd(value));
     };
 }
