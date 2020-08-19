@@ -3,6 +3,15 @@ import styled from '@emotion/styled';
 
 import { Bar } from './Bar';
 
+type DataItem = {
+    title: string;
+    value: number;
+};
+type Props = {
+    color?: string;
+    data: Array<DataItem>;
+};
+
 const BarChartWrapper = styled.div`
     height: 500px;
     width: 100%;
@@ -13,12 +22,30 @@ const BarChartWrapper = styled.div`
     padding: 20px 0;
 `;
 
-export const BarChart: FunctionComponent<{}> = () => {
+export const BarChart: FunctionComponent<Props> = (props: Props) => {
+    const { color, data } = props;
+    const isMaxValue = () => {
+        const maxItem = data.reduce((prev, cur) => {
+            if (prev.value > cur.value) {
+                return prev;
+            }
+            return cur;
+        });
+        return maxItem.value;
+    };
     return (
         <BarChartWrapper>
-            <Bar value={5} maxValue={10} title="05.10" />
-            <Bar color="orange" value={9} maxValue={10} title="06.10" />
-            <Bar color="yellow" value={7} maxValue={10} title="06.10" />
+            {data.map(function (item) {
+                return (
+                    <Bar
+                        color={color}
+                        value={item.value}
+                        maxValue={isMaxValue()}
+                        title={item.title}
+                        key={item.title}
+                    />
+                );
+            })}
         </BarChartWrapper>
     );
 };
