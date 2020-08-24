@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Tariff } from '@/screens';
 
 export type Status = 'active' | 'pause' | 'finished';
 export type Visitor = {
@@ -22,7 +21,7 @@ export type VisitorsWithTimestamp = {
     visitors: Visitor[];
     timestamp: number;
 };
-export type State = {
+export type VisitorsState = {
     visitors: Array<Visitor>;
     modals: {
         payVisitors: boolean;
@@ -31,7 +30,7 @@ export type State = {
     payedVisitors: Array<Visitor>;
     timer: number;
 };
-export const initialState: State = {
+export const initialState: VisitorsState = {
     visitors: [
         {
             id: 1,

@@ -91,7 +91,6 @@ const VisitorsComponent: FunctionComponent<Props> = ({
             clearInterval(interval);
         };
     });
-
     return (
         <>
             <MaterialTable
