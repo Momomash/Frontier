@@ -1,25 +1,15 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import MaterialTable, { MTableToolbar } from 'material-table';
+import MaterialTable from 'material-table';
 import { IconButton } from '@material-ui/core';
 import styled from '@emotion/styled';
 import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
-
+import { Store } from '@/store';
+import { Visitor, EventUser, actions, VisitorsWithTimestamp } from './reducer';
+import { Tariff } from '@/screens/';
 import { AlertDialog } from '@/components';
-import {
-    addVisitor,
-    editVisitor,
-    deleteVisitor,
-    eventVisitor,
-    deleteSelectedVisitors,
-    paySelectedVisitors,
-    toggleModalPayVisitors,
-    calculateTotal,
-    setPayedVisitors,
-    putVisitorsHistory,
-} from '@/redux/actions';
 import { localizationMaterialTable, calculateCostHelper, calculateDuration } from '@/utils';
 import { Tariff, Visitor, EventUser, Store } from '@/redux/initialState';
 
@@ -31,15 +21,17 @@ type Props = {
     };
     total: number;
     payedVisitors: Array<Visitor>;
+    timer: number;
     addVisitor(visitor: Visitor): void;
     editVisitor(visitor: Visitor): void;
     deleteVisitor(visitor: Visitor): void;
     eventVisitor(event: EventUser): void;
     deleteSelectedVisitors(visitors: Array<Visitor>): void;
-    paySelectedVisitors(visitors: Array<Visitor>): void;
+    paySelectedVisitors(selectedVisitors: VisitorsWithTimestamp): void;
     toggleModalPayVisitors(status: boolean): void;
-    calculateTotal(visitors: Array<Visitor>, tariffs: Array<Tariff>): void;
+    calculateTotal(total: number): void;
     setPayedVisitors(visitors: Array<Visitor>): void;
+    updateTimer(timestamp: number): void;
     putVisitorsHistory(): void;
 };
 
@@ -70,34 +62,28 @@ const isPayedVisitors = (visitors: Visitor[]) => {
 };
 const getFunctionForRow = (action: (visitor: Visitor) => void) => {
     return (newData: Visitor) => {
-        return new Promise((resolve) => {
-            resolve();
-            action(newData);
-        });
+        action(newData);
+        return Promise.resolve();
     };
 };
-const VisitorsComponent: FunctionComponent<Props> = (props: Props) => {
-    const {
-        payedVisitors,
-        total,
-        visitors,
-        tariffs,
-        modals,
-        addVisitor,
-        editVisitor,
-        deleteVisitor,
-        eventVisitor,
-        deleteSelectedVisitors,
-        paySelectedVisitors,
-        toggleModalPayVisitors,
-        calculateTotal,
-        setPayedVisitors,
-        putVisitorsHistory,
-    } = props;
-    const [timer, setTimer] = React.useState<number>(Date.now());
-    const [tableVisitors, setTableVisitors] = React.useState<TableState>({
-        data: [],
-    });
+const VisitorsComponent: FunctionComponent<Props> = ({
+    payedVisitors,
+    total,
+    visitors,
+    tariffs,
+    modals,
+    addVisitor,
+    editVisitor,
+    deleteVisitor,
+    eventVisitor,
+    deleteSelectedVisitors,
+    paySelectedVisitors,
+    toggleModalPayVisitors,
+    calculateTotal,
+    setPayedVisitors,
+    updateTimer,
+    putVisitorsHistory,
+}) => {
     const handleTogglePause = (currentUser: Visitor) => {
         const updatedVisitor: Visitor = visitors.find((visitor) => visitor.id === currentUser.id)!;
         if (updatedVisitor.status === 'active') {
@@ -105,11 +91,6 @@ const VisitorsComponent: FunctionComponent<Props> = (props: Props) => {
         } else {
             eventVisitor({ timestamp: Date.now(), status: 'active', id: currentUser.id });
         }
-        setTableVisitors((prevState) => {
-            const data = [...prevState.data];
-            data[data.indexOf(currentUser)] = updatedVisitor;
-            return { ...prevState, data };
-        });
     };
     let tariffsColumn: NumberToString = {};
     tariffsColumn = tariffs.reduce(function (newArr, tariff) {
@@ -118,15 +99,13 @@ const VisitorsComponent: FunctionComponent<Props> = (props: Props) => {
     }, tariffsColumn);
 
     useEffect(() => {
-        if (JSON.stringify(visitors) !== JSON.stringify(tableVisitors.data)) {
-            setTableVisitors({ ...tableVisitors, data: visitors });
-        }
         const interval = setInterval(() => {
-            setTimer(Date.now());
+            updateTimer(Date.now());
         }, 60000);
-        return () => clearInterval(interval);
+        return () => {
+            clearInterval(interval);
+        };
     });
-
     return (
         <>
             <MaterialTable
@@ -199,7 +178,7 @@ const VisitorsComponent: FunctionComponent<Props> = (props: Props) => {
                         },
                     },
                 ]}
-                data={JSON.parse(JSON.stringify(tableVisitors.data))}
+                data={JSON.parse(JSON.stringify(visitors))}
                 editable={{
                     onRowAdd: getFunctionForRow(addVisitor),
                     onRowUpdate: getFunctionForRow(editVisitor),
@@ -219,7 +198,8 @@ const VisitorsComponent: FunctionComponent<Props> = (props: Props) => {
                         icon: 'payment',
                         onClick: (evt, data) => {
                             data = Array.isArray(data) ? data : [data];
-                            calculateTotal(data, tariffs);
+                            const total = calculateCostHelper(data, tariffs);
+                            calculateTotal(total);
                             setPayedVisitors(data);
                             toggleModalPayVisitors(true);
                         },
@@ -256,7 +236,7 @@ const VisitorsComponent: FunctionComponent<Props> = (props: Props) => {
                 agreeButtonText="Расчитать"
                 disagreeButtonText="Отмена"
                 agreeOnClick={() => {
-                    paySelectedVisitors(payedVisitors);
+                    paySelectedVisitors({ visitors: payedVisitors, timestamp: Date.now() });
                     toggleModalPayVisitors(false);
                 }}
                 dialogTitle="Рассчитать посетителей"
@@ -270,25 +250,27 @@ const VisitorsComponent: FunctionComponent<Props> = (props: Props) => {
 
 const mapStateToProps = (store: Store) => {
     return {
-        visitors: store.visitors,
+        visitors: store.visitors.visitors,
         tariffs: store.tariffs,
-        modals: store.modals,
-        total: store.total,
-        payedVisitors: store.payedVisitors,
+        modals: store.visitors.modals,
+        total: store.visitors.total,
+        payedVisitors: store.visitors.payedVisitors,
+        timer: store.visitors.timer,
     };
 };
 
 const mapDispatchToProps = {
-    addVisitor,
-    editVisitor,
-    deleteVisitor,
-    eventVisitor,
-    deleteSelectedVisitors,
-    paySelectedVisitors,
-    toggleModalPayVisitors,
-    calculateTotal,
-    setPayedVisitors,
-    putVisitorsHistory,
+    addVisitor: actions.add,
+    editVisitor: actions.edit,
+    deleteVisitor: actions.delete,
+    eventVisitor: actions.event,
+    deleteSelectedVisitors: actions.selectedDelete,
+    paySelectedVisitors: actions.selectedPay,
+    toggleModalPayVisitors: actions.modalPayToggle,
+    calculateTotal: actions.totalCalculate,
+    setPayedVisitors: actions.payedVisitorsSet,
+    updateTimer: actions.timerUpdate,
+    putVisitorsHistory: actions.updateTimer,
 };
 
 export const VisitorsScreen = connect(mapStateToProps, mapDispatchToProps)(VisitorsComponent);

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/es/integration/react';
 
-import { store, persistor } from './redux/store';
+import { store, persistor } from './store';
 import { WrapperApp } from '@/components';
 import { VisitorsScreen, TariffsScreen, StatisticsScreen, NotFoundScreen } from '@/screens';
 import { theme } from '@/utils';

@@ -1,39 +1,30 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent } from 'react';
 import MaterialTable from 'material-table';
 import { connect } from 'react-redux';
 
+import { actions, Tariff } from './reducer';
 import { localizationMaterialTable } from '@/utils/localizationMaterialTable';
-import { Tariff, Store } from '@/redux/initialState';
-import { addTariff, deleteTariff, editTariff } from '@/redux/actions';
+import { Store } from '@/store';
 
 type Props = {
     tariffs: Array<Tariff>;
-    addTariff(visitor: Tariff): void;
-    editTariff(visitor: Tariff): void;
-    deleteTariff(visitor: Tariff): void;
+    addTariff(tariff: Tariff): void;
+    editTariff(tariff: Tariff): void;
+    deleteTariff(tariff: Tariff): void;
 };
 
-interface TableState {
-    data: Array<Tariff>;
-}
 const getFunctionForRow = (action: (tariff: Tariff) => void) => {
     return (newData: Tariff) => {
-        return new Promise((resolve) => {
-            resolve();
-            action(newData);
-        });
+        action(newData);
+        return Promise.resolve();
     };
 };
-export const TariffsComponent: FunctionComponent<Props> = (props: Props) => {
-    const { tariffs, addTariff, editTariff, deleteTariff } = props;
-    const [state, setState] = React.useState<TableState>({
-        data: [],
-    });
-    useEffect(() => {
-        if (tariffs !== state.data) {
-            setState({ ...state, data: tariffs });
-        }
-    });
+export const TariffsComponent: FunctionComponent<Props> = ({
+    tariffs,
+    addTariff,
+    editTariff,
+    deleteTariff,
+}) => {
     return (
         <MaterialTable
             title="Тарифы"
@@ -58,7 +49,7 @@ export const TariffsComponent: FunctionComponent<Props> = (props: Props) => {
                     type: 'numeric',
                 },
             ]}
-            data={JSON.parse(JSON.stringify(state.data))}
+            data={JSON.parse(JSON.stringify(tariffs))}
             editable={{
                 onRowAdd: getFunctionForRow(addTariff),
                 onRowUpdate: getFunctionForRow(editTariff),
@@ -72,14 +63,12 @@ export const TariffsComponent: FunctionComponent<Props> = (props: Props) => {
     );
 };
 
-const mapStateToProps = (store: Store) => {
-    return { tariffs: store.tariffs };
-};
+const mapStateToProps = ({ tariffs }: Store) => ({ tariffs });
 
 const mapDispatchToProps = {
-    addTariff,
-    editTariff,
-    deleteTariff,
+    addTariff: actions.add,
+    editTariff: actions.edit,
+    deleteTariff: actions.delete,
 };
 
 export const TariffsScreen = connect(mapStateToProps, mapDispatchToProps)(TariffsComponent);
