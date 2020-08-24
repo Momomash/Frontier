@@ -82,11 +82,13 @@
     "lodash": "4.17.19",
     "loki": "0.24.0",
     "material-table": "1.66.0",
+    "notistack": "^0.9.17",
     "react": "16.13.1",
     "react-docgen-typescript-loader": "3.7.2",
     "react-dom": "16.13.1",
     "react-redux": "7.2.1",
-    "react-router-dom": "5.2.0"
+    "react-router-dom": "5.2.0",
+    "redux-devtools-extension": "2.13.8"
   },
   "repository": {
     "type": "git",

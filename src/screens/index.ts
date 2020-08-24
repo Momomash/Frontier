@@ -1,6 +1,25 @@
-import { SettingsScreen } from './SettingsScreen';
+import { TariffsScreen, TariffsSlice, Tariff } from './TariffsScreen';
 import { StatisticsScreen } from './StatisticsScreen';
-import { VisitorsScreen } from './VisitorsScreen';
+import {
+    VisitorsScreen,
+    VisitorsSlice,
+    Visitor,
+    Event,
+    EventUser,
+    VisitorsWithTimestamp,
+} from './VisitorsScreen';
 import { NotFoundScreen } from './NotFoundScreen';
 
-export { SettingsScreen, StatisticsScreen, VisitorsScreen, NotFoundScreen };
+export {
+    TariffsScreen,
+    TariffsSlice,
+    Tariff,
+    Visitor,
+    Event,
+    EventUser,
+    VisitorsWithTimestamp,
+    StatisticsScreen,
+    VisitorsScreen,
+    VisitorsSlice,
+    NotFoundScreen,
+};

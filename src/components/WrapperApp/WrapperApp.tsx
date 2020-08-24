@@ -100,12 +100,12 @@ export const WrapperApp: FunctionComponent<{}> = (Props) => {
                                 <ListItemText primary="Посетители" />
                             </ListItem>
                         </Link>
-                        <Link exact to="/settings" activeClassName="active">
-                            <ListItem button key="settings">
+                        <Link exact to="/tariffs" activeClassName="active">
+                            <ListItem button key="tariffs">
                                 <ListItemIcon>
                                     <SettingsIcon color="primary" />
                                 </ListItemIcon>
-                                <ListItemText primary="Настройки" />
+                                <ListItemText primary="Тарифы" />
                             </ListItem>
                         </Link>
                         <Link exact to="/statistics" activeClassName="active">

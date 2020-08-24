@@ -1,3 +1,4 @@
 import { WrapperApp } from './WrapperApp';
+import { AlertDialog } from './AlertDialog';
 
-export { WrapperApp };
+export { WrapperApp, AlertDialog };
