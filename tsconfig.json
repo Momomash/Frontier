@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "baseUrl": "./",
+        "typeRoots": [ "./types", "./node_modules/@types"],
         "paths": {
             "types/*": ["src/types/*"],
             "components/*": ["src/components/*"],
@@ -14,5 +15,5 @@
         "strict": true,
         "allowSyntheticDefaultImports": true
     },
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules", "typings"]
 }

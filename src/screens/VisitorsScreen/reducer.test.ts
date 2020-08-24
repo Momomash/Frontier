@@ -1,4 +1,4 @@
-import { actions, reducer, State, Visitor } from './reducer';
+import { actions, reducer, VisitorsState, Visitor } from './reducer';
 
 describe('reducer', () => {
     const newVisitor: Visitor = {
@@ -16,7 +16,7 @@ describe('reducer', () => {
         times: [{ timestamp: 1597246825795, status: 'active' }],
     };
 
-    const state: State = {
+    const state: VisitorsState = {
         visitors: [initialVisitor],
         modals: {
             payVisitors: false,

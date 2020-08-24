@@ -1,4 +1,19 @@
 import { VisitorsScreen } from './VisitorsScreen';
-import { VisitorsSlice, Visitor, Event, EventUser, VisitorsWithTimestamp } from './reducer';
+import {
+    VisitorsSlice,
+    Visitor,
+    VisitorsState,
+    Event,
+    EventUser,
+    VisitorsWithTimestamp,
+} from './reducer';
 
-export { VisitorsScreen, VisitorsSlice, Visitor, Event, EventUser, VisitorsWithTimestamp };
+export {
+    VisitorsScreen,
+    VisitorsSlice,
+    VisitorsState,
+    Visitor,
+    Event,
+    EventUser,
+    VisitorsWithTimestamp,
+};
