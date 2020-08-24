@@ -1,5 +1,5 @@
 import { calculateCostHelper } from './calculateCostHelper';
-import { Tariff, Visitor } from '@/redux/initialState';
+import { Tariff, Visitor } from '@/screens';
 
 describe('calculateTariffHelper test', () => {
     const visitors: Array<Visitor> = [
@@ -55,10 +55,10 @@ describe('calculateTariffHelper test', () => {
         },
     ];
 
-    it('1 visitor: duration < maxDuration', () => {
+    it('1 visitor', () => {
         expect(calculateCostHelper(visitors[0], tariffs)).toBe(50);
     });
-    it('1 visitors: is duration: false', () => {
-        expect(calculateCostHelper(visitors[1], tariffs)).toBe(400);
+    it('Array visitors', () => {
+        expect(calculateCostHelper(visitors, tariffs)).toBe(450);
     });
 });
