@@ -1,10 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+} from '@material-ui/core';
 
 type Props = {
     dialogTitle: string;
@@ -15,16 +17,15 @@ type Props = {
     close: () => void;
     isOpen: boolean;
 };
-export const AlertDialog: FunctionComponent<Props> = (props: Props) => {
-    const {
-        dialogTitle,
-        dialogContent,
-        agreeButtonText,
-        disagreeButtonText,
-        agreeOnClick,
-        close,
-        isOpen,
-    } = props;
+export const AlertDialog: FunctionComponent<Props> = ({
+    dialogTitle,
+    dialogContent,
+    agreeButtonText,
+    disagreeButtonText,
+    agreeOnClick,
+    close,
+    isOpen,
+}) => {
     return (
         <div>
             <Dialog open={isOpen} onClose={close}>

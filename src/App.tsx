@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import { store } from './redux/store';
+import { store } from './store';
 import { WrapperApp } from '@/components';
 import { VisitorsScreen, TariffsScreen, StatisticsScreen, NotFoundScreen } from '@/screens';
 import { theme } from '@/utils';

@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { action } from '@storybook/addon-actions';
 
-import { AlertDialog } from './AlertDialog';
+import { AlertDialog } from '@/components';
 
 export default {
     title: 'AlertDialog',
@@ -10,9 +11,9 @@ export const ALertDialog = () => (
     <AlertDialog
         dialogTitle="Example Dialog title"
         dialogContent="Example dialog content"
-        agreeOnClick={() => undefined}
+        agreeOnClick={action('Agree Click')}
         agreeButtonText="Agree"
-        close={() => undefined}
+        close={action('Close Alert click')}
         disagreeButtonText="Disagree"
         isOpen={true}
     />

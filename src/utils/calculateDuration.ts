@@ -1,4 +1,4 @@
-import { Event } from '@/redux/initialState';
+import { Event } from '@/screens';
 
 export const calculateDuration = (times: Array<Event>): number => {
     let time = 0;
