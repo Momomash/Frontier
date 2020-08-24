@@ -23,6 +23,7 @@ export type VisitorsWithTimestamp = {
 };
 export type VisitorsState = {
     visitors: Array<Visitor>;
+    historyVisitors: Array<Visitor>;
     modals: {
         payVisitors: boolean;
     };
@@ -40,6 +41,7 @@ export const initialState: VisitorsState = {
             times: [{ timestamp: 1597246825795, status: 'active' }],
         },
     ],
+    historyVisitors: [],
     modals: {
         payVisitors: false,
     },
@@ -109,6 +111,13 @@ export const VisitorsSlice = createSlice({
         },
         timerUpdate: (state, { payload }: PayloadAction<number>) => {
             state.timer = payload;
+        },
+        historyPut: (state) => {
+            Array.prototype.push.apply(state.historyVisitors, state.visitors);
+            state.visitors = [];
+        },
+        historyClean: (state) => {
+            state.historyVisitors = [];
         },
     },
 });

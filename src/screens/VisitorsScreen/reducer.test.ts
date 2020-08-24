@@ -15,26 +15,10 @@ describe('reducer', () => {
         status: 'active',
         times: [{ timestamp: 1597246825795, status: 'active' }],
     };
-    const newTariff: Tariff = {
-        id: 1,
-        title: 'test',
-        cost: 5,
-        maxCost: 1000,
-        isDuration: false,
-    };
-    const initialTariff: Tariff = {
-        id: 1,
-        title: '2,5р/мин',
-        cost: 2.5,
-        maxCost: 600,
-        isDuration: true,
-    };
-    const event: Event = { timestamp: 111, status: 'finished' };
 
     const state: VisitorsState = {
         visitors: [initialVisitor],
         historyVisitors: [],
-        tariffs: [initialTariff],
         modals: {
             payVisitors: false,
         },
@@ -46,9 +30,6 @@ describe('reducer', () => {
     it('should handle VISITOR_ADD', () => {
         expect(reducer(state, actions.add(newVisitor))).toEqual({
             visitors: [initialVisitor, newVisitor],
-            modals: {
-                payVisitors: false,
-            },
             payedVisitors: [],
             timer: 0,
             historyVisitors: [],
@@ -62,9 +43,6 @@ describe('reducer', () => {
     it('should handle VISITOR_DELETE', () => {
         expect(reducer(state, actions.delete(initialVisitor))).toEqual({
             visitors: [],
-            modals: {
-                payVisitors: false,
-            },
             total: 0,
             timer: 0,
             historyVisitors: [],
@@ -152,7 +130,6 @@ describe('reducer', () => {
                         },
                     ],
                     historyVisitors: [],
-                    tariffs: [initialTariff],
                     modals: {
                         payVisitors: false,
                     },
@@ -269,7 +246,7 @@ describe('reducer', () => {
             },
             payedVisitors: [],
             total: 0,
-            payedVisitors: [],
+            timer: 0,
         });
     });
     it('should handle VISITORS_HISTORY_PUT', () => {
@@ -294,16 +271,14 @@ describe('reducer', () => {
                         },
                     ],
                     historyVisitors: [],
-                    tariffs: [initialTariff],
                     modals: {
                         payVisitors: false,
                     },
                     total: 0,
                     payedVisitors: [],
+                    timer: 0,
                 },
-                {
-                    type: visitorsHistoryPut,
-                },
+                actions.historyPut(),
             ),
         ).toEqual({
             visitors: [],
@@ -328,8 +303,8 @@ describe('reducer', () => {
                 payVisitors: false,
             },
             payedVisitors: [],
-            tariffs: [initialTariff],
             total: 0,
+            timer: 0,
         });
     });
     it('should handle VISITORS_HISTORY_CLEAN', () => {
@@ -353,24 +328,22 @@ describe('reducer', () => {
                             times: [{ timestamp: 1597246825795, status: 'active' }],
                         },
                     ],
-                    tariffs: [initialTariff],
                     modals: {
                         payVisitors: false,
                     },
                     total: 0,
                     payedVisitors: [],
+                    timer: 0,
                 },
-                {
-                    type: visitorsHistoryClean,
-                },
+                actions.historyClean,
             ),
         ).toEqual({
             visitors: [initialVisitor],
             historyVisitors: [],
-            tariffs: [initialTariff],
             modals: {
                 payVisitors: false,
             },
+            payedVisitors: [],
             total: 0,
             timer: 0,
         });
@@ -396,6 +369,7 @@ describe('reducer', () => {
             total: 400,
             payedVisitors: [],
             timer: 0,
+            historyVisitors: [],
         });
     });
     it('should handle PAYED_VISITORS_SET', () => {
@@ -477,6 +451,7 @@ describe('reducer', () => {
     it('should handle TIMER_UPDATE', () => {
         expect(reducer(state, actions.timerUpdate(1))).toEqual({
             visitors: [initialVisitor],
+            historyVisitors: [],
             modals: {
                 payVisitors: false,
             },

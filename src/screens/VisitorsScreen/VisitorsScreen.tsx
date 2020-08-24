@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import MaterialTable from 'material-table';
+import MaterialTable, { MTableToolbar } from 'material-table';
 import { IconButton } from '@material-ui/core';
 import styled from '@emotion/styled';
 import PauseIcon from '@material-ui/icons/Pause';
@@ -11,7 +11,6 @@ import { Visitor, EventUser, actions, VisitorsWithTimestamp } from './reducer';
 import { Tariff } from '@/screens/';
 import { AlertDialog } from '@/components';
 import { localizationMaterialTable, calculateCostHelper, calculateDuration } from '@/utils';
-import { Tariff, Visitor, EventUser, Store } from '@/redux/initialState';
 
 type Props = {
     visitors: Array<Visitor>;
@@ -270,7 +269,7 @@ const mapDispatchToProps = {
     calculateTotal: actions.totalCalculate,
     setPayedVisitors: actions.payedVisitorsSet,
     updateTimer: actions.timerUpdate,
-    putVisitorsHistory: actions.updateTimer,
+    putVisitorsHistory: actions.historyPut,
 };
 
 export const VisitorsScreen = connect(mapStateToProps, mapDispatchToProps)(VisitorsComponent);
