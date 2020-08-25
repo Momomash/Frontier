@@ -1,11 +1,21 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@material-ui/core';
 import styled from '@emotion/styled';
 import { connect } from 'react-redux';
 
 import { Store } from '@/store';
+import { actions } from './reducer';
 import { Visitor, Tariff } from '@/screens';
-import { TimestampToString, StringToTimestamp, rankData } from '@/utils';
+import {
+    TimestampToString,
+    StringToTimestamp,
+    rankData,
+    sortData,
+    calculateTotalStatistics,
+    calculateAverageCostStatistics,
+    calculateAverageDurationStatistics,
+    calculateQuantityVisitorsStatistics,
+} from '@/utils';
 import { BarChart } from '@/components';
 
 const Controls = styled(FormControl)`
@@ -23,34 +33,66 @@ const dataTest = [
 type Props = {
     historyVisitors: Array<Visitor>;
     tariffs: Array<Tariff>;
+    startDate: string;
+    endDate: string;
+    statisticsIndicator: string;
+    updateStartDate(date: string): void;
+    updateEndDate(date: string): void;
+    updateStatisticsIndicator(indicator: string): void;
 };
-const StatisticsComponent: FunctionComponent<Props> = ({ historyVisitors, tariffs }) => {
-    let startDate = TimestampToString(Date.now() - 2592000000);
-    let endDate = TimestampToString(Date.now());
-    let dataRanged = rankData(
+const StatisticsComponent: FunctionComponent<Props> = ({
+    historyVisitors,
+    tariffs,
+    startDate,
+    endDate,
+    statisticsIndicator,
+    updateEndDate,
+    updateStartDate,
+    updateStatisticsIndicator,
+}) => {
+    const dataRanged = rankData(
         historyVisitors,
         StringToTimestamp(startDate),
         StringToTimestamp(endDate),
     );
+    let data;
+    switch (statisticsIndicator) {
+        case 'total':
+            data = calculateTotalStatistics(sortData(dataRanged), tariffs);
+            break;
+        case 'average-cost':
+            data = calculateAverageCostStatistics(sortData(dataRanged), tariffs);
+            break;
+        case 'average-duration':
+            data = calculateAverageDurationStatistics(sortData(dataRanged));
+            break;
+        case 'quantity-visitors':
+            data = calculateQuantityVisitorsStatistics(sortData(dataRanged));
+            break;
+        default:
+            data = calculateTotalStatistics(sortData(dataRanged), tariffs);
+    }
     const handleChoice = (event: React.ChangeEvent<{ value: unknown }>) => {
-        alert(event.target.value);
+        updateStatisticsIndicator(event.target.value as string);
     };
     const handleStartDate = (event: React.ChangeEvent<{ value: string }>) => {
-        startDate = event.target.value;
-        dataRanged = rankData(
-            historyVisitors,
-            StringToTimestamp(startDate),
-            StringToTimestamp(endDate),
-        );
+        updateStartDate(event.target.value);
     };
     const handleEndDate = (event: React.ChangeEvent<{ value: string }>) => {
-        endDate = event.target.value;
-        dataRanged = rankData(
-            historyVisitors,
-            StringToTimestamp(startDate),
-            StringToTimestamp(endDate),
-        );
+        updateEndDate(event.target.value);
     };
+    useEffect(() => {
+        if (!startDate) {
+            updateStartDate(TimestampToString(Date.now() - 2592000000));
+        }
+        if (!endDate) {
+            updateEndDate(TimestampToString(Date.now()));
+        }
+        if (!statisticsIndicator) {
+            updateStatisticsIndicator('total');
+        }
+        //return () => {};
+    });
     return (
         <>
             <Controls>
@@ -58,7 +100,7 @@ const StatisticsComponent: FunctionComponent<Props> = ({ historyVisitors, tariff
                 <Select
                     labelId="statistics-choice-label"
                     id="statistics-choice"
-                    value={'total'}
+                    value={statisticsIndicator}
                     onChange={handleChoice}
                 >
                     <MenuItem value={'total'}>Итого за день</MenuItem>
@@ -80,7 +122,7 @@ const StatisticsComponent: FunctionComponent<Props> = ({ historyVisitors, tariff
             <Controls>
                 <TextField label="По" type="date" defaultValue={endDate} onChange={handleEndDate} />
             </Controls>
-            <BarChart data={dataTest} color="aquamarine" />
+            <BarChart data={data} color="aquamarine" />
         </>
     );
 };
@@ -88,8 +130,15 @@ const mapStateToProps = (store: Store) => {
     return {
         historyVisitors: store.visitors.historyVisitors,
         tariffs: store.tariffs,
+        startDate: store.statistics.startDate,
+        endDate: store.statistics.endDate,
+        statisticsIndicator: store.statistics.statisticsIndicator,
     };
 };
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+    updateStartDate: actions.updateStartDate,
+    updateEndDate: actions.updateEndDate,
+    updateStatisticsIndicator: actions.updateStatisticsIndicator,
+};
 
 export const StatisticsScreen = connect(mapStateToProps, mapDispatchToProps)(StatisticsComponent);

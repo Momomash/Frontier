@@ -12,11 +12,12 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist-indexeddb-storage';
 
-import { VisitorsSlice, TariffsSlice, VisitorsState, Tariff } from '@/screens';
+import { VisitorsSlice, TariffsSlice, StatisticsSlice, VisitorsState, StatisticsState, Tariff } from '@/screens';
 
 const reducer = combineReducers({
     visitors: VisitorsSlice.reducer,
     tariffs: TariffsSlice.reducer,
+    statistics: StatisticsSlice.reducer,
 });
 const persistConfig = {
     key: 'root',
@@ -27,6 +28,7 @@ const persistedReducer = persistReducer(persistConfig, reducer);
 export type Store = {
     visitors: VisitorsState;
     tariffs: Tariff[];
+    statistics: StatisticsState;
 };
 export const store = configureStore({
     reducer: persistedReducer,
