@@ -6,6 +6,7 @@ import {
     Event,
     EventUser,
     VisitorsWithTimestamp,
+    Status,
 } from './reducer';
 
 export {
@@ -16,4 +17,5 @@ export {
     Event,
     EventUser,
     VisitorsWithTimestamp,
+    Status,
 };

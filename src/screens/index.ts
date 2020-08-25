@@ -8,6 +8,7 @@ import {
     Event,
     EventUser,
     VisitorsWithTimestamp,
+    Status,
 } from './VisitorsScreen';
 import { NotFoundScreen } from './NotFoundScreen';
 
@@ -20,6 +21,7 @@ export {
     Event,
     EventUser,
     VisitorsWithTimestamp,
+    Status,
     StatisticsScreen,
     StatisticsSlice,
     StatisticsState,

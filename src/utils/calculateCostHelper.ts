@@ -20,4 +20,3 @@ export const calculateCostHelper = (data: Visitor | Visitor[], tariffs: Array<Ta
     }
     return total;
 };
-

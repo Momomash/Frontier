@@ -24,21 +24,23 @@ const BarItem = styled.div((props: { height: number; color: string | undefined }
 }));
 const BarTitle = styled.div`
     position: absolute;
-    bottom: -45px;
+    bottom: -80px;
+    left: -20px;
     width: 100%;
     text-align: center;
-    transform: rotate(-90deg);
+    transform: rotate(-70deg);
+    white-space: nowrap;
 `;
 const BarValue = styled.div`
     position: absolute;
     top: -25px;
     width: 100%;
     text-align: center;
+    transform: rotate(-70deg);
+    white-space: nowrap;
 `;
-export const Bar: FunctionComponent<Props> = (props: Props) => {
-    const { value, maxValue, title, color } = props;
+export const Bar: FunctionComponent<Props> = ({ value, maxValue, title, color }) => {
     const fullness = (value / maxValue) * 100;
-
     return (
         <BarItem color={color} height={fullness}>
             <BarTitle>{title}</BarTitle>

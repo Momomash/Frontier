@@ -1,5 +1,5 @@
 import { calculateCostHelper } from './calculateCostHelper';
-import { Tariff, Visitor } from '@/screens';
+import { Status, Tariff, Visitor } from '@/screens';
 
 describe('calculateTariffHelper test', () => {
     const visitors: Array<Visitor> = [
@@ -7,20 +7,20 @@ describe('calculateTariffHelper test', () => {
             id: 1,
             name: 'Франц',
             tariffId: 1,
-            status: 'pause',
+            status: Status.pause,
             times: [
-                { timestamp: 1597665600000, status: 'active' },
-                { timestamp: 1597666800000, status: 'pause' },
+                { timestamp: 1597665600000, status: Status.active },
+                { timestamp: 1597666800000, status: Status.pause },
             ],
         },
         {
             id: 2,
             name: 'Франц 2',
             tariffId: 2,
-            status: 'active',
+            status: Status.pause,
             times: [
-                { timestamp: 1597665600000, status: 'active' },
-                { timestamp: 1597666800000, status: 'pause' },
+                { timestamp: 1597665600000, status: Status.active },
+                { timestamp: 1597666800000, status: Status.pause },
             ],
         },
     ];

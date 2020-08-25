@@ -1,12 +1,12 @@
 import {
-    rankData,
-    sortData,
-    calculateTotalStatistics,
     calculateAverageCostStatistics,
     calculateAverageDurationStatistics,
     calculateQuantityVisitorsStatistics,
+    calculateTotalStatistics,
+    rankData,
+    sortData,
 } from './statisticsUtils';
-import { Visitor, Tariff } from '@/screens';
+import { Status, Tariff, Visitor } from '@/screens';
 
 describe('StatisticsUtils test', () => {
     const visitors: Array<Visitor> = [
@@ -14,33 +14,30 @@ describe('StatisticsUtils test', () => {
             id: 1,
             name: 'Франц',
             tariffId: 1,
-            status: 'finished',
+            status: Status.finished,
             times: [
-                { timestamp: 1597246825795, status: 'active' },
-                { timestamp: 1597927148000, status: 'finished' },
-                //20 августа 2020
+                { timestamp: 1597246825795, status: Status.active },
+                { timestamp: 1597927148000, status: Status.finished },
             ],
         },
         {
             id: 2,
             name: 'Франц 2',
             tariffId: 2,
-            status: 'finished',
+            status: Status.finished,
             times: [
-                { timestamp: 1597246825795, status: 'active' },
-                { timestamp: 1598099948000, status: 'finished' },
-                //22 августа 2020
+                { timestamp: 1597246825795, status: Status.active },
+                { timestamp: 1598099948000, status: Status.finished },
             ],
         },
         {
             id: 3,
             name: 'Франц 3',
             tariffId: 3,
-            status: 'finished',
+            status: Status.finished,
             times: [
-                { timestamp: 1597246825795, status: 'active' },
-                { timestamp: 1598099948000, status: 'finished' },
-                //22 августа 2020
+                { timestamp: 1597246825795, status: Status.active },
+                { timestamp: 1598099948000, status: Status.finished },
             ],
         },
     ];
@@ -117,11 +114,11 @@ describe('StatisticsUtils test', () => {
         expect(calculateAverageDurationStatistics(sortData(visitors))).toEqual([
             {
                 title: '2020-8-20',
-                value: 11338,
+                value: 189,
             },
             {
                 title: '2020-8-22',
-                value: 14218,
+                value: 237,
             },
         ]);
     });

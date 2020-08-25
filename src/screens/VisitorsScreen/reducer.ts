@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export type Status = 'active' | 'pause' | 'finished';
+export enum Status {
+    active,
+    pause,
+    finished,
+}
 export type Visitor = {
     id?: number;
     name: string;
@@ -37,33 +40,30 @@ export const initialState: VisitorsState = {
             id: 1,
             name: 'Франц',
             tariffId: 1,
-            status: 'finished',
+            status: Status.finished,
             times: [
-                { timestamp: 1597246825795, status: 'active' },
-                { timestamp: 1597927148000, status: 'finished' },
-                //20 августа 2020
+                { timestamp: 1597246825795, status: Status.active },
+                { timestamp: 1597927148000, status: Status.finished },
             ],
         },
         {
             id: 2,
             name: 'Франц 2',
             tariffId: 2,
-            status: 'finished',
+            status: Status.finished,
             times: [
-                { timestamp: 1597246825795, status: 'active' },
-                { timestamp: 1598099948000, status: 'finished' },
-                //22 августа 2020
+                { timestamp: 1597246825795, status: Status.active },
+                { timestamp: 1598099948000, status: Status.finished },
             ],
         },
         {
             id: 3,
             name: 'Франц 3',
             tariffId: 3,
-            status: 'finished',
+            status: Status.finished,
             times: [
-                { timestamp: 1597246825795, status: 'active' },
-                { timestamp: 1598099948000, status: 'finished' },
-                //22 августа 2020
+                { timestamp: 1597246825795, status: Status.active },
+                { timestamp: 1598099948000, status: Status.finished },
             ],
         },
     ],
@@ -84,8 +84,8 @@ export const VisitorsSlice = createSlice({
             prepare: (visitor: Visitor) => {
                 const newTime = Date.now();
                 visitor.id = newTime;
-                visitor.status = 'active';
-                visitor.times = [{ timestamp: newTime, status: 'active' }];
+                visitor.status = Status.active;
+                visitor.times = [{ timestamp: newTime, status: Status.active }];
                 return { payload: visitor };
             },
             reducer: (state, { payload }: PayloadAction<Visitor>) => {
@@ -117,10 +117,10 @@ export const VisitorsSlice = createSlice({
                 const indexVisitor = state.visitors.findIndex(
                     (visitor) => visitor.id === payload.visitors[i].id,
                 );
-                state.visitors[indexVisitor].status = 'finished';
+                state.visitors[indexVisitor].status = Status.finished;
                 state.visitors[indexVisitor].times.push({
                     timestamp: payload.timestamp,
-                    status: 'finished',
+                    status: Status.finished,
                 });
             }
             state.total = 0;

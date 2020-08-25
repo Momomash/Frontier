@@ -7,10 +7,10 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { Store } from '@/store';
-import { Visitor, EventUser, actions, VisitorsWithTimestamp } from './reducer';
+import { actions, EventUser, Status, Visitor, VisitorsWithTimestamp } from './reducer';
 import { Tariff } from '@/screens/';
 import { AlertDialog } from '@/components';
-import { localizationMaterialTable, calculateCostHelper, calculateDuration } from '@/utils';
+import { calculateCostHelper, calculateDuration, localizationMaterialTable } from '@/utils';
 
 type Props = {
     visitors: Array<Visitor>;
@@ -55,7 +55,7 @@ const TableHeader = styled.div`
 
 const isPayedVisitors = (visitors: Visitor[]) => {
     const filteredVisitors = visitors.filter((visitor) => {
-        return visitor.status !== 'finished';
+        return visitor.status !== Status.finished;
     });
     return filteredVisitors.length <= 0;
 };
@@ -85,10 +85,10 @@ const VisitorsComponent: FunctionComponent<Props> = ({
 }) => {
     const handleTogglePause = (currentUser: Visitor) => {
         const updatedVisitor: Visitor = visitors.find((visitor) => visitor.id === currentUser.id)!;
-        if (updatedVisitor.status === 'active') {
-            eventVisitor({ timestamp: Date.now(), status: 'pause', id: currentUser.id });
+        if (updatedVisitor.status === Status.active) {
+            eventVisitor({ timestamp: Date.now(), status: Status.pause, id: currentUser.id });
         } else {
-            eventVisitor({ timestamp: Date.now(), status: 'active', id: currentUser.id });
+            eventVisitor({ timestamp: Date.now(), status: Status.active, id: currentUser.id });
         }
     };
     let tariffsColumn: NumberToString = {};
@@ -159,7 +159,7 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                         defaultFilter: 'active',
                         render: (RowData) => {
                             let icon;
-                            if (RowData.status === 'active') {
+                            if (RowData.status === Status.active) {
                                 icon = <PauseIcon />;
                             } else {
                                 icon = <PlayArrowIcon />;

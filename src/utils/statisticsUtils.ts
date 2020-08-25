@@ -56,7 +56,7 @@ export const calculateAverageCostStatistics = (
 export const calculateAverageDurationStatistics = (data: SortedData): Array<StatisticsData> => {
     return Object.keys(data).map((key: string) => {
         const total = data[key].reduce((result: number, visitor: Visitor) => {
-            return result + calculateDuration(visitor.times);
+            return result + Math.round(calculateDuration(visitor.times) / 60);
         }, 0);
         return { title: key, value: total / data[key].length };
     });

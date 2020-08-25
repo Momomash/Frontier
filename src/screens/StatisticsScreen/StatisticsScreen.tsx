@@ -25,11 +25,6 @@ const Controls = styled(FormControl)`
         margin-bottom: 5px;
     }
 `;
-const dataTest = [
-    { title: '1', value: 20 },
-    { title: '2', value: 40 },
-    { title: '3', value: 35 },
-];
 type Props = {
     historyVisitors: Array<Visitor>;
     tariffs: Array<Tariff>;
@@ -91,7 +86,6 @@ const StatisticsComponent: FunctionComponent<Props> = ({
         if (!statisticsIndicator) {
             updateStatisticsIndicator('total');
         }
-        //return () => {};
     });
     return (
         <>
@@ -106,7 +100,7 @@ const StatisticsComponent: FunctionComponent<Props> = ({
                     <MenuItem value={'total'}>Итого за день</MenuItem>
                     <MenuItem value={'average-cost'}>Средняя стоимость посещения</MenuItem>
                     <MenuItem value={'average-duration'}>
-                        Средняя продолжительность посещения
+                        Средняя продолжительность посещения (часов)
                     </MenuItem>
                     <MenuItem value={'quantity-visitors'}>Количество посетителей</MenuItem>
                 </Select>
@@ -122,7 +116,7 @@ const StatisticsComponent: FunctionComponent<Props> = ({
             <Controls>
                 <TextField label="По" type="date" defaultValue={endDate} onChange={handleEndDate} />
             </Controls>
-            <BarChart data={data} color="aquamarine" />
+            <BarChart data={data} />
         </>
     );
 };

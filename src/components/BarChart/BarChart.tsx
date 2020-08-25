@@ -22,8 +22,7 @@ const BarChartWrapper = styled.div`
     padding: 20px 0;
 `;
 
-export const BarChart: FunctionComponent<Props> = (props: Props) => {
-    const { color, data } = props;
+export const BarChart: FunctionComponent<Props> = ({ color, data }) => {
     const isMaxValue = () => {
         const maxItem = data.reduce((prev, cur) => {
             if (prev.value > cur.value) {
