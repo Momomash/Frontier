@@ -55,6 +55,17 @@ export const initialState: VisitorsState = {
                 //22 августа 2020
             ],
         },
+        {
+            id: 3,
+            name: 'Франц 3',
+            tariffId: 3,
+            status: 'finished',
+            times: [
+                { timestamp: 1597246825795, status: 'active' },
+                { timestamp: 1598099948000, status: 'finished' },
+                //22 августа 2020
+            ],
+        },
     ],
     historyVisitors: [],
     modals: {
