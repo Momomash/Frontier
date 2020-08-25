@@ -4,7 +4,14 @@ import { calculateCostHelper } from './calculateCostHelper';
 import { theme, useStyles, drawerWidth } from './initialTheme';
 import { localizationMaterialTable } from './localizationMaterialTable';
 import { TimestampToString, StringToTimestamp } from './FormatDate';
-import { rankData } from './statisticsUtils';
+import {
+    rankData,
+    sortData,
+    calculateTotalStatistics,
+    calculateAverageCostStatistics,
+    calculateAverageDurationStatistics,
+    calculateQuantityVisitorsStatistics,
+} from './statisticsUtils';
 
 export {
     calculateCost,
@@ -17,4 +24,9 @@ export {
     TimestampToString,
     StringToTimestamp,
     rankData,
+    sortData,
+    calculateTotalStatistics,
+    calculateAverageCostStatistics,
+    calculateAverageDurationStatistics,
+    calculateQuantityVisitorsStatistics,
 };
