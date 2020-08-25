@@ -12,7 +12,7 @@ const BarItemHover = css({
     fontWeight: 'bold',
     cursor: 'pointer',
 });
-const BarItem = styled.div((props: { height: number; color: string | undefined }) => ({
+export const BarItem = styled.div((props: { height: number; color: string | undefined }) => ({
     flexGrow: 1,
     width: '100%',
     height: props.height + '%',
