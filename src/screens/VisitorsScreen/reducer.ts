@@ -37,8 +37,23 @@ export const initialState: VisitorsState = {
             id: 1,
             name: 'Франц',
             tariffId: 1,
-            status: 'active',
-            times: [{ timestamp: 1597246825795, status: 'active' }],
+            status: 'finished',
+            times: [
+                { timestamp: 1597246825795, status: 'active' },
+                { timestamp: 1597927148000, status: 'finished' },
+                //20 августа 2020
+            ],
+        },
+        {
+            id: 2,
+            name: 'Франц 2',
+            tariffId: 2,
+            status: 'finished',
+            times: [
+                { timestamp: 1597246825795, status: 'active' },
+                { timestamp: 1598099948000, status: 'finished' },
+                //22 августа 2020
+            ],
         },
     ],
     historyVisitors: [],

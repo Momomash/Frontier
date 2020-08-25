@@ -5,12 +5,11 @@ import { connect } from 'react-redux';
 
 import { Store } from '@/store';
 import { Visitor, Tariff } from '@/screens';
-import { TimestampToString } from '@/utils';
+import { TimestampToString, StringToTimestamp, rankData } from '@/utils';
 import { BarChart } from '@/components';
-import { Bar } from 'components/BarChart/Bar';
 
 const Controls = styled(FormControl)`
-    margin-right: 20px;
+    margin: 0 20px 30px 0;
     label {
         font-weight: bold;
         margin-bottom: 5px;
@@ -26,18 +25,31 @@ type Props = {
     tariffs: Array<Tariff>;
 };
 const StatisticsComponent: FunctionComponent<Props> = ({ historyVisitors, tariffs }) => {
-
-    const today = TimestampToString(Date.now());
-    const monthAgo = TimestampToString(Date.now() - 2592000000);
-
+    let startDate = TimestampToString(Date.now() - 2592000000);
+    let endDate = TimestampToString(Date.now());
+    let dataRanged = rankData(
+        historyVisitors,
+        StringToTimestamp(startDate),
+        StringToTimestamp(endDate),
+    );
     const handleChoice = (event: React.ChangeEvent<{ value: unknown }>) => {
         alert(event.target.value);
     };
-    const handleStartTime = (event: React.ChangeEvent<{ value: unknown }>) => {
-        alert(event.target.value);
+    const handleStartDate = (event: React.ChangeEvent<{ value: string }>) => {
+        startDate = event.target.value;
+        dataRanged = rankData(
+            historyVisitors,
+            StringToTimestamp(startDate),
+            StringToTimestamp(endDate),
+        );
     };
-    const handleEndTime = (event: React.ChangeEvent<{ value: unknown }>) => {
-        alert(event.target.value);
+    const handleEndDate = (event: React.ChangeEvent<{ value: string }>) => {
+        endDate = event.target.value;
+        dataRanged = rankData(
+            historyVisitors,
+            StringToTimestamp(startDate),
+            StringToTimestamp(endDate),
+        );
     };
     return (
         <>
@@ -61,12 +73,12 @@ const StatisticsComponent: FunctionComponent<Props> = ({ historyVisitors, tariff
                 <TextField
                     label="C"
                     type="date"
-                    defaultValue={monthAgo}
-                    onChange={handleStartTime}
+                    defaultValue={startDate}
+                    onChange={handleStartDate}
                 />
             </Controls>
             <Controls>
-                <TextField label="По" type="date" defaultValue={today} onChange={handleEndTime} />
+                <TextField label="По" type="date" defaultValue={endDate} onChange={handleEndDate} />
             </Controls>
             <BarChart data={dataTest} color="aquamarine" />
         </>

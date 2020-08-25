@@ -4,6 +4,7 @@ import { calculateCostHelper } from './calculateCostHelper';
 import { theme, useStyles, drawerWidth } from './initialTheme';
 import { localizationMaterialTable } from './localizationMaterialTable';
 import { TimestampToString, StringToTimestamp } from './FormatDate';
+import { rankData } from './statisticsUtils';
 
 export {
     calculateCost,
@@ -15,4 +16,5 @@ export {
     localizationMaterialTable,
     TimestampToString,
     StringToTimestamp,
+    rankData,
 };
