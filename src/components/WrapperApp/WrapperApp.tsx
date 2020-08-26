@@ -22,7 +22,7 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 
-import { useStyles, theme } from '@/utils/initialTheme';
+import { useStyles, theme } from '../../utils/initialTheme';
 
 const Link = styled(NavLink)`
     color: inherit;
@@ -37,6 +37,7 @@ const Link = styled(NavLink)`
 
 export const WrapperApp: FunctionComponent<{}> = (Props) => {
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -44,7 +45,6 @@ export const WrapperApp: FunctionComponent<{}> = (Props) => {
         setOpen(false);
     };
 
-    const [open, setOpen] = React.useState(false);
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -53,6 +53,7 @@ export const WrapperApp: FunctionComponent<{}> = (Props) => {
                 className={clsx(classes.appBar, {
                     [classes.appBarShift]: open,
                 })}
+                style={{ zIndex: 1201 }}
             >
                 <Toolbar>
                     <IconButton

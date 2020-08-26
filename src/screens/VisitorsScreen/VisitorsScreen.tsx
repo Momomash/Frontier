@@ -1,21 +1,23 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import MaterialTable from 'material-table';
+import MaterialTable, { MTableToolbar } from 'material-table';
 import { IconButton } from '@material-ui/core';
 import styled from '@emotion/styled';
 import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { Store } from '@/store';
-import { Visitor, EventUser, actions, VisitorsWithTimestamp } from './reducer';
+import { actions, EventUser, Status, Visitor, VisitorsWithTimestamp } from './reducer';
 import { Tariff } from '@/screens/';
 import { AlertDialog } from '@/components';
-import { localizationMaterialTable, calculateCostHelper, calculateDuration } from '@/utils';
+import { calculateCostHelper, calculateDuration, localizationMaterialTable } from '@/utils';
 
 type Props = {
     visitors: Array<Visitor>;
     tariffs: Array<Tariff>;
     modals: {
         payVisitors: boolean;
+        historyVisitors: boolean;
     };
     total: number;
     payedVisitors: Array<Visitor>;
@@ -27,14 +29,12 @@ type Props = {
     deleteSelectedVisitors(visitors: Array<Visitor>): void;
     paySelectedVisitors(selectedVisitors: VisitorsWithTimestamp): void;
     toggleModalPayVisitors(status: boolean): void;
+    toggleModalHistoryVisitors(status: boolean): void;
     calculateTotal(total: number): void;
     setPayedVisitors(visitors: Array<Visitor>): void;
     updateTimer(timestamp: number): void;
+    putVisitorsHistory(): void;
 };
-
-interface TableState {
-    data: Array<Visitor>;
-}
 
 interface NumberToString {
     [n: number]: string;
@@ -45,7 +45,18 @@ const Controls = styled.div`
     flex-direction: row;
     align-items: center;
 `;
+const TableHeader = styled.div`
+    display: flex;
+    padding: 10px;
+    justify-content: flex-end;
+`;
 
+const isPayedVisitors = (visitors: Visitor[]) => {
+    const filteredVisitors = visitors.filter((visitor) => {
+        return visitor.status !== Status.finished;
+    });
+    return filteredVisitors.length <= 0;
+};
 const getFunctionForRow = (action: (visitor: Visitor) => void) => {
     return (newData: Visitor) => {
         action(newData);
@@ -65,16 +76,18 @@ const VisitorsComponent: FunctionComponent<Props> = ({
     deleteSelectedVisitors,
     paySelectedVisitors,
     toggleModalPayVisitors,
+    toggleModalHistoryVisitors,
     calculateTotal,
     setPayedVisitors,
     updateTimer,
+    putVisitorsHistory,
 }) => {
     const handleTogglePause = (currentUser: Visitor) => {
         const updatedVisitor: Visitor = visitors.find((visitor) => visitor.id === currentUser.id)!;
-        if (updatedVisitor.status === 'active') {
-            eventVisitor({ timestamp: Date.now(), status: 'pause', id: currentUser.id });
+        if (updatedVisitor.status === Status.active) {
+            eventVisitor({ timestamp: Date.now(), status: Status.pause, id: currentUser.id });
         } else {
-            eventVisitor({ timestamp: Date.now(), status: 'active', id: currentUser.id });
+            eventVisitor({ timestamp: Date.now(), status: Status.active, id: currentUser.id });
         }
     };
     let tariffsColumn: NumberToString = {};
@@ -94,7 +107,7 @@ const VisitorsComponent: FunctionComponent<Props> = ({
     return (
         <>
             <MaterialTable
-                title="Фронтир"
+                title="Посетители"
                 columns={[
                     {
                         title: 'Имя',
@@ -114,6 +127,13 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                         title: 'Тариф',
                         field: 'tariffId',
                         lookup: tariffsColumn,
+                        validate: (rowData) => {
+                            if (!rowData.tariffId) {
+                                return 'Укажите тариф';
+                            } else {
+                                return '';
+                            }
+                        },
                     },
                     {
                         title: 'Продолжительность посещения',
@@ -139,16 +159,18 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                     },
                     {
                         field: 'status',
-                        title: 'Статус',
+                        title: '',
                         editable: 'never',
                         initialEditValue: 'active',
-                        defaultFilter: 'active',
+                        defaultSort: 'asc',
                         render: (RowData) => {
                             let icon;
-                            if (RowData.status === 'active') {
+                            if (RowData.status === Status.active) {
                                 icon = <PauseIcon />;
-                            } else {
+                            } else if (RowData.status === Status.pause) {
                                 icon = <PlayArrowIcon />;
+                            } else {
+                                return '';
                             }
                             return (
                                 <Controls>
@@ -194,7 +216,31 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                 options={{
                     selection: true,
                     actionsColumnIndex: -1,
-                    filtering: true,
+                    sorting: true,
+                    rowStyle: (rowData) => ({
+                        backgroundColor: rowData.status === Status.finished ? '#e9e8eb' : '#FFF',
+                        color: rowData.status === Status.finished ? '#bfbfbf' : 'black',
+                    }),
+                }}
+                components={{
+                    Toolbar: (props) => (
+                        <>
+                            <MTableToolbar {...props} />
+                            <TableHeader>
+                                <Button
+                                    color="secondary"
+                                    variant="contained"
+                                    onClick={() => {
+                                        isPayedVisitors(visitors)
+                                            ? putVisitorsHistory()
+                                            : toggleModalHistoryVisitors(true);
+                                    }}
+                                >
+                                    Закрыть день
+                                </Button>
+                            </TableHeader>
+                        </>
+                    ),
                 }}
             />
             <AlertDialog
@@ -208,6 +254,14 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                 dialogContent={'Итого к расчету: ' + total}
                 isOpen={modals.payVisitors}
                 close={() => toggleModalPayVisitors(false)}
+            />
+            <AlertDialog
+                agreeButtonText="Закрыть"
+                agreeOnClick={() => {
+                    toggleModalHistoryVisitors(false);
+                }}
+                dialogTitle="Чтобы закрыть день, рассчитайте всех посетителей!"
+                isOpen={modals.historyVisitors}
             />
         </>
     );
@@ -232,9 +286,11 @@ const mapDispatchToProps = {
     deleteSelectedVisitors: actions.selectedDelete,
     paySelectedVisitors: actions.selectedPay,
     toggleModalPayVisitors: actions.modalPayToggle,
+    toggleModalHistoryVisitors: actions.modalHistoryToggle,
     calculateTotal: actions.totalCalculate,
     setPayedVisitors: actions.payedVisitorsSet,
     updateTimer: actions.timerUpdate,
+    putVisitorsHistory: actions.historyPut,
 };
 
 export const VisitorsScreen = connect(mapStateToProps, mapDispatchToProps)(VisitorsComponent);

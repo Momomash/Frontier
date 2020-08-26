@@ -1,25 +1,27 @@
-import { actions, reducer, VisitorsState, Visitor } from './reducer';
+import { actions, reducer, Status, Visitor, VisitorsState } from './reducer';
 
 describe('reducer', () => {
     const newVisitor: Visitor = {
         id: 22,
         name: 'test',
         tariffId: 2,
-        status: 'active',
-        times: [{ timestamp: 1597246825795, status: 'active' }],
+        status: Status.active,
+        times: [{ timestamp: 1597246825795, status: Status.active }],
     };
     const initialVisitor: Visitor = {
         id: 1,
         name: 'Франц',
         tariffId: 1,
-        status: 'active',
-        times: [{ timestamp: 1597246825795, status: 'active' }],
+        status: Status.active,
+        times: [{ timestamp: 1597246825795, status: Status.active }],
     };
 
     const state: VisitorsState = {
         visitors: [initialVisitor],
+        historyVisitors: [],
         modals: {
             payVisitors: false,
+            historyVisitors: false,
         },
         total: 0,
         payedVisitors: [],
@@ -29,24 +31,28 @@ describe('reducer', () => {
     it('should handle VISITOR_ADD', () => {
         expect(reducer(state, actions.add(newVisitor))).toEqual({
             visitors: [initialVisitor, newVisitor],
-            modals: {
-                payVisitors: false,
-            },
-            total: 0,
             payedVisitors: [],
             timer: 0,
+            historyVisitors: [],
+            modals: {
+                payVisitors: false,
+                historyVisitors: false,
+            },
+            total: 0,
         });
     });
 
     it('should handle VISITOR_DELETE', () => {
         expect(reducer(state, actions.delete(initialVisitor))).toEqual({
             visitors: [],
+            total: 0,
+            timer: 0,
+            historyVisitors: [],
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
-            total: 0,
             payedVisitors: [],
-            timer: 0,
         });
     });
     it('should handle VISITOR_EDIT', () => {
@@ -57,8 +63,8 @@ describe('reducer', () => {
                     id: 1,
                     name: 'Франц 1',
                     tariffId: 2,
-                    status: 'finished',
-                    times: [{ timestamp: 1597246825795, status: 'active' }],
+                    status: Status.finished,
+                    times: [{ timestamp: 1597246825795, status: Status.active }],
                 }),
             ),
         ).toEqual({
@@ -67,13 +73,15 @@ describe('reducer', () => {
                     id: 1,
                     name: 'Франц 1',
                     tariffId: 2,
-                    status: 'finished',
-                    times: [{ timestamp: 1597246825795, status: 'active' }],
+                    status: Status.finished,
+                    times: [{ timestamp: 1597246825795, status: Status.active }],
                 },
             ],
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
+            historyVisitors: [],
             total: 0,
             payedVisitors: [],
             timer: 0,
@@ -81,23 +89,28 @@ describe('reducer', () => {
     });
     it('should handle VISITOR_EVENT', () => {
         expect(
-            reducer(state, actions.event({ timestamp: 1597246826000, status: 'pause', id: 1 })),
+            reducer(
+                state,
+                actions.event({ timestamp: 1597246826000, status: Status.pause, id: 1 }),
+            ),
         ).toEqual({
             visitors: [
                 {
                     id: 1,
                     name: 'Франц',
                     tariffId: 1,
-                    status: 'pause',
+                    status: Status.pause,
                     times: [
-                        { timestamp: 1597246825795, status: 'active' },
-                        { timestamp: 1597246826000, status: 'pause' },
+                        { timestamp: 1597246825795, status: Status.active },
+                        { timestamp: 1597246826000, status: Status.pause },
                     ],
                 },
             ],
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
+            historyVisitors: [],
             total: 0,
             payedVisitors: [],
             timer: 0,
@@ -113,19 +126,21 @@ describe('reducer', () => {
                             id: 2,
                             name: 'Франц 1',
                             tariffId: 2,
-                            status: 'active',
-                            times: [{ timestamp: 1597246822295, status: 'active' }],
+                            status: Status.active,
+                            times: [{ timestamp: 1597246822295, status: Status.active }],
                         },
                         {
                             id: 3,
                             name: 'Франц 2',
                             tariffId: 3,
-                            status: 'active',
-                            times: [{ timestamp: 1597246825795, status: 'active' }],
+                            status: Status.active,
+                            times: [{ timestamp: 1597246825795, status: Status.active }],
                         },
                     ],
+                    historyVisitors: [],
                     modals: {
                         payVisitors: false,
+                        historyVisitors: false,
                     },
                     total: 0,
                     payedVisitors: [],
@@ -137,8 +152,8 @@ describe('reducer', () => {
                         id: 3,
                         name: 'Франц 2',
                         tariffId: 3,
-                        status: 'active',
-                        times: [{ timestamp: 1597246825795, status: 'active' }],
+                        status: Status.active,
+                        times: [{ timestamp: 1597246825795, status: Status.active }],
                     },
                 ]),
             ),
@@ -148,12 +163,14 @@ describe('reducer', () => {
                     id: 2,
                     name: 'Франц 1',
                     tariffId: 2,
-                    status: 'active',
-                    times: [{ timestamp: 1597246822295, status: 'active' }],
+                    status: Status.active,
+                    times: [{ timestamp: 1597246822295, status: Status.active }],
                 },
             ],
+            historyVisitors: [],
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
             total: 0,
             payedVisitors: [],
@@ -170,19 +187,21 @@ describe('reducer', () => {
                             id: 2,
                             name: 'Франц 1',
                             tariffId: 2,
-                            status: 'active',
-                            times: [{ timestamp: 1597246822295, status: 'active' }],
+                            status: Status.active,
+                            times: [{ timestamp: 1597246822295, status: Status.active }],
                         },
                         {
                             id: 3,
                             name: 'Франц 2',
                             tariffId: 3,
-                            status: 'active',
-                            times: [{ timestamp: 1597246825795, status: 'active' }],
+                            status: Status.active,
+                            times: [{ timestamp: 1597246825795, status: Status.active }],
                         },
                     ],
+                    historyVisitors: [],
                     modals: {
                         payVisitors: false,
+                        historyVisitors: false,
                     },
                     total: 0,
                     payedVisitors: [],
@@ -195,8 +214,8 @@ describe('reducer', () => {
                             id: 3,
                             name: 'Франц 2',
                             tariffId: 3,
-                            status: 'active',
-                            times: [{ timestamp: 1597246825795, status: 'active' }],
+                            status: Status.active,
+                            times: [{ timestamp: 1597246825795, status: Status.active }],
                         },
                     ],
                     timestamp: 1111111111111,
@@ -208,32 +227,137 @@ describe('reducer', () => {
                     id: 1,
                     name: 'Франц',
                     tariffId: 1,
-                    status: 'finished',
+                    status: Status.finished,
                     times: [
-                        { timestamp: 1597246825795, status: 'active' },
-                        { timestamp: 1111111111111, status: 'finished' },
+                        { timestamp: 1597246825795, status: Status.active },
+                        { timestamp: 1111111111111, status: Status.finished },
                     ],
                 },
                 {
                     id: 2,
                     name: 'Франц 1',
                     tariffId: 2,
-                    status: 'active',
-                    times: [{ timestamp: 1597246822295, status: 'active' }],
+                    status: Status.active,
+                    times: [{ timestamp: 1597246822295, status: Status.active }],
                 },
                 {
                     id: 3,
                     name: 'Франц 2',
                     tariffId: 3,
-                    status: 'finished',
+                    status: Status.finished,
                     times: [
-                        { timestamp: 1597246825795, status: 'active' },
-                        { timestamp: 1111111111111, status: 'finished' },
+                        { timestamp: 1597246825795, status: Status.active },
+                        { timestamp: 1111111111111, status: Status.finished },
                     ],
+                },
+            ],
+            historyVisitors: [],
+            modals: {
+                payVisitors: false,
+                historyVisitors: false,
+            },
+            payedVisitors: [],
+            total: 0,
+            timer: 0,
+        });
+    });
+    it('should handle VISITORS_HISTORY_PUT', () => {
+        expect(
+            reducer(
+                {
+                    visitors: [
+                        initialVisitor,
+                        {
+                            id: 2,
+                            name: 'Франц 1',
+                            tariffId: 2,
+                            status: Status.active,
+                            times: [{ timestamp: 1597246822295, status: Status.active }],
+                        },
+                        {
+                            id: 3,
+                            name: 'Франц 2',
+                            tariffId: 3,
+                            status: Status.active,
+                            times: [{ timestamp: 1597246825795, status: Status.active }],
+                        },
+                    ],
+                    historyVisitors: [],
+                    modals: {
+                        payVisitors: false,
+                        historyVisitors: false,
+                    },
+                    total: 0,
+                    payedVisitors: [],
+                    timer: 0,
+                },
+                actions.historyPut(),
+            ),
+        ).toEqual({
+            visitors: [],
+            historyVisitors: [
+                initialVisitor,
+                {
+                    id: 2,
+                    name: 'Франц 1',
+                    tariffId: 2,
+                    status: Status.active,
+                    times: [{ timestamp: 1597246822295, status: Status.active }],
+                },
+                {
+                    id: 3,
+                    name: 'Франц 2',
+                    tariffId: 3,
+                    status: Status.active,
+                    times: [{ timestamp: 1597246825795, status: Status.active }],
                 },
             ],
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
+            },
+            payedVisitors: [],
+            total: 0,
+            timer: 0,
+        });
+    });
+    it('should handle VISITORS_HISTORY_CLEAN', () => {
+        expect(
+            reducer(
+                {
+                    visitors: [initialVisitor],
+                    historyVisitors: [
+                        {
+                            id: 2,
+                            name: 'Франц 1',
+                            tariffId: 2,
+                            status: Status.active,
+                            times: [{ timestamp: 1597246822295, status: Status.active }],
+                        },
+                        {
+                            id: 3,
+                            name: 'Франц 2',
+                            tariffId: 3,
+                            status: Status.active,
+                            times: [{ timestamp: 1597246825795, status: Status.active }],
+                        },
+                    ],
+                    modals: {
+                        payVisitors: false,
+                        historyVisitors: false,
+                    },
+                    total: 0,
+                    payedVisitors: [],
+                    timer: 0,
+                },
+                actions.historyClean,
+            ),
+        ).toEqual({
+            visitors: [initialVisitor],
+            historyVisitors: [],
+            modals: {
+                payVisitors: false,
+                historyVisitors: false,
             },
             payedVisitors: [],
             total: 0,
@@ -243,8 +367,23 @@ describe('reducer', () => {
     it('should handle MODAL_PAY_VISITORS_TOGGLE', () => {
         expect(reducer(state, actions.modalPayToggle(true))).toEqual({
             visitors: [initialVisitor],
+            historyVisitors: [],
             modals: {
                 payVisitors: true,
+                historyVisitors: false,
+            },
+            total: 0,
+            payedVisitors: [],
+            timer: 0,
+        });
+    });
+    it('should handle MODAL_PAY_VISITORS_TOGGLE', () => {
+        expect(reducer(state, actions.modalHistoryToggle(true))).toEqual({
+            visitors: [initialVisitor],
+            historyVisitors: [],
+            modals: {
+                payVisitors: false,
+                historyVisitors: true,
             },
             total: 0,
             payedVisitors: [],
@@ -256,10 +395,12 @@ describe('reducer', () => {
             visitors: [initialVisitor],
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
             total: 400,
             payedVisitors: [],
             timer: 0,
+            historyVisitors: [],
         });
     });
     it('should handle PAYED_VISITORS_SET', () => {
@@ -272,19 +413,21 @@ describe('reducer', () => {
                             id: 2,
                             name: 'Франц 1',
                             tariffId: 2,
-                            status: 'active',
-                            times: [{ timestamp: 1597246822295, status: 'active' }],
+                            status: Status.active,
+                            times: [{ timestamp: 1597246822295, status: Status.active }],
                         },
                         {
                             id: 3,
                             name: 'Франц 2',
                             tariffId: 3,
-                            status: 'active',
-                            times: [{ timestamp: 1597246825795, status: 'active' }],
+                            status: Status.active,
+                            times: [{ timestamp: 1597246825795, status: Status.active }],
                         },
                     ],
+                    historyVisitors: [],
                     modals: {
                         payVisitors: false,
+                        historyVisitors: false,
                     },
                     total: 0,
                     payedVisitors: [],
@@ -296,8 +439,8 @@ describe('reducer', () => {
                         id: 3,
                         name: 'Франц 2',
                         tariffId: 3,
-                        status: 'active',
-                        times: [{ timestamp: 1597246825795, status: 'active' }],
+                        status: Status.active,
+                        times: [{ timestamp: 1597246825795, status: Status.active }],
                     },
                 ]),
             ),
@@ -308,20 +451,22 @@ describe('reducer', () => {
                     id: 2,
                     name: 'Франц 1',
                     tariffId: 2,
-                    status: 'active',
-                    times: [{ timestamp: 1597246822295, status: 'active' }],
+                    status: Status.active,
+                    times: [{ timestamp: 1597246822295, status: Status.active }],
                 },
                 {
                     id: 3,
                     name: 'Франц 2',
                     tariffId: 3,
-                    status: 'active',
-                    times: [{ timestamp: 1597246825795, status: 'active' }],
+                    status: Status.active,
+                    times: [{ timestamp: 1597246825795, status: Status.active }],
                 },
             ],
+            historyVisitors: [],
             total: 0,
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
             payedVisitors: [
                 initialVisitor,
@@ -329,8 +474,8 @@ describe('reducer', () => {
                     id: 3,
                     name: 'Франц 2',
                     tariffId: 3,
-                    status: 'active',
-                    times: [{ timestamp: 1597246825795, status: 'active' }],
+                    status: Status.active,
+                    times: [{ timestamp: 1597246825795, status: Status.active }],
                 },
             ],
             timer: 0,
@@ -339,8 +484,10 @@ describe('reducer', () => {
     it('should handle TIMER_UPDATE', () => {
         expect(reducer(state, actions.timerUpdate(1))).toEqual({
             visitors: [initialVisitor],
+            historyVisitors: [],
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
             total: 0,
             payedVisitors: [],
