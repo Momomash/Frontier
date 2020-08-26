@@ -107,7 +107,7 @@ const VisitorsComponent: FunctionComponent<Props> = ({
     return (
         <>
             <MaterialTable
-                title="Фронтир"
+                title="Посетители"
                 columns={[
                     {
                         title: 'Имя',

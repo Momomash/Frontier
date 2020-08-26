@@ -37,6 +37,7 @@ const Link = styled(NavLink)`
 
 export const WrapperApp: FunctionComponent<{}> = (Props) => {
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -44,7 +45,6 @@ export const WrapperApp: FunctionComponent<{}> = (Props) => {
         setOpen(false);
     };
 
-    const [open, setOpen] = React.useState(false);
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -53,6 +53,7 @@ export const WrapperApp: FunctionComponent<{}> = (Props) => {
                 className={clsx(classes.appBar, {
                     [classes.appBarShift]: open,
                 })}
+                style={{ zIndex: 1201 }}
             >
                 <Toolbar>
                     <IconButton

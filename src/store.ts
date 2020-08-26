@@ -12,7 +12,14 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist-indexeddb-storage';
 
-import { VisitorsSlice, TariffsSlice, StatisticsSlice, VisitorsState, StatisticsState, Tariff } from '@/screens';
+import {
+    VisitorsSlice,
+    TariffsSlice,
+    StatisticsSlice,
+    VisitorsState,
+    StatisticsState,
+    Tariff,
+} from '@/screens';
 
 const reducer = combineReducers({
     visitors: VisitorsSlice.reducer,
@@ -30,13 +37,16 @@ export type Store = {
     tariffs: Tariff[];
     statistics: StatisticsState;
 };
-export const store = configureStore({
-    reducer: persistedReducer,
-    middleware: getDefaultMiddleware({
-        serializableCheck: {
-            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        },
-    }),
-    devTools: process.env.NODE_ENV !== 'production',
-});
+export const createStore = () => {
+    return configureStore({
+        reducer: persistedReducer,
+        middleware: getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            },
+        }),
+        devTools: process.env.NODE_ENV !== 'production',
+    });
+};
+export const store = createStore();
 export const persistor = persistStore(store);

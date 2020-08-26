@@ -111,12 +111,19 @@ const StatisticsComponent: FunctionComponent<Props> = ({
                 <TextField
                     label="C"
                     type="date"
+                    id="startDate"
                     defaultValue={startDate || timestampToString(Date.now() - MONTH)}
                     onChange={handleStartDate}
                 />
             </Controls>
             <Controls>
-                <TextField label="По" type="date" defaultValue={endDate || timestampToString(Date.now() + DAY)} onChange={handleEndDate} />
+                <TextField
+                    label="По"
+                    type="date"
+                    id="endDate"
+                    defaultValue={endDate || timestampToString(Date.now() + DAY)}
+                    onChange={handleEndDate}
+                />
             </Controls>
             <BarChart data={data} />
         </>
