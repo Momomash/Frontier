@@ -81,7 +81,7 @@ const StatisticsComponent: FunctionComponent<Props> = ({
             updateStartDate(TimestampToString(Date.now() - 2592000000));
         }
         if (!endDate) {
-            updateEndDate(TimestampToString(Date.now()));
+            updateEndDate(TimestampToString(Date.now() + 86400000));
         }
         if (!statisticsIndicator) {
             updateStatisticsIndicator('total');

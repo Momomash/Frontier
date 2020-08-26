@@ -10,11 +10,11 @@ import {
 
 type Props = {
     dialogTitle: string;
-    dialogContent: string;
+    dialogContent?: string;
     agreeButtonText: string;
-    disagreeButtonText: string;
+    disagreeButtonText?: string;
     agreeOnClick: () => void;
-    close: () => void;
+    close?: () => void;
     isOpen: boolean;
 };
 export const AlertDialog: FunctionComponent<Props> = ({

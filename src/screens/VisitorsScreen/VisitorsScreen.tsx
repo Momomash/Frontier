@@ -17,6 +17,7 @@ type Props = {
     tariffs: Array<Tariff>;
     modals: {
         payVisitors: boolean;
+        historyVisitors: boolean;
     };
     total: number;
     payedVisitors: Array<Visitor>;
@@ -28,15 +29,12 @@ type Props = {
     deleteSelectedVisitors(visitors: Array<Visitor>): void;
     paySelectedVisitors(selectedVisitors: VisitorsWithTimestamp): void;
     toggleModalPayVisitors(status: boolean): void;
+    toggleModalHistoryVisitors(status: boolean): void;
     calculateTotal(total: number): void;
     setPayedVisitors(visitors: Array<Visitor>): void;
     updateTimer(timestamp: number): void;
     putVisitorsHistory(): void;
 };
-
-interface TableState {
-    data: Array<Visitor>;
-}
 
 interface NumberToString {
     [n: number]: string;
@@ -78,6 +76,7 @@ const VisitorsComponent: FunctionComponent<Props> = ({
     deleteSelectedVisitors,
     paySelectedVisitors,
     toggleModalPayVisitors,
+    toggleModalHistoryVisitors,
     calculateTotal,
     setPayedVisitors,
     updateTimer,
@@ -128,6 +127,13 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                         title: 'Тариф',
                         field: 'tariffId',
                         lookup: tariffsColumn,
+                        validate: (rowData) => {
+                            if (!rowData.tariffId) {
+                                return 'Укажите тариф';
+                            } else {
+                                return '';
+                            }
+                        },
                     },
                     {
                         title: 'Продолжительность посещения',
@@ -156,7 +162,7 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                         title: 'Статус',
                         editable: 'never',
                         initialEditValue: 'active',
-                        defaultFilter: 'active',
+                        defaultSort: 'asc',
                         render: (RowData) => {
                             let icon;
                             if (RowData.status === Status.active) {
@@ -208,7 +214,7 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                 options={{
                     selection: true,
                     actionsColumnIndex: -1,
-                    filtering: true,
+                    sorting: true,
                 }}
                 components={{
                     Toolbar: (props) => (
@@ -221,7 +227,7 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                                     onClick={() => {
                                         isPayedVisitors(visitors)
                                             ? putVisitorsHistory()
-                                            : alert('Рассчитайте всех посетителей!');
+                                            : toggleModalHistoryVisitors(true);
                                     }}
                                 >
                                     Закрыть день
@@ -242,6 +248,14 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                 dialogContent={'Итого к расчету: ' + total}
                 isOpen={modals.payVisitors}
                 close={() => toggleModalPayVisitors(false)}
+            />
+            <AlertDialog
+                agreeButtonText="Закрыть"
+                agreeOnClick={() => {
+                    toggleModalHistoryVisitors(false);
+                }}
+                dialogTitle="Чтобы закрыть день, рассчитайте всех посетителей!"
+                isOpen={modals.historyVisitors}
             />
         </>
     );
@@ -266,6 +280,7 @@ const mapDispatchToProps = {
     deleteSelectedVisitors: actions.selectedDelete,
     paySelectedVisitors: actions.selectedPay,
     toggleModalPayVisitors: actions.modalPayToggle,
+    toggleModalHistoryVisitors: actions.modalHistoryToggle,
     calculateTotal: actions.totalCalculate,
     setPayedVisitors: actions.payedVisitorsSet,
     updateTimer: actions.timerUpdate,

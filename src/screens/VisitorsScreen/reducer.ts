@@ -29,6 +29,7 @@ export type VisitorsState = {
     historyVisitors: Array<Visitor>;
     modals: {
         payVisitors: boolean;
+        historyVisitors: boolean;
     };
     total: number;
     payedVisitors: Array<Visitor>;
@@ -70,6 +71,7 @@ export const initialState: VisitorsState = {
     historyVisitors: [],
     modals: {
         payVisitors: false,
+        historyVisitors: false,
     },
     total: 0,
     payedVisitors: [],
@@ -128,6 +130,9 @@ export const VisitorsSlice = createSlice({
         },
         modalPayToggle: (state, { payload }: PayloadAction<boolean>) => {
             state.modals.payVisitors = payload;
+        },
+        modalHistoryToggle: (state, { payload }: PayloadAction<boolean>) => {
+            state.modals.historyVisitors = payload;
         },
         totalCalculate: (state, { payload }: PayloadAction<number>) => {
             state.total = payload;

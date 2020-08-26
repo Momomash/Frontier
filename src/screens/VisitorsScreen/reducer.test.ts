@@ -21,6 +21,7 @@ describe('reducer', () => {
         historyVisitors: [],
         modals: {
             payVisitors: false,
+            historyVisitors: false,
         },
         total: 0,
         payedVisitors: [],
@@ -35,6 +36,7 @@ describe('reducer', () => {
             historyVisitors: [],
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
             total: 0,
         });
@@ -48,6 +50,7 @@ describe('reducer', () => {
             historyVisitors: [],
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
             payedVisitors: [],
         });
@@ -76,6 +79,7 @@ describe('reducer', () => {
             ],
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
             historyVisitors: [],
             total: 0,
@@ -104,6 +108,7 @@ describe('reducer', () => {
             ],
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
             historyVisitors: [],
             total: 0,
@@ -135,6 +140,7 @@ describe('reducer', () => {
                     historyVisitors: [],
                     modals: {
                         payVisitors: false,
+                        historyVisitors: false,
                     },
                     total: 0,
                     payedVisitors: [],
@@ -164,6 +170,7 @@ describe('reducer', () => {
             historyVisitors: [],
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
             total: 0,
             payedVisitors: [],
@@ -194,6 +201,7 @@ describe('reducer', () => {
                     historyVisitors: [],
                     modals: {
                         payVisitors: false,
+                        historyVisitors: false,
                     },
                     total: 0,
                     payedVisitors: [],
@@ -246,6 +254,7 @@ describe('reducer', () => {
             historyVisitors: [],
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
             payedVisitors: [],
             total: 0,
@@ -276,6 +285,7 @@ describe('reducer', () => {
                     historyVisitors: [],
                     modals: {
                         payVisitors: false,
+                        historyVisitors: false,
                     },
                     total: 0,
                     payedVisitors: [],
@@ -304,6 +314,7 @@ describe('reducer', () => {
             ],
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
             payedVisitors: [],
             total: 0,
@@ -333,6 +344,7 @@ describe('reducer', () => {
                     ],
                     modals: {
                         payVisitors: false,
+                        historyVisitors: false,
                     },
                     total: 0,
                     payedVisitors: [],
@@ -345,6 +357,7 @@ describe('reducer', () => {
             historyVisitors: [],
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
             payedVisitors: [],
             total: 0,
@@ -357,6 +370,20 @@ describe('reducer', () => {
             historyVisitors: [],
             modals: {
                 payVisitors: true,
+                historyVisitors: false,
+            },
+            total: 0,
+            payedVisitors: [],
+            timer: 0,
+        });
+    });
+    it('should handle MODAL_PAY_VISITORS_TOGGLE', () => {
+        expect(reducer(state, actions.modalHistoryToggle(true))).toEqual({
+            visitors: [initialVisitor],
+            historyVisitors: [],
+            modals: {
+                payVisitors: false,
+                historyVisitors: true,
             },
             total: 0,
             payedVisitors: [],
@@ -368,6 +395,7 @@ describe('reducer', () => {
             visitors: [initialVisitor],
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
             total: 400,
             payedVisitors: [],
@@ -399,6 +427,7 @@ describe('reducer', () => {
                     historyVisitors: [],
                     modals: {
                         payVisitors: false,
+                        historyVisitors: false,
                     },
                     total: 0,
                     payedVisitors: [],
@@ -437,6 +466,7 @@ describe('reducer', () => {
             total: 0,
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
             payedVisitors: [
                 initialVisitor,
@@ -457,6 +487,7 @@ describe('reducer', () => {
             historyVisitors: [],
             modals: {
                 payVisitors: false,
+                historyVisitors: false,
             },
             total: 0,
             payedVisitors: [],
