@@ -1,5 +1,5 @@
 import { Tariff, Visitor } from '@/screens';
-import { TimestampToString } from './FormatDate';
+import { timestampToString } from './FormatDate';
 import { calculateCostHelper } from '@/utils/calculateCostHelper';
 import { calculateDuration } from '@/utils/calculateDuration';
 
@@ -22,7 +22,7 @@ export const rankData = (
 
 export const sortData = (data: Array<Visitor>): SortedData => {
     return data.reduce((sortedData: SortedData, visitor: Visitor) => {
-        const lastTimestamp = TimestampToString(visitor.times[visitor.times.length - 1].timestamp);
+        const lastTimestamp = timestampToString(visitor.times[visitor.times.length - 1].timestamp);
         if (sortedData[lastTimestamp] !== undefined) {
             sortedData[lastTimestamp].push(visitor);
         } else {

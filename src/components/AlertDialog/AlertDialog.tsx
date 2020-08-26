@@ -1,4 +1,6 @@
 import React, { FunctionComponent } from 'react';
+import styled from '@emotion/styled';
+
 import {
     Button,
     Dialog,
@@ -8,6 +10,9 @@ import {
     DialogTitle,
 } from '@material-ui/core';
 
+const Title = styled(DialogTitle)`
+    max-width: 400px;
+`;
 type Props = {
     dialogTitle: string;
     dialogContent?: string;
@@ -29,7 +34,7 @@ export const AlertDialog: FunctionComponent<Props> = ({
     return (
         <div>
             <Dialog open={isOpen} onClose={close}>
-                <DialogTitle id="alert-dialog-title">{dialogTitle}</DialogTitle>
+                <Title id="alert-dialog-title">{dialogTitle}</Title>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         {dialogContent}

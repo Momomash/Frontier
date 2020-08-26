@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.13% </span>
+                <span class="strong">21.21% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/31</span>
+                <span class='fraction'>7/33</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>0/17</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">16.13% </span>
+                <span class="strong">21.21% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/31</span>
+                <span class='fraction'>7/33</span>
             </div>
         
             
@@ -195,7 +195,9 @@
 <a name='L136'></a><a href='#L136'>136</a>
 <a name='L137'></a><a href='#L137'>137</a>
 <a name='L138'></a><a href='#L138'>138</a>
-<a name='L139'></a><a href='#L139'>139</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L139'></a><a href='#L139'>139</a>
+<a name='L140'></a><a href='#L140'>140</a>
+<a name='L141'></a><a href='#L141'>141</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -222,6 +224,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -342,8 +346,8 @@ import { Store } from '@/store';
 import { actions } from './reducer';
 import { Visitor, Tariff } from '@/screens';
 import {
-    TimestampToString,
-    StringToTimestamp,
+    timestampToString,
+    stringToTimestamp,
     rankData,
     sortData,
     calculateTotalStatistics,
@@ -360,6 +364,8 @@ const Controls = styled(FormControl)`
         margin-bottom: 5px;
     }
 `;
+const DAY = 86400000;
+const MONTH = 2592000000;
 type Props = {
     historyVisitors: Array&lt;Visitor&gt;;
     tariffs: Array&lt;Tariff&gt;;
@@ -382,8 +388,8 @@ const StatisticsComponent: FunctionComponent&lt;Props&gt; = <span class="fstat-n
 }) =&gt; {
     const dataRanged = <span class="cstat-no" title="statement not covered" >rankData(</span>
         historyVisitors,
-        StringToTimestamp(startDate),
-        StringToTimestamp(endDate),
+        stringToTimestamp(startDate),
+        stringToTimestamp(endDate),
     );
     let data;
 <span class="cstat-no" title="statement not covered" >    switch (statisticsIndicator) {</span>
@@ -413,10 +419,10 @@ const StatisticsComponent: FunctionComponent&lt;Props&gt; = <span class="fstat-n
     };
 <span class="cstat-no" title="statement not covered" >    useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >        if (!startDate) {</span>
-<span class="cstat-no" title="statement not covered" >            updateStartDate(TimestampToString(Date.now() - 2592000000));</span>
+<span class="cstat-no" title="statement not covered" >            updateStartDate(timestampToString(Date.now() - MONTH));</span>
         }
 <span class="cstat-no" title="statement not covered" >        if (!endDate) {</span>
-<span class="cstat-no" title="statement not covered" >            updateEndDate(TimestampToString(Date.now()));</span>
+<span class="cstat-no" title="statement not covered" >            updateEndDate(timestampToString(Date.now() + DAY));</span>
         }
 <span class="cstat-no" title="statement not covered" >        if (!statisticsIndicator) {</span>
 <span class="cstat-no" title="statement not covered" >            updateStatisticsIndicator('total');</span>
@@ -429,7 +435,7 @@ const StatisticsComponent: FunctionComponent&lt;Props&gt; = <span class="fstat-n
                 &lt;Select
                     labelId="statistics-choice-label"
                     id="statistics-choice"
-                    value={statisticsIndicator}
+                    value={statisticsIndicator || 'total'}
                     onChange={handleChoice}
                 &gt;
                     &lt;MenuItem value={'total'}&gt;Итого за день&lt;/MenuItem&gt;
@@ -444,12 +450,12 @@ const StatisticsComponent: FunctionComponent&lt;Props&gt; = <span class="fstat-n
                 &lt;TextField
                     label="C"
                     type="date"
-                    defaultValue={startDate}
+                    defaultValue={startDate || timestampToString(Date.now() - MONTH)}
                     onChange={handleStartDate}
                 /&gt;
             &lt;/Controls&gt;
             &lt;Controls&gt;
-                &lt;TextField label="По" type="date" defaultValue={endDate} onChange={handleEndDate} /&gt;
+                &lt;TextField label="По" type="date" defaultValue={endDate || timestampToString(Date.now() + DAY)} onChange={handleEndDate} /&gt;
             &lt;/Controls&gt;
             &lt;BarChart data={data} /&gt;
         &lt;/&gt;
@@ -478,7 +484,7 @@ export const StatisticsScreen = connect(mapStateToProps, mapDispatchToProps)(Sta
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Aug 25 2020 18:31:18 GMT+0300 (GMT+03:00)
+                at Wed Aug 26 2020 12:13:30 GMT+0300 (GMT+03:00)
             </div>
         </div>
         <script src="../../prettify.js"></script>

@@ -159,7 +159,7 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                     },
                     {
                         field: 'status',
-                        title: 'Статус',
+                        title: '',
                         editable: 'never',
                         initialEditValue: 'active',
                         defaultSort: 'asc',
@@ -167,8 +167,10 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                             let icon;
                             if (RowData.status === Status.active) {
                                 icon = <PauseIcon />;
-                            } else {
+                            } else if (RowData.status === Status.pause) {
                                 icon = <PlayArrowIcon />;
+                            } else {
+                                return '';
                             }
                             return (
                                 <Controls>
@@ -215,6 +217,10 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                     selection: true,
                     actionsColumnIndex: -1,
                     sorting: true,
+                    rowStyle: (rowData) => ({
+                        backgroundColor: rowData.status === Status.finished ? '#e9e8eb' : '#FFF',
+                        color: rowData.status === Status.finished ? '#bfbfbf' : 'black',
+                    }),
                 }}
                 components={{
                     Toolbar: (props) => (

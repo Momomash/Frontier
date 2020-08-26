@@ -3,7 +3,7 @@ import { calculateDuration } from './calculateDuration';
 import { calculateCostHelper } from './calculateCostHelper';
 import { theme, useStyles, drawerWidth } from './initialTheme';
 import { localizationMaterialTable } from './localizationMaterialTable';
-import { TimestampToString, StringToTimestamp } from './FormatDate';
+import { timestampToString, stringToTimestamp } from './FormatDate';
 import {
     rankData,
     sortData,
@@ -21,8 +21,8 @@ export {
     useStyles,
     drawerWidth,
     localizationMaterialTable,
-    TimestampToString,
-    StringToTimestamp,
+    timestampToString,
+    stringToTimestamp,
     rankData,
     sortData,
     calculateTotalStatistics,

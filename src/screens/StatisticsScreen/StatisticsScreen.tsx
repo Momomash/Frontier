@@ -7,8 +7,8 @@ import { Store } from '@/store';
 import { actions } from './reducer';
 import { Visitor, Tariff } from '@/screens';
 import {
-    TimestampToString,
-    StringToTimestamp,
+    timestampToString,
+    stringToTimestamp,
     rankData,
     sortData,
     calculateTotalStatistics,
@@ -25,6 +25,8 @@ const Controls = styled(FormControl)`
         margin-bottom: 5px;
     }
 `;
+const DAY = 86400000;
+const MONTH = 2592000000;
 type Props = {
     historyVisitors: Array<Visitor>;
     tariffs: Array<Tariff>;
@@ -47,8 +49,8 @@ const StatisticsComponent: FunctionComponent<Props> = ({
 }) => {
     const dataRanged = rankData(
         historyVisitors,
-        StringToTimestamp(startDate),
-        StringToTimestamp(endDate),
+        stringToTimestamp(startDate),
+        stringToTimestamp(endDate),
     );
     let data;
     switch (statisticsIndicator) {
@@ -78,10 +80,10 @@ const StatisticsComponent: FunctionComponent<Props> = ({
     };
     useEffect(() => {
         if (!startDate) {
-            updateStartDate(TimestampToString(Date.now() - 2592000000));
+            updateStartDate(timestampToString(Date.now() - MONTH));
         }
         if (!endDate) {
-            updateEndDate(TimestampToString(Date.now() + 86400000));
+            updateEndDate(timestampToString(Date.now() + DAY));
         }
         if (!statisticsIndicator) {
             updateStatisticsIndicator('total');
@@ -94,7 +96,7 @@ const StatisticsComponent: FunctionComponent<Props> = ({
                 <Select
                     labelId="statistics-choice-label"
                     id="statistics-choice"
-                    value={statisticsIndicator}
+                    value={statisticsIndicator || 'total'}
                     onChange={handleChoice}
                 >
                     <MenuItem value={'total'}>Итого за день</MenuItem>
@@ -109,12 +111,12 @@ const StatisticsComponent: FunctionComponent<Props> = ({
                 <TextField
                     label="C"
                     type="date"
-                    defaultValue={startDate}
+                    defaultValue={startDate || timestampToString(Date.now() - MONTH)}
                     onChange={handleStartDate}
                 />
             </Controls>
             <Controls>
-                <TextField label="По" type="date" defaultValue={endDate} onChange={handleEndDate} />
+                <TextField label="По" type="date" defaultValue={endDate || timestampToString(Date.now() + DAY)} onChange={handleEndDate} />
             </Controls>
             <BarChart data={data} />
         </>
