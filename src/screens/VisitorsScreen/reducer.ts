@@ -36,15 +36,16 @@ export type VisitorsState = {
     timer: number;
 };
 export const initialState: VisitorsState = {
-    visitors: [
+    visitors: [],
+    historyVisitors: [
         {
             id: 1,
             name: 'Франц',
             tariffId: 1,
             status: Status.finished,
             times: [
-                { timestamp: 1597246825795, status: Status.active },
-                { timestamp: 1597927148000, status: Status.finished },
+                { timestamp: 1597833600000, status: Status.active },
+                { timestamp: 1597847340000, status: Status.finished },
             ],
         },
         {
@@ -53,8 +54,8 @@ export const initialState: VisitorsState = {
             tariffId: 2,
             status: Status.finished,
             times: [
-                { timestamp: 1597246825795, status: Status.active },
-                { timestamp: 1598099948000, status: Status.finished },
+                { timestamp: 1597836180000, status: Status.active },
+                { timestamp: 1597847340000, status: Status.finished },
             ],
         },
         {
@@ -63,12 +64,51 @@ export const initialState: VisitorsState = {
             tariffId: 3,
             status: Status.finished,
             times: [
-                { timestamp: 1597246825795, status: Status.active },
-                { timestamp: 1598099948000, status: Status.finished },
+                { timestamp: 1597924800000, status: Status.active },
+                { timestamp: 1597938000000, status: Status.finished },
+            ],
+        },
+        {
+            id: 4,
+            name: 'Франц 4',
+            tariffId: 2,
+            status: Status.finished,
+            times: [
+                { timestamp: 1597929600000, status: Status.active },
+                { timestamp: 1597953360000, status: Status.finished },
+            ],
+        },
+        {
+            id: 5,
+            name: 'Франц 5',
+            tariffId: 4,
+            status: Status.finished,
+            times: [
+                { timestamp: 1598098200000, status: Status.active },
+                { timestamp: 1598120400000, status: Status.finished },
+            ],
+        },
+        {
+            id: 6,
+            name: 'Франц 6',
+            tariffId: 1,
+            status: Status.finished,
+            times: [
+                { timestamp: 1598184000000, status: Status.active },
+                { timestamp: 1598209200000, status: Status.finished },
+            ],
+        },
+        {
+            id: 7,
+            name: 'Франц 7',
+            tariffId: 2,
+            status: Status.finished,
+            times: [
+                { timestamp: 1598199600000, status: Status.active },
+                { timestamp: 1598219100000, status: Status.finished },
             ],
         },
     ],
-    historyVisitors: [],
     modals: {
         payVisitors: false,
         historyVisitors: false,

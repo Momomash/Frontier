@@ -50,7 +50,7 @@ export const calculateAverageCostStatistics = (
     const total = calculateTotalStatistics(data, tariffs);
     return total.map((item) => ({
         title: item.title,
-        value: item.value / data[item.title].length,
+        value: Math.round(item.value / data[item.title].length),
     }));
 };
 export const calculateAverageDurationStatistics = (data: SortedData): Array<StatisticsData> => {
@@ -58,7 +58,7 @@ export const calculateAverageDurationStatistics = (data: SortedData): Array<Stat
         const total = data[key].reduce((result: number, visitor: Visitor) => {
             return result + Math.round(calculateDuration(visitor.times) / 60);
         }, 0);
-        return { title: key, value: total / data[key].length };
+        return { title: key, value: Math.round(total / data[key].length) };
     });
 };
 export const calculateQuantityVisitorsStatistics = (data: SortedData): Array<StatisticsData> => {
