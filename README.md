@@ -8,11 +8,11 @@ https://github.com/Momomash/Frontier
 
 Приложение по контролю времени посетителей антикафе
 
-![Visitors](visitors.jpg "Главный экран")
+![Visitors](visitors.JPG "Главный экран")
 
-![Tariffs](tariffs.jpg "Тарифы")
+![Tariffs](tariffs.JPG "Тарифы")
 
-![Statistics](statistics.jpg "Статистика")
+![Statistics](statistics.JPG "Статистика")
 
 ## Возможности
 
