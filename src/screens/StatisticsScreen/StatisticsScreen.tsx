@@ -50,7 +50,7 @@ const StatisticsComponent: FunctionComponent<Props> = ({
     const dataRanged = rankData(
         historyVisitors,
         stringToTimestamp(startDate),
-        stringToTimestamp(endDate),
+        stringToTimestamp(endDate) + DAY,
     );
     let data;
     switch (statisticsIndicator) {
@@ -83,7 +83,7 @@ const StatisticsComponent: FunctionComponent<Props> = ({
             updateStartDate(timestampToString(Date.now() - MONTH));
         }
         if (!endDate) {
-            updateEndDate(timestampToString(Date.now() + DAY));
+            updateEndDate(timestampToString(Date.now()));
         }
         if (!statisticsIndicator) {
             updateStatisticsIndicator('total');

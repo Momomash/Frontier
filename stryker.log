@@ -1,0 +1,538 @@
+11:53:41 (13756) INFO ConfigReader Using stryker.conf.js
+11:53:42 (13756) DEBUG BroadcastReporter Broadcasting to reporters ["html","clear-text","progress"]
+11:53:41 (13756) DEBUG ConfigReader Loading config C:\Users\Мария\Documents\Web Projects\Frontier\stryker.conf.js
+11:53:41 (13756) DEBUG ConfigReader Loaded config: {
+  "mutator": "typescript",
+  "packageManager": "npm",
+  "reporters": [
+    "html",
+    "clear-text",
+    "progress"
+  ],
+  "testRunner": "jest",
+  "transpilers": [],
+  "coverageAnalysis": "off",
+  "tsconfigFile": "tsconfig.json",
+  "mutate": [
+    "src/**/*.ts"
+  ],
+  "allowConsoleColors": true,
+  "commandRunner": {
+    "command": "npm test"
+  },
+  "clearTextReporter": {
+    "allowColor": true,
+    "logTests": true,
+    "maxTestsToLog": 3
+  },
+  "dashboard": {
+    "baseUrl": "https://dashboard.stryker-mutator.io/api/reports",
+    "reportType": "full"
+  },
+  "eventReporter": {
+    "baseDir": "reports/mutation/events"
+  },
+  "fileLogLevel": "trace",
+  "logLevel": "debug",
+  "maxConcurrentTestRunners": 9007199254740991,
+  "plugins": [
+    "@stryker-mutator/*"
+  ],
+  "symlinkNodeModules": true,
+  "tempDirName": ".stryker-tmp",
+  "thresholds": {
+    "high": 80,
+    "low": 60,
+    "break": null
+  },
+  "timeoutFactor": 1.5,
+  "timeoutMS": 5000,
+  "warnings": true,
+  "configFile": "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\stryker.conf.js"
+}
+11:53:41 (13756) DEBUG PluginLoader Loading @stryker-mutator/* from C:\Users\Мария\Documents\Web Projects\Frontier\node_modules\@stryker-mutator
+11:53:41 (13756) DEBUG PluginLoader Loading plugin "C:\Users\Мария\Documents\Web Projects\Frontier\node_modules\@stryker-mutator\jest-runner" (matched with expression @stryker-mutator/*)
+11:53:41 (13756) DEBUG PluginLoader Loading plugin "C:\Users\Мария\Documents\Web Projects\Frontier\node_modules\@stryker-mutator\typescript" (matched with expression @stryker-mutator/*)
+11:53:41 (13756) DEBUG PluginLoader Loading plugins C:\Users\Мария\Documents\Web Projects\Frontier\node_modules\@stryker-mutator\jest-runner
+11:53:41 (13756) DEBUG PluginLoader Loading plugins C:\Users\Мария\Documents\Web Projects\Frontier\node_modules\@stryker-mutator\typescript
+11:53:42 (13756) DEBUG PluginLoader Loading plugins C:\Users\Мария\Documents\Web Projects\Frontier\node_modules\@stryker-mutator\core\src\reporters\index.js
+11:53:42 (13756) DEBUG buildSchemaWithPluginContributions Contributing 2 schemas from plugins to options validation.
+11:53:42 (13756) INFO TypescriptOptionsEditor Loading tsconfig file C:\Users\Мария\Documents\Web Projects\Frontier\tsconfig.json
+11:53:43 (13756) INFO InputFileResolver Found 29 of 177 file(s) to be mutated.
+11:53:43 (13756) DEBUG InputFileResolver All input files: [
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\stryker.conf.js",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\stryker.log",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\.eslintrc.json",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\.gitignore",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\.loki\\.gitignore",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\.loki\\reference\\chrome_iphone7_WrapperApp_Wrapper_With_Default_Theme.png",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\.loki\\reference\\chrome_iphone7_WrapperApp_Wrapper_With_Initial_Theme.png",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\.loki\\reference\\chrome_laptop_WrapperApp_Wrapper_With_Default_Theme.png",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\.loki\\reference\\chrome_laptop_WrapperApp_Wrapper_With_Initial_Theme.png",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\.prettierrc.js",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\.storybook\\.babelrc.js",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\.storybook\\main.js",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\.storybook\\preview.js",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\.storybook\\webpack.config.js",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\README.md",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\babel.config.json",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\clover.xml",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\coverage-final.json",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\base.css",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\block-navigation.js",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\components\\AlertDialog\\AlertDialog.tsx.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\components\\AlertDialog\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\components\\AlertDialog\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\components\\BarChart\\Bar\\Bar.tsx.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\components\\BarChart\\Bar\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\components\\BarChart\\Bar\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\components\\BarChart\\BarChart.tsx.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\components\\BarChart\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\components\\BarChart\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\components\\WrapperApp\\WrapperApp.tsx.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\components\\WrapperApp\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\components\\WrapperApp\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\components\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\components\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\favicon.png",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\prettify.css",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\prettify.js",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\screens\\NotFoundScreen.tsx.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\screens\\StatisticsScreen\\StatisticsScreen.tsx.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\screens\\StatisticsScreen\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\screens\\StatisticsScreen\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\screens\\StatisticsScreen\\reducer.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\screens\\TariffsScreen\\TariffsScreen.tsx.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\screens\\TariffsScreen\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\screens\\TariffsScreen\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\screens\\TariffsScreen\\reducer.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\screens\\VisitorsScreen\\VisitorsScreen.tsx.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\screens\\VisitorsScreen\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\screens\\VisitorsScreen\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\screens\\VisitorsScreen\\reducer.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\screens\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\screens\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\sort-arrow-sprite.png",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\sorter.js",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\components\\AlertDialog\\AlertDialog.tsx.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\components\\AlertDialog\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\components\\AlertDialog\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\components\\BarChart\\Bar\\Bar.tsx.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\components\\BarChart\\Bar\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\components\\BarChart\\Bar\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\components\\BarChart\\BarChart.tsx.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\components\\BarChart\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\components\\BarChart\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\components\\WrapperApp\\WrapperApp.tsx.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\components\\WrapperApp\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\components\\WrapperApp\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\components\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\components\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\screens\\NotFoundScreen.tsx.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\screens\\StatisticsScreen\\StatisticsScreen.tsx.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\screens\\StatisticsScreen\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\screens\\StatisticsScreen\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\screens\\StatisticsScreen\\reducer.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\screens\\TariffsScreen\\TariffsScreen.tsx.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\screens\\TariffsScreen\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\screens\\TariffsScreen\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\screens\\TariffsScreen\\reducer.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\screens\\VisitorsScreen\\VisitorsScreen.tsx.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\screens\\VisitorsScreen\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\screens\\VisitorsScreen\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\screens\\VisitorsScreen\\reducer.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\screens\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\screens\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\store.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\utils\\FormatDate.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\utils\\calculateCost.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\utils\\calculateCostHelper.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\utils\\calculateDuration.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\utils\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\utils\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\utils\\initialTheme.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\utils\\localizationMaterialTable.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\src\\utils\\statisticsUtils.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\utils\\FormatDate.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\utils\\calculateCost.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\utils\\calculateCostHelper.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\utils\\calculateDuration.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\utils\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\utils\\index.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\utils\\initialTheme.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\utils\\localizationMaterialTable.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov-report\\utils\\statisticsUtils.ts.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\coverage\\lcov.info",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\internals\\jestSettings.js",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\jest.config.js",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\package-lock.json",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\package.json",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\public\\favicon.ico",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\public\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\App.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\AlertDialog\\AlertDialog.stories.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\AlertDialog\\AlertDialog.test.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\AlertDialog\\AlertDialog.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\AlertDialog\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\BarChart\\Bar\\Bar.stories.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\BarChart\\Bar\\Bar.test.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\BarChart\\Bar\\Bar.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\BarChart\\Bar\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\BarChart\\BarChart.stories.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\BarChart\\BarChart.test.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\BarChart\\BarChart.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\BarChart\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\WrapperApp\\WrapperApp.stories.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\WrapperApp\\WrapperApp.test.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\WrapperApp\\WrapperApp.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\WrapperApp\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\index.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\NotFoundScreen.test.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\NotFoundScreen.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\StatisticsScreen\\StatisticsScreen.test.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\StatisticsScreen\\StatisticsScreen.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\StatisticsScreen\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\StatisticsScreen\\reducer.test.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\StatisticsScreen\\reducer.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\TariffsScreen\\TariffsScreen.test.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\TariffsScreen\\TariffsScreen.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\TariffsScreen\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\TariffsScreen\\reducer.test.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\TariffsScreen\\reducer.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\VisitorsScreen\\VisitorsScreen.test.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\VisitorsScreen\\VisitorsScreen.tsx",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\VisitorsScreen\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\VisitorsScreen\\reducer.test.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\VisitorsScreen\\reducer.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\__snapshots__\\NotFoundScreen.test.tsx.snap",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\store.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\FormatDate.test.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\FormatDate.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\calculateCost.test.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\calculateCost.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\calculateCostHelper.test.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\calculateCostHelper.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\calculateDuration.test.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\calculateDuration.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\initialTheme.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\localizationMaterialTable.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\statisticsUtils.test.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\statisticsUtils.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\statistics.JPG",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\storybook-static\\favicon.ico",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\storybook-static\\index.html",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\storybook-static\\main.35e1bb522f6dcb37b371.bundle.js",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\storybook-static\\runtime~main.286b69a873d49f2f199c.bundle.js",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\storybook-static\\sb_dll\\storybook_ui-manifest.json",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\storybook-static\\sb_dll\\storybook_ui_dll.LICENCE",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\storybook-static\\sb_dll\\storybook_ui_dll.js",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\storybook-static\\vendors~main.1a58403682d345291f22.bundle.js",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\tariffs.JPG",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\tsconfig.json",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\types\\redux-persist-indexeddb-storage\\index.d.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\visitors.JPG",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\webpack.config.js"
+]
+11:53:43 (13756) DEBUG InputFileResolver Files to mutate: [
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\AlertDialog\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\BarChart\\Bar\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\BarChart\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\WrapperApp\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\components\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\StatisticsScreen\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\StatisticsScreen\\reducer.test.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\StatisticsScreen\\reducer.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\TariffsScreen\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\TariffsScreen\\reducer.test.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\TariffsScreen\\reducer.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\VisitorsScreen\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\VisitorsScreen\\reducer.test.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\VisitorsScreen\\reducer.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\screens\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\store.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\FormatDate.test.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\FormatDate.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\calculateCost.test.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\calculateCost.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\calculateCostHelper.test.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\calculateCostHelper.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\calculateDuration.test.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\calculateDuration.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\index.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\initialTheme.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\localizationMaterialTable.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\statisticsUtils.test.ts",
+  "C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\src\\utils\\statisticsUtils.ts"
+]
+11:53:43 (13756) DEBUG TemporaryDirectory Using temp directory "C:\Users\Мария\Documents\Web Projects\Frontier\.stryker-tmp"
+11:53:43 (13756) DEBUG TestFrameworkOrchestrator The `coverageAnalysis` setting is "off", not hooking into the test framework to achieve performance benefits.
+11:53:43 (13756) INFO InitialTestExecutor Starting initial test run. This may take a while.
+11:53:43 (13756) DEBUG Sandbox Creating a sandbox for files in C:\Users\Мария\Documents\Web Projects\Frontier\.stryker-tmp\sandbox3143098
+11:53:43 (13756) DEBUG Sandbox Creating test runner 0
+11:53:43 (13756) DEBUG ChildProcessProxy Starting C:\Users\Мария\Documents\Web Projects\Frontier\node_modules\@stryker-mutator\core\src\test-runner\ChildProcessTestRunnerWorker.js in child process 15092
+11:53:44 (15092) DEBUG ChildProcessProxyWorker Changing current working directory for this process to C:\Users\Мария\Documents\Web Projects\Frontier\.stryker-tmp\sandbox3143098
+11:53:44 (15092) DEBUG PluginLoader Loading @stryker-mutator/* from C:\Users\Мария\Documents\Web Projects\Frontier\node_modules\@stryker-mutator
+11:53:44 (15092) DEBUG PluginLoader Loading plugin "C:\Users\Мария\Documents\Web Projects\Frontier\node_modules\@stryker-mutator\jest-runner" (matched with expression @stryker-mutator/*)
+11:53:44 (15092) DEBUG PluginLoader Loading plugin "C:\Users\Мария\Documents\Web Projects\Frontier\node_modules\@stryker-mutator\typescript" (matched with expression @stryker-mutator/*)
+11:53:44 (15092) DEBUG PluginLoader Loading plugins C:\Users\Мария\Documents\Web Projects\Frontier\node_modules\@stryker-mutator\jest-runner
+11:53:44 (15092) DEBUG PluginLoader Loading plugins C:\Users\Мария\Documents\Web Projects\Frontier\node_modules\@stryker-mutator\typescript
+11:53:45 (15092) DEBUG PluginLoader Loading plugins C:\Users\Мария\Documents\Web Projects\Frontier\node_modules\@stryker-mutator\core\src\reporters\index.js
+11:53:45 (15092) DEBUG CustomJestConfigLoader Read Jest config from C:\Users\Мария\Documents\Web Projects\Frontier\.stryker-tmp\sandbox3143098\jest.config.js
+11:53:45 (15092) TRACE JestTestRunner Merging file-based config {
+  "clearMocks": true,
+  "setupFilesAfterEnv": [
+    "<rootDir>/internals/jestSettings.js"
+  ],
+  "coverageDirectory": "coverage",
+  "moduleNameMapper": {
+    "^@/(.*)$": "<rootDir>/src/$1"
+  },
+  "testEnvironment": "jest-environment-jsdom",
+  "transform": {
+    "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest"
+  }
+} 
+      with custom config {}
+      and default (internal) stryker config [object Object]
+11:53:45 (15092) DEBUG JestTestRunner Running jest with --findRelatedTests flag. Set jest.enableFindRelatedTests to false to run all tests on every mutant.
+11:53:45 (15092) DEBUG JestTestRunner Project root is C:\Users\Мария\Documents\Web Projects\Frontier\.stryker-tmp\sandbox3143098
+11:53:45 (13756) DEBUG TimeoutDecorator Starting timeout timer (300000 ms) for a test run
+11:53:45 (15092) TRACE JestGreaterThan25Adapter Invoking Jest with config {"clearMocks":true,"setupFilesAfterEnv":["<rootDir>/internals/jestSettings.js"],"coverageDirectory":"coverage","moduleNameMapper":{"^@/(.*)$":"<rootDir>/src/$1"},"testEnvironment":"jest-environment-jsdom","transform":{"^.+\\.(js|jsx|ts|tsx)$":"<rootDir>/node_modules/babel-jest"},"collectCoverage":false,"verbose":false,"bail":false,"notify":false,"rootDir":"C:\\Users\\Мария\\Documents\\Web Projects\\Frontier\\.stryker-tmp\\sandbox3143098","reporters":[]}
+11:53:50 (13756) TRACE ChildProcessProxy (node:15092) ExperimentalWarning: The fs.promises API is experimental
+
+11:53:50 (13756) DEBUG ChildProcessProxy Disposing of worker process 15092
+11:53:50 (13756) DEBUG ChildProcessProxy Kill 15092
+11:53:50 (13756) ERROR InitialTestExecutor One or more tests resulted in an error:
+	  ● Test suite failed to run
+
+    evalmachine.<anonymous>:1
+    globalThis
+    ^
+
+    ReferenceError: globalThis is not defined
+
+      at evalmachine.<anonymous>:1:1
+      at setupWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:51:55)
+      at new Window (../../node_modules/jsdom/lib/jsdom/browser/Window.js:107:3)
+      at exports.createWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:38:10)
+      at new JSDOM (../../node_modules/jsdom/lib/api.js:36:20)
+
+	  ● Test suite failed to run
+
+    evalmachine.<anonymous>:1
+    globalThis
+    ^
+
+    ReferenceError: globalThis is not defined
+
+      at evalmachine.<anonymous>:1:1
+      at setupWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:51:55)
+      at new Window (../../node_modules/jsdom/lib/jsdom/browser/Window.js:107:3)
+      at exports.createWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:38:10)
+      at new JSDOM (../../node_modules/jsdom/lib/api.js:36:20)
+
+	  ● Test suite failed to run
+
+    evalmachine.<anonymous>:1
+    globalThis
+    ^
+
+    ReferenceError: globalThis is not defined
+
+      at evalmachine.<anonymous>:1:1
+      at setupWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:51:55)
+      at new Window (../../node_modules/jsdom/lib/jsdom/browser/Window.js:107:3)
+      at exports.createWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:38:10)
+      at new JSDOM (../../node_modules/jsdom/lib/api.js:36:20)
+
+	  ● Test suite failed to run
+
+    evalmachine.<anonymous>:1
+    globalThis
+    ^
+
+    ReferenceError: globalThis is not defined
+
+      at evalmachine.<anonymous>:1:1
+      at setupWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:51:55)
+      at new Window (../../node_modules/jsdom/lib/jsdom/browser/Window.js:107:3)
+      at exports.createWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:38:10)
+      at new JSDOM (../../node_modules/jsdom/lib/api.js:36:20)
+
+	  ● Test suite failed to run
+
+    evalmachine.<anonymous>:1
+    globalThis
+    ^
+
+    ReferenceError: globalThis is not defined
+
+      at evalmachine.<anonymous>:1:1
+      at setupWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:51:55)
+      at new Window (../../node_modules/jsdom/lib/jsdom/browser/Window.js:107:3)
+      at exports.createWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:38:10)
+      at new JSDOM (../../node_modules/jsdom/lib/api.js:36:20)
+
+	  ● Test suite failed to run
+
+    evalmachine.<anonymous>:1
+    globalThis
+    ^
+
+    ReferenceError: globalThis is not defined
+
+      at evalmachine.<anonymous>:1:1
+      at setupWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:51:55)
+      at new Window (../../node_modules/jsdom/lib/jsdom/browser/Window.js:107:3)
+      at exports.createWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:38:10)
+      at new JSDOM (../../node_modules/jsdom/lib/api.js:36:20)
+
+	  ● Test suite failed to run
+
+    evalmachine.<anonymous>:1
+    globalThis
+    ^
+
+    ReferenceError: globalThis is not defined
+
+      at evalmachine.<anonymous>:1:1
+      at setupWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:51:55)
+      at new Window (../../node_modules/jsdom/lib/jsdom/browser/Window.js:107:3)
+      at exports.createWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:38:10)
+      at new JSDOM (../../node_modules/jsdom/lib/api.js:36:20)
+
+	  ● Test suite failed to run
+
+    evalmachine.<anonymous>:1
+    globalThis
+    ^
+
+    ReferenceError: globalThis is not defined
+
+      at evalmachine.<anonymous>:1:1
+      at setupWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:51:55)
+      at new Window (../../node_modules/jsdom/lib/jsdom/browser/Window.js:107:3)
+      at exports.createWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:38:10)
+      at new JSDOM (../../node_modules/jsdom/lib/api.js:36:20)
+
+	  ● Test suite failed to run
+
+    evalmachine.<anonymous>:1
+    globalThis
+    ^
+
+    ReferenceError: globalThis is not defined
+
+      at evalmachine.<anonymous>:1:1
+      at setupWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:51:55)
+      at new Window (../../node_modules/jsdom/lib/jsdom/browser/Window.js:107:3)
+      at exports.createWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:38:10)
+      at new JSDOM (../../node_modules/jsdom/lib/api.js:36:20)
+
+	  ● Test suite failed to run
+
+    evalmachine.<anonymous>:1
+    globalThis
+    ^
+
+    ReferenceError: globalThis is not defined
+
+      at evalmachine.<anonymous>:1:1
+      at setupWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:51:55)
+      at new Window (../../node_modules/jsdom/lib/jsdom/browser/Window.js:107:3)
+      at exports.createWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:38:10)
+      at new JSDOM (../../node_modules/jsdom/lib/api.js:36:20)
+
+	  ● Test suite failed to run
+
+    evalmachine.<anonymous>:1
+    globalThis
+    ^
+
+    ReferenceError: globalThis is not defined
+
+      at evalmachine.<anonymous>:1:1
+      at setupWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:51:55)
+      at new Window (../../node_modules/jsdom/lib/jsdom/browser/Window.js:107:3)
+      at exports.createWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:38:10)
+      at new JSDOM (../../node_modules/jsdom/lib/api.js:36:20)
+
+	  ● Test suite failed to run
+
+    evalmachine.<anonymous>:1
+    globalThis
+    ^
+
+    ReferenceError: globalThis is not defined
+
+      at evalmachine.<anonymous>:1:1
+      at setupWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:51:55)
+      at new Window (../../node_modules/jsdom/lib/jsdom/browser/Window.js:107:3)
+      at exports.createWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:38:10)
+      at new JSDOM (../../node_modules/jsdom/lib/api.js:36:20)
+
+	  ● Test suite failed to run
+
+    evalmachine.<anonymous>:1
+    globalThis
+    ^
+
+    ReferenceError: globalThis is not defined
+
+      at evalmachine.<anonymous>:1:1
+      at setupWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:51:55)
+      at new Window (../../node_modules/jsdom/lib/jsdom/browser/Window.js:107:3)
+      at exports.createWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:38:10)
+      at new JSDOM (../../node_modules/jsdom/lib/api.js:36:20)
+
+	  ● Test suite failed to run
+
+    evalmachine.<anonymous>:1
+    globalThis
+    ^
+
+    ReferenceError: globalThis is not defined
+
+      at evalmachine.<anonymous>:1:1
+      at setupWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:51:55)
+      at new Window (../../node_modules/jsdom/lib/jsdom/browser/Window.js:107:3)
+      at exports.createWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:38:10)
+      at new JSDOM (../../node_modules/jsdom/lib/api.js:36:20)
+
+	  ● Test suite failed to run
+
+    evalmachine.<anonymous>:1
+    globalThis
+    ^
+
+    ReferenceError: globalThis is not defined
+
+      at evalmachine.<anonymous>:1:1
+      at setupWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:51:55)
+      at new Window (../../node_modules/jsdom/lib/jsdom/browser/Window.js:107:3)
+      at exports.createWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:38:10)
+      at new JSDOM (../../node_modules/jsdom/lib/api.js:36:20)
+
+	  ● Test suite failed to run
+
+    evalmachine.<anonymous>:1
+    globalThis
+    ^
+
+    ReferenceError: globalThis is not defined
+
+      at evalmachine.<anonymous>:1:1
+      at setupWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:51:55)
+      at new Window (../../node_modules/jsdom/lib/jsdom/browser/Window.js:107:3)
+      at exports.createWindow (../../node_modules/jsdom/lib/jsdom/browser/Window.js:38:10)
+      at new JSDOM (../../node_modules/jsdom/lib/api.js:36:20)
+
+11:53:50 (13756) ERROR StrykerCli an error occurred Error: Something went wrong in the initial test run
+    at InitialTestExecutor.validateResult (C:\Users\Мария\Documents\Web Projects\Frontier\node_modules\@stryker-mutator\core\src\process\InitialTestExecutor.js:86:15)
+    at InitialTestExecutor.run (C:\Users\Мария\Documents\Web Projects\Frontier\node_modules\@stryker-mutator\core\src\process\InitialTestExecutor.js:41:14)
+    at process._tickCallback (internal/process/next_tick.js:68:7)

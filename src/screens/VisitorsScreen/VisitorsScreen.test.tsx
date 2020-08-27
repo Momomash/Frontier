@@ -60,15 +60,23 @@ describe('VisitorsScreen with real store', () => {
                 },
               ],
               "visitors": Object {
-                "historyVisitors": Array [],
-                "modals": Object {
-                  "historyVisitors": false,
-                  "payVisitors": false,
-                },
-                "payedVisitors": Array [],
-                "timer": 0,
-                "total": 0,
-                "visitors": Array [
+                "historyVisitors": Array [
+                  Object {
+                    "id": 1,
+                    "name": "Франц",
+                    "status": 2,
+                    "tariffId": 1,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1597833600000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1597847340000,
+                      },
+                    ],
+                  },
                   Object {
                     "id": 2,
                     "name": "Франц 2",
@@ -77,11 +85,11 @@ describe('VisitorsScreen with real store', () => {
                     "times": Array [
                       Object {
                         "status": 0,
-                        "timestamp": 1597246825795,
+                        "timestamp": 1597836180000,
                       },
                       Object {
                         "status": 2,
-                        "timestamp": 1598099948000,
+                        "timestamp": 1597847340000,
                       },
                     ],
                   },
@@ -93,15 +101,87 @@ describe('VisitorsScreen with real store', () => {
                     "times": Array [
                       Object {
                         "status": 0,
-                        "timestamp": 1597246825795,
+                        "timestamp": 1597924800000,
                       },
                       Object {
                         "status": 2,
-                        "timestamp": 1598099948000,
+                        "timestamp": 1597938000000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 4,
+                    "name": "Франц 4",
+                    "status": 2,
+                    "tariffId": 2,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1597929600000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1597953360000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 5,
+                    "name": "Франц 5",
+                    "status": 2,
+                    "tariffId": 4,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1598098200000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1598120400000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 6,
+                    "name": "Франц 6",
+                    "status": 2,
+                    "tariffId": 1,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1598184000000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1598209200000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 7,
+                    "name": "Франц 7",
+                    "status": 2,
+                    "tariffId": 2,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1598199600000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1598219100000,
                       },
                     ],
                   },
                 ],
+                "modals": Object {
+                  "historyVisitors": false,
+                  "payVisitors": false,
+                },
+                "payedVisitors": Array [],
+                "timer": 0,
+                "total": 0,
+                "visitors": Array [],
               },
             }
         `);

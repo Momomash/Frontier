@@ -82,18 +82,18 @@ describe('StatisticsUtils test', () => {
     });
     it('SortData', () => {
         expect(sortData(visitors)).toEqual({
-            '2020-8-20': [visitors[0]],
-            '2020-8-22': [visitors[1], visitors[2]],
+            '2020-08-20': [visitors[0]],
+            '2020-08-22': [visitors[1], visitors[2]],
         });
     });
     it('CalculateTotalStatistics', () => {
         expect(calculateTotalStatistics(sortData(visitors), tariffs)).toEqual([
             {
-                title: '2020-8-20',
+                title: '2020-08-20',
                 value: 600,
             },
             {
-                title: '2020-8-22',
+                title: '2020-08-22',
                 value: 1000,
             },
         ]);
@@ -101,11 +101,11 @@ describe('StatisticsUtils test', () => {
     it('calculateAverageCostStatistics', () => {
         expect(calculateAverageCostStatistics(sortData(visitors), tariffs)).toEqual([
             {
-                title: '2020-8-20',
+                title: '2020-08-20',
                 value: 600,
             },
             {
-                title: '2020-8-22',
+                title: '2020-08-22',
                 value: 500,
             },
         ]);
@@ -113,23 +113,23 @@ describe('StatisticsUtils test', () => {
     it('calculateAverageDurationStatistics', () => {
         expect(calculateAverageDurationStatistics(sortData(visitors))).toEqual([
             {
-                title: '2020-8-20',
+                title: '2020-08-20',
                 value: 189,
             },
             {
-                title: '2020-8-22',
+                title: '2020-08-22',
                 value: 237,
             },
         ]);
     });
-    it('calculateQuatityVisitorsStatistics', () => {
+    it('calculateQuantityVisitorsStatistics', () => {
         expect(calculateQuantityVisitorsStatistics(sortData(visitors))).toEqual([
             {
-                title: '2020-8-20',
+                title: '2020-08-20',
                 value: 1,
             },
             {
-                title: '2020-8-22',
+                title: '2020-08-22',
                 value: 2,
             },
         ]);
