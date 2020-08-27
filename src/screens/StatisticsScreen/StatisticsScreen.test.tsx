@@ -65,15 +65,7 @@ describe('StatisticsScreen with real store', () => {
                 },
               ],
               "visitors": Object {
-                "historyVisitors": Array [],
-                "modals": Object {
-                  "historyVisitors": false,
-                  "payVisitors": false,
-                },
-                "payedVisitors": Array [],
-                "timer": 0,
-                "total": 0,
-                "visitors": Array [
+                "historyVisitors": Array [
                   Object {
                     "id": 1,
                     "name": "Франц",
@@ -82,11 +74,11 @@ describe('StatisticsScreen with real store', () => {
                     "times": Array [
                       Object {
                         "status": 0,
-                        "timestamp": 1597246825795,
+                        "timestamp": 1597833600000,
                       },
                       Object {
                         "status": 2,
-                        "timestamp": 1597927148000,
+                        "timestamp": 1597847340000,
                       },
                     ],
                   },
@@ -98,11 +90,11 @@ describe('StatisticsScreen with real store', () => {
                     "times": Array [
                       Object {
                         "status": 0,
-                        "timestamp": 1597246825795,
+                        "timestamp": 1597836180000,
                       },
                       Object {
                         "status": 2,
-                        "timestamp": 1598099948000,
+                        "timestamp": 1597847340000,
                       },
                     ],
                   },
@@ -114,11 +106,100 @@ describe('StatisticsScreen with real store', () => {
                     "times": Array [
                       Object {
                         "status": 0,
-                        "timestamp": 1597246825795,
+                        "timestamp": 1597924800000,
                       },
                       Object {
                         "status": 2,
-                        "timestamp": 1598099948000,
+                        "timestamp": 1597938000000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 4,
+                    "name": "Франц 4",
+                    "status": 2,
+                    "tariffId": 2,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1597929600000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1597953360000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 5,
+                    "name": "Франц 5",
+                    "status": 2,
+                    "tariffId": 4,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1598098200000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1598120400000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 6,
+                    "name": "Франц 6",
+                    "status": 2,
+                    "tariffId": 1,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1598184000000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1598209200000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 7,
+                    "name": "Франц 7",
+                    "status": 2,
+                    "tariffId": 2,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1598199600000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1598219100000,
+                      },
+                    ],
+                  },
+                ],
+                "modals": Object {
+                  "historyVisitors": false,
+                  "payVisitors": false,
+                },
+                "payedVisitors": Array [],
+                "timer": 0,
+                "total": 0,
+                "visitors": Array [
+                  Object {
+                    "id": 0,
+                    "name": "Франц",
+                    "status": 2,
+                    "tariffId": 1,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1597833600000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1597847340000,
                       },
                     ],
                   },
@@ -141,8 +222,8 @@ describe('StatisticsScreen with real store', () => {
         expect(store.getState()).toMatchInlineSnapshot(`
             Object {
               "statistics": Object {
-                "endDate": "2020-8-27",
-                "startDate": "2020-7-27",
+                "endDate": "2020-08-27",
+                "startDate": "2020-07-28",
                 "statisticsIndicator": "average-cost",
               },
               "tariffs": Array [
@@ -176,15 +257,7 @@ describe('StatisticsScreen with real store', () => {
                 },
               ],
               "visitors": Object {
-                "historyVisitors": Array [],
-                "modals": Object {
-                  "historyVisitors": false,
-                  "payVisitors": false,
-                },
-                "payedVisitors": Array [],
-                "timer": 0,
-                "total": 0,
-                "visitors": Array [
+                "historyVisitors": Array [
                   Object {
                     "id": 1,
                     "name": "Франц",
@@ -193,11 +266,11 @@ describe('StatisticsScreen with real store', () => {
                     "times": Array [
                       Object {
                         "status": 0,
-                        "timestamp": 1597246825795,
+                        "timestamp": 1597833600000,
                       },
                       Object {
                         "status": 2,
-                        "timestamp": 1597927148000,
+                        "timestamp": 1597847340000,
                       },
                     ],
                   },
@@ -209,11 +282,11 @@ describe('StatisticsScreen with real store', () => {
                     "times": Array [
                       Object {
                         "status": 0,
-                        "timestamp": 1597246825795,
+                        "timestamp": 1597836180000,
                       },
                       Object {
                         "status": 2,
-                        "timestamp": 1598099948000,
+                        "timestamp": 1597847340000,
                       },
                     ],
                   },
@@ -225,11 +298,100 @@ describe('StatisticsScreen with real store', () => {
                     "times": Array [
                       Object {
                         "status": 0,
-                        "timestamp": 1597246825795,
+                        "timestamp": 1597924800000,
                       },
                       Object {
                         "status": 2,
-                        "timestamp": 1598099948000,
+                        "timestamp": 1597938000000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 4,
+                    "name": "Франц 4",
+                    "status": 2,
+                    "tariffId": 2,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1597929600000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1597953360000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 5,
+                    "name": "Франц 5",
+                    "status": 2,
+                    "tariffId": 4,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1598098200000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1598120400000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 6,
+                    "name": "Франц 6",
+                    "status": 2,
+                    "tariffId": 1,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1598184000000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1598209200000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 7,
+                    "name": "Франц 7",
+                    "status": 2,
+                    "tariffId": 2,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1598199600000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1598219100000,
+                      },
+                    ],
+                  },
+                ],
+                "modals": Object {
+                  "historyVisitors": false,
+                  "payVisitors": false,
+                },
+                "payedVisitors": Array [],
+                "timer": 0,
+                "total": 0,
+                "visitors": Array [
+                  Object {
+                    "id": 0,
+                    "name": "Франц",
+                    "status": 2,
+                    "tariffId": 1,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1597833600000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1597847340000,
                       },
                     ],
                   },
@@ -252,8 +414,8 @@ describe('StatisticsScreen with real store', () => {
         expect(store.getState()).toMatchInlineSnapshot(`
             Object {
               "statistics": Object {
-                "endDate": "2020-8-27",
-                "startDate": "2020-7-27",
+                "endDate": "2020-08-27",
+                "startDate": "2020-07-28",
                 "statisticsIndicator": "average-duration",
               },
               "tariffs": Array [
@@ -287,15 +449,7 @@ describe('StatisticsScreen with real store', () => {
                 },
               ],
               "visitors": Object {
-                "historyVisitors": Array [],
-                "modals": Object {
-                  "historyVisitors": false,
-                  "payVisitors": false,
-                },
-                "payedVisitors": Array [],
-                "timer": 0,
-                "total": 0,
-                "visitors": Array [
+                "historyVisitors": Array [
                   Object {
                     "id": 1,
                     "name": "Франц",
@@ -304,11 +458,11 @@ describe('StatisticsScreen with real store', () => {
                     "times": Array [
                       Object {
                         "status": 0,
-                        "timestamp": 1597246825795,
+                        "timestamp": 1597833600000,
                       },
                       Object {
                         "status": 2,
-                        "timestamp": 1597927148000,
+                        "timestamp": 1597847340000,
                       },
                     ],
                   },
@@ -320,11 +474,11 @@ describe('StatisticsScreen with real store', () => {
                     "times": Array [
                       Object {
                         "status": 0,
-                        "timestamp": 1597246825795,
+                        "timestamp": 1597836180000,
                       },
                       Object {
                         "status": 2,
-                        "timestamp": 1598099948000,
+                        "timestamp": 1597847340000,
                       },
                     ],
                   },
@@ -336,11 +490,100 @@ describe('StatisticsScreen with real store', () => {
                     "times": Array [
                       Object {
                         "status": 0,
-                        "timestamp": 1597246825795,
+                        "timestamp": 1597924800000,
                       },
                       Object {
                         "status": 2,
-                        "timestamp": 1598099948000,
+                        "timestamp": 1597938000000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 4,
+                    "name": "Франц 4",
+                    "status": 2,
+                    "tariffId": 2,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1597929600000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1597953360000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 5,
+                    "name": "Франц 5",
+                    "status": 2,
+                    "tariffId": 4,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1598098200000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1598120400000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 6,
+                    "name": "Франц 6",
+                    "status": 2,
+                    "tariffId": 1,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1598184000000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1598209200000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 7,
+                    "name": "Франц 7",
+                    "status": 2,
+                    "tariffId": 2,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1598199600000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1598219100000,
+                      },
+                    ],
+                  },
+                ],
+                "modals": Object {
+                  "historyVisitors": false,
+                  "payVisitors": false,
+                },
+                "payedVisitors": Array [],
+                "timer": 0,
+                "total": 0,
+                "visitors": Array [
+                  Object {
+                    "id": 0,
+                    "name": "Франц",
+                    "status": 2,
+                    "tariffId": 1,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1597833600000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1597847340000,
                       },
                     ],
                   },
@@ -363,8 +606,8 @@ describe('StatisticsScreen with real store', () => {
         expect(store.getState()).toMatchInlineSnapshot(`
             Object {
               "statistics": Object {
-                "endDate": "2020-8-27",
-                "startDate": "2020-7-27",
+                "endDate": "2020-08-27",
+                "startDate": "2020-07-28",
                 "statisticsIndicator": "quantity-visitors",
               },
               "tariffs": Array [
@@ -398,15 +641,7 @@ describe('StatisticsScreen with real store', () => {
                 },
               ],
               "visitors": Object {
-                "historyVisitors": Array [],
-                "modals": Object {
-                  "historyVisitors": false,
-                  "payVisitors": false,
-                },
-                "payedVisitors": Array [],
-                "timer": 0,
-                "total": 0,
-                "visitors": Array [
+                "historyVisitors": Array [
                   Object {
                     "id": 1,
                     "name": "Франц",
@@ -415,11 +650,11 @@ describe('StatisticsScreen with real store', () => {
                     "times": Array [
                       Object {
                         "status": 0,
-                        "timestamp": 1597246825795,
+                        "timestamp": 1597833600000,
                       },
                       Object {
                         "status": 2,
-                        "timestamp": 1597927148000,
+                        "timestamp": 1597847340000,
                       },
                     ],
                   },
@@ -431,11 +666,11 @@ describe('StatisticsScreen with real store', () => {
                     "times": Array [
                       Object {
                         "status": 0,
-                        "timestamp": 1597246825795,
+                        "timestamp": 1597836180000,
                       },
                       Object {
                         "status": 2,
-                        "timestamp": 1598099948000,
+                        "timestamp": 1597847340000,
                       },
                     ],
                   },
@@ -447,11 +682,100 @@ describe('StatisticsScreen with real store', () => {
                     "times": Array [
                       Object {
                         "status": 0,
-                        "timestamp": 1597246825795,
+                        "timestamp": 1597924800000,
                       },
                       Object {
                         "status": 2,
-                        "timestamp": 1598099948000,
+                        "timestamp": 1597938000000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 4,
+                    "name": "Франц 4",
+                    "status": 2,
+                    "tariffId": 2,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1597929600000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1597953360000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 5,
+                    "name": "Франц 5",
+                    "status": 2,
+                    "tariffId": 4,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1598098200000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1598120400000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 6,
+                    "name": "Франц 6",
+                    "status": 2,
+                    "tariffId": 1,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1598184000000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1598209200000,
+                      },
+                    ],
+                  },
+                  Object {
+                    "id": 7,
+                    "name": "Франц 7",
+                    "status": 2,
+                    "tariffId": 2,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1598199600000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1598219100000,
+                      },
+                    ],
+                  },
+                ],
+                "modals": Object {
+                  "historyVisitors": false,
+                  "payVisitors": false,
+                },
+                "payedVisitors": Array [],
+                "timer": 0,
+                "total": 0,
+                "visitors": Array [
+                  Object {
+                    "id": 0,
+                    "name": "Франц",
+                    "status": 2,
+                    "tariffId": 1,
+                    "times": Array [
+                      Object {
+                        "status": 0,
+                        "timestamp": 1597833600000,
+                      },
+                      Object {
+                        "status": 2,
+                        "timestamp": 1597847340000,
                       },
                     ],
                   },

@@ -36,7 +36,18 @@ export type VisitorsState = {
     timer: number;
 };
 export const initialState: VisitorsState = {
-    visitors: [],
+    visitors: [
+        {
+            id: 0,
+            name: 'Франц',
+            tariffId: 1,
+            status: Status.finished,
+            times: [
+                { timestamp: 1597833600000, status: Status.active },
+                { timestamp: 1597847340000, status: Status.finished },
+            ],
+        },
+    ],
     historyVisitors: [
         {
             id: 1,
