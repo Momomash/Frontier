@@ -3,6 +3,10 @@ Anti-cafe visitor time control application
 
 https://github.com/Momomash/Frontier
 
+[Stryker Test Mutation](reports/mutation/html/index.html)
+
+[Jest Test coverage](coverage/lcov-report/index.html)
+
 
 [Google Slides презентация](https://docs.google.com/presentation/d/1shc6710WoSZWF7HO1Jpop3-0PkDqyGYvy9NRD2asYtQ/edit?usp=sharing)
 
