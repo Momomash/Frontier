@@ -13,7 +13,7 @@ export const App: FunctionComponent<{}> = () => {
     return (
         <Provider store={store}>
             <PersistGate persistor={persistor}>
-                <HashRouter basename="/">
+                <HashRouter basename="/Frontier">
                     <ThemeProvider theme={theme}>
                         <WrapperApp>
                             <Switch>
