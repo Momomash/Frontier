@@ -1,11 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export enum Status {
+    active,
+    deleted,
+}
 export type Tariff = {
     id: number;
     title: string;
     cost: number;
     maxCost: number;
     isDuration: boolean;
+    status: Status;
 };
 
 export const initialState: Tariff[] = [
@@ -15,6 +20,7 @@ export const initialState: Tariff[] = [
         cost: 2.5,
         maxCost: 600,
         isDuration: true,
+        status: Status.active,
     },
     {
         id: 2,
@@ -22,6 +28,7 @@ export const initialState: Tariff[] = [
         cost: 0,
         maxCost: 400,
         isDuration: false,
+        status: Status.active,
     },
     {
         id: 3,
@@ -29,6 +36,7 @@ export const initialState: Tariff[] = [
         cost: 0,
         maxCost: 600,
         isDuration: false,
+        status: Status.active,
     },
     {
         id: 4,
@@ -36,6 +44,7 @@ export const initialState: Tariff[] = [
         cost: 0,
         maxCost: 100,
         isDuration: false,
+        status: Status.active,
     },
 ];
 
@@ -52,12 +61,10 @@ export const TariffsSlice = createSlice({
                 state.push(payload);
             },
         },
-        edit: (state, { payload }: PayloadAction<Tariff>) => {
-            const indexTariff = state.findIndex((tariff) => tariff.id === payload.id);
-            state[indexTariff] = payload;
-        },
         delete: (state, { payload }: PayloadAction<Tariff>) => {
-            return state.filter((tariff) => tariff.id !== payload.id);
+            //return state.filter((tariff) => tariff.id !== payload.id);
+            const indexTariff = state.findIndex((tariff) => tariff.id === payload.id);
+            state[indexTariff].status = Status.deleted;
         },
     },
 });

@@ -7,9 +7,6 @@ https://github.com/Momomash/Frontier
 
 [Jest Test coverage](coverage/lcov-report/index.html)
 
-
-[Google Slides презентация](https://docs.google.com/presentation/d/1shc6710WoSZWF7HO1Jpop3-0PkDqyGYvy9NRD2asYtQ/edit?usp=sharing)
-
 Приложение по контролю времени посетителей антикафе
 
 ![Visitors](visitors.JPG "Главный экран")

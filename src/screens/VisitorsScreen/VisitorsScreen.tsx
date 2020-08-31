@@ -11,6 +11,7 @@ import { actions, EventUser, Status, Visitor, VisitorsWithTimestamp } from './re
 import { Tariff } from '@/screens/';
 import { AlertDialog } from '@/components';
 import { calculateCostHelper, calculateDuration, localizationMaterialTable } from '@/utils';
+import { Status as TariffStatus } from '../TariffsScreen/reducer';
 
 type Props = {
     visitors: Array<Visitor>;
@@ -92,7 +93,9 @@ const VisitorsComponent: FunctionComponent<Props> = ({
     };
     let tariffsColumn: NumberToString = {};
     tariffsColumn = tariffs.reduce(function (newArr, tariff) {
-        newArr[tariff.id] = tariff.title;
+        if (tariff.status === TariffStatus.active) {
+            newArr[tariff.id] = tariff.title;
+        }
         return newArr;
     }, tariffsColumn);
 

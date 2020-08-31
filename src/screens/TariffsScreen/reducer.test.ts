@@ -1,4 +1,4 @@
-import { actions, reducer, Tariff } from './reducer';
+import { actions, reducer, Status, Tariff } from './reducer';
 
 describe('reducer', () => {
     const newTariff: Tariff = {
@@ -7,6 +7,7 @@ describe('reducer', () => {
         cost: 5,
         maxCost: 1000,
         isDuration: false,
+        status: Status.active,
     };
     const initialTariff: Tariff = {
         id: 1,
@@ -14,6 +15,7 @@ describe('reducer', () => {
         cost: 2.5,
         maxCost: 600,
         isDuration: true,
+        status: Status.active,
     };
 
     const state = [initialTariff];
@@ -22,27 +24,14 @@ describe('reducer', () => {
         expect(reducer(state, actions.add(newTariff))).toEqual([initialTariff, newTariff]);
     });
     it('should handle TARIFF_DELETE', () => {
-        expect(reducer(state, actions.delete(initialTariff))).toEqual([]);
-    });
-    it('should handle TARIFF_EDIT', () => {
-        expect(
-            reducer(
-                state,
-                actions.edit({
-                    id: 1,
-                    title: '4р/мин',
-                    cost: 4,
-                    maxCost: 1000,
-                    isDuration: false,
-                }),
-            ),
-        ).toEqual([
+        expect(reducer(state, actions.delete(initialTariff))).toEqual([
             {
                 id: 1,
-                title: '4р/мин',
-                cost: 4,
-                maxCost: 1000,
-                isDuration: false,
+                title: '2,5р/мин',
+                cost: 2.5,
+                maxCost: 600,
+                isDuration: true,
+                status: Status.deleted,
             },
         ]);
     });
