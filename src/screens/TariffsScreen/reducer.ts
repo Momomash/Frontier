@@ -55,6 +55,7 @@ export const TariffsSlice = createSlice({
         add: {
             prepare: (tariff: Tariff) => {
                 tariff.id = Date.now();
+                tariff.status = Status.active;
                 return { payload: tariff };
             },
             reducer: (state, { payload }: PayloadAction<Tariff>) => {
@@ -62,7 +63,6 @@ export const TariffsSlice = createSlice({
             },
         },
         delete: (state, { payload }: PayloadAction<Tariff>) => {
-            //return state.filter((tariff) => tariff.id !== payload.id);
             const indexTariff = state.findIndex((tariff) => tariff.id === payload.id);
             state[indexTariff].status = Status.deleted;
         },

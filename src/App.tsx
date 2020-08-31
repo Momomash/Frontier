@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as HashRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/es/integration/react';
 
@@ -13,7 +13,7 @@ export const App: FunctionComponent<{}> = () => {
     return (
         <Provider store={store}>
             <PersistGate persistor={persistor}>
-                <Router>
+                <HashRouter basename="/">
                     <ThemeProvider theme={theme}>
                         <WrapperApp>
                             <Switch>
@@ -26,7 +26,7 @@ export const App: FunctionComponent<{}> = () => {
                             </Switch>
                         </WrapperApp>
                     </ThemeProvider>
-                </Router>
+                </HashRouter>
             </PersistGate>
         </Provider>
     );
