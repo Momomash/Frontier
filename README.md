@@ -1,14 +1,13 @@
 # Frontier
 Anti-cafe visitor time control application
 
-https://github.com/Momomash/Frontier
+Github Pages - https://momomash.github.io/Frontier/
 
 [Stryker Test Mutation](reports/mutation/html/index.html)
 
 [Jest Test coverage](coverage/lcov-report/index.html)
 
 
-[Google Slides презентация](https://docs.google.com/presentation/d/1shc6710WoSZWF7HO1Jpop3-0PkDqyGYvy9NRD2asYtQ/edit?usp=sharing)
 
 Приложение по контролю времени посетителей антикафе
 
@@ -30,7 +29,7 @@ https://github.com/Momomash/Frontier
 
 3). постановка на паузу, воспроизведение и подсчет времени.
 
-4). поддержка закрытия/обновления страницы браузера без потери данных.
+4). поддержка закрытия/обновления страницы браузера без потери данных (локальное хранение данных в IndexedDB).
 
 5). возможность расчета нескольких посетителей одновременно с выводом итоговой суммы;
 
