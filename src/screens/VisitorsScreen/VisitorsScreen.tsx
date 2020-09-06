@@ -155,6 +155,12 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                         },
                     },
                     {
+                        title: 'Скидка, %',
+                        field: 'discount',
+                        initialEditValue: 0,
+                        type: 'numeric',
+                    },
+                    {
                         title: 'Продолжительность посещения',
                         field: 'duration',
                         type: 'numeric',
@@ -173,7 +179,13 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                         field: 'cost',
                         type: 'numeric',
                         render: (RowData) => {
-                            return <>{calculateCostHelper(RowData, tariffs)}</>;
+                            const cost = calculateCostHelper(RowData, tariffs);
+                            const discountCost = cost - Math.round((cost / 100) * RowData.discount);
+                            if (discountCost < 100) {
+                                return <>100</>;
+                            } else {
+                                return <>{discountCost}</>;
+                            }
                         },
                     },
                     {

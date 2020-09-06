@@ -10,6 +10,7 @@ export type Visitor = {
     tariffId: number;
     status: Status;
     times: Array<Event>;
+    discount: number;
 };
 export type NewVisitor = {
     id?: number;
@@ -17,6 +18,7 @@ export type NewVisitor = {
     tariffId: number;
     status?: Status;
     times?: Array<Event>;
+    discount?: number;
 };
 export type Event = {
     timestamp: number;

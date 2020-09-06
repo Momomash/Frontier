@@ -7,6 +7,7 @@ describe('reducer', () => {
         tariffId: 2,
         status: Status.active,
         times: [{ timestamp: 1597246825795, status: Status.active }],
+        discount: 0,
     };
     const initialVisitor: Visitor = {
         id: 1,
@@ -14,6 +15,7 @@ describe('reducer', () => {
         tariffId: 1,
         status: Status.active,
         times: [{ timestamp: 1597246825795, status: Status.active }],
+        discount: 0,
     };
 
     const state: VisitorsState = {
@@ -65,6 +67,7 @@ describe('reducer', () => {
                     tariffId: 2,
                     status: Status.finished,
                     times: [{ timestamp: 1597246825795, status: Status.active }],
+                    discount: 0,
                 }),
             ),
         ).toEqual({
@@ -75,6 +78,7 @@ describe('reducer', () => {
                     tariffId: 2,
                     status: Status.finished,
                     times: [{ timestamp: 1597246825795, status: Status.active }],
+                    discount: 0,
                 },
             ],
             modals: {
@@ -104,6 +108,7 @@ describe('reducer', () => {
                         { timestamp: 1597246825795, status: Status.active },
                         { timestamp: 1597246826000, status: Status.pause },
                     ],
+                    discount: 0,
                 },
             ],
             modals: {
@@ -128,6 +133,7 @@ describe('reducer', () => {
                             tariffId: 2,
                             status: Status.active,
                             times: [{ timestamp: 1597246822295, status: Status.active }],
+                            discount: 0,
                         },
                         {
                             id: 3,
@@ -135,6 +141,7 @@ describe('reducer', () => {
                             tariffId: 3,
                             status: Status.active,
                             times: [{ timestamp: 1597246825795, status: Status.active }],
+                            discount: 0,
                         },
                     ],
                     historyVisitors: [],
@@ -154,6 +161,7 @@ describe('reducer', () => {
                         tariffId: 3,
                         status: Status.active,
                         times: [{ timestamp: 1597246825795, status: Status.active }],
+                        discount: 0,
                     },
                 ]),
             ),
@@ -165,6 +173,7 @@ describe('reducer', () => {
                     tariffId: 2,
                     status: Status.active,
                     times: [{ timestamp: 1597246822295, status: Status.active }],
+                    discount: 0,
                 },
             ],
             historyVisitors: [],
@@ -189,6 +198,7 @@ describe('reducer', () => {
                             tariffId: 2,
                             status: Status.active,
                             times: [{ timestamp: 1597246822295, status: Status.active }],
+                            discount: 0,
                         },
                         {
                             id: 3,
@@ -196,6 +206,7 @@ describe('reducer', () => {
                             tariffId: 3,
                             status: Status.active,
                             times: [{ timestamp: 1597246825795, status: Status.active }],
+                            discount: 0,
                         },
                     ],
                     historyVisitors: [],
@@ -216,6 +227,7 @@ describe('reducer', () => {
                             tariffId: 3,
                             status: Status.active,
                             times: [{ timestamp: 1597246825795, status: Status.active }],
+                            discount: 0,
                         },
                     ],
                     timestamp: 1111111111111,
@@ -232,6 +244,7 @@ describe('reducer', () => {
                         { timestamp: 1597246825795, status: Status.active },
                         { timestamp: 1111111111111, status: Status.finished },
                     ],
+                    discount: 0,
                 },
                 {
                     id: 2,
@@ -239,6 +252,7 @@ describe('reducer', () => {
                     tariffId: 2,
                     status: Status.active,
                     times: [{ timestamp: 1597246822295, status: Status.active }],
+                    discount: 0,
                 },
                 {
                     id: 3,
@@ -249,6 +263,7 @@ describe('reducer', () => {
                         { timestamp: 1597246825795, status: Status.active },
                         { timestamp: 1111111111111, status: Status.finished },
                     ],
+                    discount: 0,
                 },
             ],
             historyVisitors: [],
@@ -273,6 +288,7 @@ describe('reducer', () => {
                             tariffId: 2,
                             status: Status.active,
                             times: [{ timestamp: 1597246822295, status: Status.active }],
+                            discount: 0,
                         },
                         {
                             id: 3,
@@ -280,6 +296,7 @@ describe('reducer', () => {
                             tariffId: 3,
                             status: Status.active,
                             times: [{ timestamp: 1597246825795, status: Status.active }],
+                            discount: 0,
                         },
                     ],
                     historyVisitors: [],
@@ -303,6 +320,7 @@ describe('reducer', () => {
                     tariffId: 2,
                     status: Status.active,
                     times: [{ timestamp: 1597246822295, status: Status.active }],
+                    discount: 0,
                 },
                 {
                     id: 3,
@@ -310,6 +328,7 @@ describe('reducer', () => {
                     tariffId: 3,
                     status: Status.active,
                     times: [{ timestamp: 1597246825795, status: Status.active }],
+                    discount: 0,
                 },
             ],
             modals: {
@@ -333,6 +352,7 @@ describe('reducer', () => {
                             tariffId: 2,
                             status: Status.active,
                             times: [{ timestamp: 1597246822295, status: Status.active }],
+                            discount: 0,
                         },
                         {
                             id: 3,
@@ -340,6 +360,7 @@ describe('reducer', () => {
                             tariffId: 3,
                             status: Status.active,
                             times: [{ timestamp: 1597246825795, status: Status.active }],
+                            discount: 0,
                         },
                     ],
                     modals: {
@@ -415,6 +436,7 @@ describe('reducer', () => {
                             tariffId: 2,
                             status: Status.active,
                             times: [{ timestamp: 1597246822295, status: Status.active }],
+                            discount: 0,
                         },
                         {
                             id: 3,
@@ -422,6 +444,7 @@ describe('reducer', () => {
                             tariffId: 3,
                             status: Status.active,
                             times: [{ timestamp: 1597246825795, status: Status.active }],
+                            discount: 0,
                         },
                     ],
                     historyVisitors: [],
@@ -441,6 +464,7 @@ describe('reducer', () => {
                         tariffId: 3,
                         status: Status.active,
                         times: [{ timestamp: 1597246825795, status: Status.active }],
+                        discount: 0,
                     },
                 ]),
             ),
@@ -453,6 +477,7 @@ describe('reducer', () => {
                     tariffId: 2,
                     status: Status.active,
                     times: [{ timestamp: 1597246822295, status: Status.active }],
+                    discount: 0,
                 },
                 {
                     id: 3,
@@ -460,6 +485,7 @@ describe('reducer', () => {
                     tariffId: 3,
                     status: Status.active,
                     times: [{ timestamp: 1597246825795, status: Status.active }],
+                    discount: 0,
                 },
             ],
             historyVisitors: [],
@@ -476,6 +502,7 @@ describe('reducer', () => {
                     tariffId: 3,
                     status: Status.active,
                     times: [{ timestamp: 1597246825795, status: Status.active }],
+                    discount: 0,
                 },
             ],
             timer: 0,
