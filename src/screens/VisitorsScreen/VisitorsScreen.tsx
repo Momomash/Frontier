@@ -99,7 +99,7 @@ const VisitorsComponent: FunctionComponent<Props> = ({
     const [fastVisitorName, setFastVisitorName] = React.useState('');
     const [fastVisitorNameInvalid, setFastVisitorNameInvalid] = React.useState(false);
     const validateVisitorName = (name: string) => {
-        return visitors.map((item) => item.name).includes(name);
+        return visitors.map((item) => item.name.toLowerCase()).includes(name.toLowerCase());
     };
     const changeVisitorFast = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFastVisitorName(event.target.value);
@@ -108,7 +108,7 @@ const VisitorsComponent: FunctionComponent<Props> = ({
     };
     const submitVisitorFast = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (!fastVisitorName) {
+        if (!fastVisitorName || fastVisitorNameInvalid) {
             return;
         }
         addVisitor({ name: fastVisitorName, tariffId: defaultTariff, discount: 0 });
@@ -141,7 +141,8 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                         field: 'name',
                         validate: (rowData) => {
                             if (
-                                visitors.map((item) => item.name).includes(rowData.name) &&
+                                rowData.name &&
+                                validateVisitorName(rowData.name) &&
                                 !visitors.map((item) => item.id).includes(rowData.id)
                             ) {
                                 return INVALID_NAME_ERROR;
