@@ -18,7 +18,7 @@ import {
     StatisticsSlice,
     VisitorsState,
     StatisticsState,
-    Tariff,
+    TariffsState,
 } from '@/screens';
 
 const reducer = combineReducers({
@@ -34,7 +34,7 @@ const persistedReducer = persistReducer(persistConfig, reducer);
 
 export type Store = {
     visitors: VisitorsState;
-    tariffs: Tariff[];
+    tariffs: TariffsState;
     statistics: StatisticsState;
 };
 export const createStore = () => {

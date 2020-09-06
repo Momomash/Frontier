@@ -1,4 +1,4 @@
-import { TariffsScreen, TariffsSlice, Tariff } from './TariffsScreen';
+import { TariffsScreen, TariffsSlice, Tariff, TariffsState } from './TariffsScreen';
 import { StatisticsScreen, StatisticsSlice, StatisticsState } from './StatisticsScreen';
 import {
     VisitorsScreen,
@@ -16,6 +16,7 @@ export {
     TariffsScreen,
     TariffsSlice,
     Tariff,
+    TariffsState,
     Visitor,
     VisitorsState,
     Event,

@@ -1,6 +1,10 @@
 import React, { FunctionComponent } from 'react';
 import MaterialTable from 'material-table';
 import { connect } from 'react-redux';
+import styled from '@emotion/styled';
+import { IconButton } from '@material-ui/core';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 
 import { actions, Status, Tariff } from './reducer';
 import { localizationMaterialTable } from '@/utils/localizationMaterialTable';
@@ -8,10 +12,17 @@ import { Store } from '@/store';
 
 type Props = {
     tariffs: Array<Tariff>;
+    defaultTariff: number;
     addTariff(tariff: Tariff): void;
     deleteTariff(tariff: Tariff): void;
+    toggleDefaultTariff(id: number): void;
 };
 
+const Controls = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
 const getFunctionForRow = (action: (tariff: Tariff) => void) => {
     return (newData: Tariff) => {
         action(newData);
@@ -20,8 +31,10 @@ const getFunctionForRow = (action: (tariff: Tariff) => void) => {
 };
 export const TariffsComponent: FunctionComponent<Props> = ({
     tariffs,
+    defaultTariff,
     addTariff,
     deleteTariff,
+    toggleDefaultTariff,
 }) => {
     const activeTariffs = tariffs.filter((tariff) => tariff.status === Status.active);
     return (
@@ -31,6 +44,30 @@ export const TariffsComponent: FunctionComponent<Props> = ({
                 {
                     title: 'Название тарифа',
                     field: 'title',
+                },
+                {
+                    field: 'defaultTariff',
+                    title: 'Тариф по умолчанию',
+                    editable: 'never',
+                    initialEditValue: 'active',
+                    render: (RowData) => {
+                        let icon;
+                        if (RowData.id === defaultTariff) {
+                            icon = <CheckCircleIcon />;
+                        } else {
+                            icon = <RadioButtonUncheckedIcon />;
+                        }
+                        return (
+                            <Controls>
+                                <IconButton
+                                    aria-label="Control"
+                                    onClick={() => toggleDefaultTariff(RowData.id)}
+                                >
+                                    {icon}
+                                </IconButton>
+                            </Controls>
+                        );
+                    },
                 },
                 {
                     title: 'Стоимость за минуту',
@@ -61,11 +98,17 @@ export const TariffsComponent: FunctionComponent<Props> = ({
     );
 };
 
-const mapStateToProps = ({ tariffs }: Store) => ({ tariffs });
+const mapStateToProps = (store: Store) => {
+    return {
+        tariffs: store.tariffs.tariffs,
+        defaultTariff: store.tariffs.defaultTariff,
+    };
+};
 
 const mapDispatchToProps = {
-    addTariff: actions.add,
-    deleteTariff: actions.delete,
+    addTariff: actions.addTariff,
+    deleteTariff: actions.deleteTariff,
+    toggleDefaultTariff: actions.toggleDefaultTariff,
 };
 
 export const TariffsScreen = connect(mapStateToProps, mapDispatchToProps)(TariffsComponent);

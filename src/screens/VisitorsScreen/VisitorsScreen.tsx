@@ -16,6 +16,7 @@ import { Status as TariffStatus } from '../TariffsScreen/reducer';
 type Props = {
     visitors: Array<Visitor>;
     tariffs: Array<Tariff>;
+    defaultTariff: number;
     modals: {
         payVisitors: boolean;
         historyVisitors: boolean;
@@ -69,6 +70,7 @@ const VisitorsComponent: FunctionComponent<Props> = ({
     total,
     visitors,
     tariffs,
+    defaultTariff,
     modals,
     addVisitor,
     editVisitor,
@@ -130,6 +132,7 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                         title: 'Тариф',
                         field: 'tariffId',
                         lookup: tariffsColumn,
+                        initialEditValue: defaultTariff,
                         validate: (rowData) => {
                             if (!rowData.tariffId) {
                                 return 'Укажите тариф';
@@ -273,7 +276,8 @@ const VisitorsComponent: FunctionComponent<Props> = ({
 const mapStateToProps = (store: Store) => {
     return {
         visitors: store.visitors.visitors,
-        tariffs: store.tariffs,
+        tariffs: store.tariffs.tariffs,
+        defaultTariff: store.tariffs.defaultTariff,
         modals: store.visitors.modals,
         total: store.visitors.total,
         payedVisitors: store.visitors.payedVisitors,
