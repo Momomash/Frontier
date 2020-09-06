@@ -7,8 +7,6 @@ Github Pages - https://momomash.github.io/Frontier/
 
 [Jest Test coverage](coverage/lcov-report/index.html)
 
-
-
 Приложение по контролю времени посетителей антикафе
 
 ![Visitors](visitors.JPG "Главный экран")
