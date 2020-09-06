@@ -52,7 +52,9 @@ const TableHeader = styled.div`
     display: flex;
     padding: 10px 24px;
     justify-content: space-between;
+    align-items: center;
 `;
+const INVALID_NAME_ERROR = 'Такое имя уже есть!';
 
 const isPayedVisitors = (visitors: Visitor[]) => {
     const filteredVisitors = visitors.filter((visitor) => {
@@ -95,15 +97,21 @@ const VisitorsComponent: FunctionComponent<Props> = ({
         }
     };
     const [fastVisitorName, setFastVisitorName] = React.useState('');
+    const [fastVisitorNameInvalid, setFastVisitorNameInvalid] = React.useState(false);
+    const validateVisitorName = (name: string) => {
+        return visitors.map((item) => item.name).includes(name);
+    };
     const changeVisitorFast = (event: React.ChangeEvent<HTMLInputElement>) => {
         setFastVisitorName(event.target.value);
+        const isInvalidName = validateVisitorName(event.target.value);
+        setFastVisitorNameInvalid(isInvalidName);
     };
     const submitVisitorFast = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (!fastVisitorName) {
             return;
         }
-        addVisitor({ name: fastVisitorName, tariffId: defaultTariff });
+        addVisitor({ name: fastVisitorName, tariffId: defaultTariff, discount: 0 });
         setFastVisitorName('');
     };
     let tariffsColumn: NumberToString = {};
@@ -122,6 +130,7 @@ const VisitorsComponent: FunctionComponent<Props> = ({
             clearInterval(interval);
         };
     });
+
     return (
         <>
             <MaterialTable
@@ -135,7 +144,7 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                                 visitors.map((item) => item.name).includes(rowData.name) &&
                                 !visitors.map((item) => item.id).includes(rowData.id)
                             ) {
-                                return 'Такое имя уже есть!';
+                                return INVALID_NAME_ERROR;
                             } else {
                                 return '';
                             }
@@ -166,26 +175,16 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                         type: 'numeric',
                         editable: 'onUpdate',
                         initialEditValue: '0',
-                        render: (RowData) => {
-                            if (RowData.times == undefined) {
-                                return <>0</>;
-                            } else {
-                                return <>{calculateDuration(RowData.times)}</>;
-                            }
+                        render: (rowData) => {
+                            return <>{rowData.times ? calculateDuration(rowData.times) : 0}</>;
                         },
                     },
                     {
                         title: 'Стоимость',
                         field: 'cost',
                         type: 'numeric',
-                        render: (RowData) => {
-                            const cost = calculateCostHelper(RowData, tariffs);
-                            const discountCost = cost - Math.round((cost / 100) * RowData.discount);
-                            if (discountCost < 100) {
-                                return <>100</>;
-                            } else {
-                                return <>{discountCost}</>;
-                            }
+                        render: (rowData) => {
+                            return <>{calculateCostHelper(rowData, tariffs)}</>;
                         },
                     },
                     {
@@ -194,11 +193,11 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                         editable: 'never',
                         initialEditValue: 'active',
                         defaultSort: 'asc',
-                        render: (RowData) => {
+                        render: (rowData) => {
                             let icon;
-                            if (RowData.status === Status.active) {
+                            if (rowData.status === Status.active) {
                                 icon = <PauseIcon />;
-                            } else if (RowData.status === Status.pause) {
+                            } else if (rowData.status === Status.pause) {
                                 icon = <PlayArrowIcon />;
                             } else {
                                 return '';
@@ -207,7 +206,7 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                                 <Controls>
                                     <IconButton
                                         aria-label="Control"
-                                        onClick={() => handleTogglePause(RowData)}
+                                        onClick={() => handleTogglePause(rowData)}
                                     >
                                         {icon}
                                     </IconButton>
@@ -265,6 +264,10 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                                         label="Новый посетитель"
                                         onChange={changeVisitorFast}
                                         value={fastVisitorName}
+                                        helperText={
+                                            fastVisitorNameInvalid ? INVALID_NAME_ERROR : ''
+                                        }
+                                        error={fastVisitorNameInvalid}
                                     />
                                 </form>
                                 <Button
