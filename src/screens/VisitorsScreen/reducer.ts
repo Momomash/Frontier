@@ -10,6 +10,15 @@ export type Visitor = {
     tariffId: number;
     status: Status;
     times: Array<Event>;
+    discount: number;
+};
+export type NewVisitor = {
+    id?: number;
+    name: string;
+    tariffId: number;
+    status?: Status;
+    times?: Array<Event>;
+    discount?: number;
 };
 export type Event = {
     timestamp: number;
@@ -52,12 +61,12 @@ export const VisitorsSlice = createSlice({
     initialState,
     reducers: {
         add: {
-            prepare: (visitor: Visitor) => {
+            prepare: (visitor: NewVisitor): { payload: Visitor } => {
                 const newTime = Date.now();
                 visitor.id = newTime;
                 visitor.status = Status.active;
                 visitor.times = [{ timestamp: newTime, status: Status.active }];
-                return { payload: visitor };
+                return { payload: visitor as Visitor };
             },
             reducer: (state, { payload }: PayloadAction<Visitor>) => {
                 state.visitors.push(payload);

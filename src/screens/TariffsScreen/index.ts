@@ -1,4 +1,4 @@
 import { TariffsScreen } from './TariffsScreen';
-import { TariffsSlice, Tariff } from './reducer';
+import { TariffsSlice, Tariff, TariffsState } from './reducer';
 
-export { TariffsScreen, TariffsSlice, Tariff };
+export { TariffsScreen, TariffsSlice, Tariff, TariffsState };
