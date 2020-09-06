@@ -92,6 +92,7 @@ export const TariffsComponent: FunctionComponent<Props> = ({
             }}
             localization={localizationMaterialTable}
             options={{
+                pageSize: 10,
                 actionsColumnIndex: -1,
             }}
         />

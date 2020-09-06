@@ -4,10 +4,11 @@ import { IconButton } from '@material-ui/core';
 import styled from '@emotion/styled';
 import PauseIcon from '@material-ui/icons/Pause';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import Button from '@material-ui/core/Button';
+import { Button, TextField } from '@material-ui/core';
 import { connect } from 'react-redux';
+
 import { Store } from '@/store';
-import { actions, EventUser, Status, Visitor, VisitorsWithTimestamp } from './reducer';
+import { actions, EventUser, Status, Visitor, NewVisitor, VisitorsWithTimestamp } from './reducer';
 import { Tariff } from '@/screens/';
 import { AlertDialog } from '@/components';
 import { calculateCostHelper, calculateDuration, localizationMaterialTable } from '@/utils';
@@ -24,7 +25,7 @@ type Props = {
     total: number;
     payedVisitors: Array<Visitor>;
     timer: number;
-    addVisitor(visitor: Visitor): void;
+    addVisitor(visitor: NewVisitor): void;
     editVisitor(visitor: Visitor): void;
     deleteVisitor(visitor: Visitor): void;
     eventVisitor(event: EventUser): void;
@@ -49,8 +50,8 @@ const Controls = styled.div`
 `;
 const TableHeader = styled.div`
     display: flex;
-    padding: 10px;
-    justify-content: flex-end;
+    padding: 10px 24px;
+    justify-content: space-between;
 `;
 
 const isPayedVisitors = (visitors: Visitor[]) => {
@@ -92,6 +93,18 @@ const VisitorsComponent: FunctionComponent<Props> = ({
         } else {
             eventVisitor({ timestamp: Date.now(), status: Status.active, id: currentUser.id });
         }
+    };
+    const [fastVisitorName, setFastVisitorName] = React.useState('');
+    const changeVisitorFast = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFastVisitorName(event.target.value);
+    };
+    const submitVisitorFast = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (!fastVisitorName) {
+            return;
+        }
+        addVisitor({ name: fastVisitorName, tariffId: defaultTariff });
+        setFastVisitorName('');
     };
     let tariffsColumn: NumberToString = {};
     tariffsColumn = tariffs.reduce(function (newArr, tariff) {
@@ -220,6 +233,7 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                 ]}
                 localization={localizationMaterialTable}
                 options={{
+                    pageSize: 20,
                     selection: true,
                     actionsColumnIndex: -1,
                     sorting: true,
@@ -233,6 +247,14 @@ const VisitorsComponent: FunctionComponent<Props> = ({
                         <>
                             <MTableToolbar {...props} />
                             <TableHeader>
+                                <form noValidate onSubmit={submitVisitorFast}>
+                                    <TextField
+                                        autoFocus={true}
+                                        label="Новый посетитель"
+                                        onChange={changeVisitorFast}
+                                        value={fastVisitorName}
+                                    />
+                                </form>
                                 <Button
                                     color="secondary"
                                     variant="contained"

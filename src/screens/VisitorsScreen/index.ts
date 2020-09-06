@@ -2,6 +2,7 @@ import { VisitorsScreen } from './VisitorsScreen';
 import {
     VisitorsSlice,
     Visitor,
+    NewVisitor,
     VisitorsState,
     Event,
     EventUser,
@@ -14,6 +15,7 @@ export {
     VisitorsSlice,
     VisitorsState,
     Visitor,
+    NewVisitor,
     Event,
     EventUser,
     VisitorsWithTimestamp,
